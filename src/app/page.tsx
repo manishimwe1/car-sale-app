@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import Hero from "../components/Hero";
 import Services from "@/components/Services";
 import ShowCase from "@/components/ShowCase";
+import WhyChooseUs from "@/components/WhyChooseUs";
 
 export default function Home() {
   return (
@@ -10,6 +11,9 @@ export default function Home() {
       <Hero />
       <Services />
       <ShowCase />
+      <div className="">
+        <WhyChooseUs />
+      </div>
     </section>
   );
 }

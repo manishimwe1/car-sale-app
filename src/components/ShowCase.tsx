@@ -11,7 +11,7 @@ import {
 import Image from "next/image";
 
 const ShowCase = () => {
-  const data = [1, 2, 3];
+  const data = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   return (
     <section className="space-y-4  py-2">
       <div className="md:flex text-center items-center justify-between">
@@ -27,9 +27,9 @@ const ShowCase = () => {
           View all <MoveRight className="text-slate-800 w-4 ml-1 " />
         </Button>
       </div>
-      <div className="grid w-full grid-cols-1 sm:grid-cols-2 md:grid-cols-3 place-items-center gap-32 md:gap-4 justify-center ">
+      <div className="grid containr grid-cols-1 sm:grid-cols-2 md:grid-cols-3 place-items-center gap-32  justify-center px-12 ">
         {data.map((_, i) => (
-          <div key={i} className=" w-[400px] h-[280px] pt-2 ">
+          <div key={i} className=" w-[400px] h-[280px] pt-2">
             <Carousel>
               <CarouselContent className=" rounded-xl flex ">
                 <CarouselItem>
