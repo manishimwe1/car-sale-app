@@ -1,6 +1,3 @@
-import React from "react";
-import { Button } from "./ui/button";
-import { MoveRight } from "lucide-react";
 import Image from "next/image";
 
 const WhyChooseUs = () => {
