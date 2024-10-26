@@ -13,7 +13,7 @@ import Image from "next/image";
 const ShowCase = () => {
   const data = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   return (
-    <section className="space-y-4  py-2">
+    <section className="space-y-4  p-2">
       <div className="md:flex text-center items-center justify-between">
         <div className="flex flex-col space-y-1">
           <h1 className="text-2xl  font-bold text-center md:text-left">
@@ -27,7 +27,7 @@ const ShowCase = () => {
           View all <MoveRight className="text-slate-800 w-4 ml-1 " />
         </Button>
       </div>
-      <div className="grid containr grid-cols-1 sm:grid-cols-2 md:grid-cols-3 place-items-center gap-32  justify-center px-12 ">
+      <div className="grid container mx-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3 place-items-center gap-32  justify-center px-12 ">
         {data.map((_, i) => (
           <div key={i} className=" w-[400px] h-[280px] pt-2">
             <Carousel>
@@ -87,7 +87,7 @@ const ShowCase = () => {
               <CarouselPrevious className="ml-[50px]" />
               <CarouselNext className="mr-[50px]" />
             </Carousel>
-            <div className=" py-4 w-full flex justify-between items-center">
+            <div className=" py-4 px-6 w-full flex justify-between items-center">
               <div className="flex flex-col ">
                 <p className="text-[14px] text-pretty font-medium text-slate-800">
                   BYD ATTO3 2023

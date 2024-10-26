@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Header from "./Header";
+import Link from "next/link";
 
 const Hero = () => {
   return (
@@ -9,19 +10,22 @@ const Hero = () => {
       <div className="bg-gradient-to-b from-black/40 via-black/40 to-transparent  mx-auto w-full h-fit ">
         <Header />
         <div className=" mt-16 flex items-center flex-col">
-          <h2 className="text-pretty text-6xl font-bold tracking-widest text-white sm:text-6xl mb-6">
+          <h2 className="text-pretty text-4xl md:text-6xl font-bold tracking-widest text-white sm:text-6xl mb-6">
             BetterWhips
           </h2>
           <div className="px-4 py-2 flex flex-col items-center  mb-4">
             <p className="text-[16px] text-pretty font-medium text-green-50">
-              We offer professional car & limousine services{" "}
+              We sell professional car & limousine services{" "}
             </p>
             <p className="text-[16px] text-pretty font-medium text-white">
               with our high-end vehicles.
             </p>
           </div>
-          <Button className="bg-black hover:bg-black/60 text-white py-3 px-6 rounded-lg">
-            Open Fleet
+          <Button
+            className="bg-black hover:bg-black/60 text-white py-3 px-6 rounded-lg"
+            asChild
+          >
+            <Link href={"#new"}>Open Fleet</Link>
           </Button>
         </div>
       </div>
