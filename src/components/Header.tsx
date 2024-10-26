@@ -2,43 +2,56 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, Package2, Search } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 const Header = () => {
   return (
-    <header className="sticky top-0 flex h-16 items-center w-full overflow-x-hidden gap-4 bg-white z-50 bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-50">
-      <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
-        <Link
-          href="#"
-          className="flex items-center gap-2 text-lg font-semibold md:text-base"
-        >
-          <Package2 className="h-6 w-6" />
-          <span className="sr-only">Acme Inc</span>
+    <header className="sticky top-0 flex h-16 items-center w-full overflow-x-hidden gap-4  z-50 bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-50">
+      <nav className=" gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:justify-between  w-full md:gap-5 md:text-sm lg:gap-6">
+        <Link href="/">
+          <div className=" h-10 w-40 relative">
+            <Image src={"/fav.png"} alt="logo" fill />
+          </div>
+          <span className="sr-only">BetterWhips</span>
         </Link>
-        <Link
-          href="#"
-          className="text-foreground transition-colors hover:text-foreground"
-        >
-          Home
-        </Link>
-        <Link
-          href="#"
-          className="text-muted-foreground transition-colors hover:text-foreground"
-        >
-          Vehicles
-        </Link>
-        <Link
-          href="#"
-          className="text-muted-foreground transition-colors hover:text-foreground"
-        >
-          Blog
-        </Link>
-        <Link
-          href="#"
-          className="text-muted-foreground transition-colors hover:text-foreground"
-        >
-          Contacts
-        </Link>
+        <div className="md:flex items-center gap-3 hidden">
+          <Link
+            href="#"
+            className="text-white transition-colors hover:text-foreground"
+          >
+            Home
+          </Link>
+          <Link
+            href="#"
+            className="text-white transition-colors hover:text-foreground"
+          >
+            Vehicles
+          </Link>
+          <Link
+            href="#"
+            className="text-white transition-colors hover:text-foreground"
+          >
+            Blog
+          </Link>
+          <Link
+            href="#"
+            className="text-white transition-colors hover:text-foreground"
+          >
+            Contacts
+          </Link>
+
+          <form className="ml-auto flex-1 sm:flex-initial ">
+            <div className="relative">
+              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-white" />
+              <Input
+                type="search"
+                placeholder="Search car..."
+                className="pl-8 sm:w-[300px] md:w-[200px] text-white lg:w-[300px] placeholder:text-white/50"
+              />
+            </div>
+          </form>
+        </div>
       </nav>
       <Sheet>
         <SheetTrigger asChild>
@@ -103,16 +116,6 @@ const Header = () => {
             <DropdownMenuItem>Logout</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu> */}
-        <form className="ml-auto flex-1 sm:flex-initial">
-          <div className="relative">
-            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input
-              type="search"
-              placeholder="Search products..."
-              className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px]"
-            />
-          </div>
-        </form>
       </div>
     </header>
   );

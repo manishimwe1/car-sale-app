@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 import { Roboto } from "next/font/google";
-import Header from "../components/Header";
 
 const roboto = Roboto({
   weight: ["400", "500", "900"],
@@ -12,6 +11,7 @@ const roboto = Roboto({
 export const metadata: Metadata = {
   title: "BetterWhips",
   description: "selling car company",
+  icons: "/favicon.png",
 };
 
 export default function RootLayout({
@@ -21,10 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${roboto.className} antialiased container mx-auto px-2.5`}>
-        <Header />
-        {children}
-      </body>
+      <body className={`${roboto.className} antialiased`}>{children}</body>
     </html>
   );
 }

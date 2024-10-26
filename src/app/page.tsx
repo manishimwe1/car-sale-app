@@ -7,11 +7,11 @@ export default function Home() {
   return (
     <section className="space-y-10">
       <Hero />
-      <Services />
-      <ShowCase />
-      <div className="">
-        <WhyChooseUs />
+      <div className="container mx-auto space-y-10">
+        <ShowCase />
+        <Services />
       </div>
+      <WhyChooseUs />
     </section>
   );
 }
