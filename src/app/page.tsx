@@ -1,8 +1,8 @@
+import Banner from "@/components/Banner";
 import Services from "@/components/Services";
 import ShowCase from "@/components/ShowCase";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import Hero from "../components/Hero";
-import Banner from "@/components/Banner";
 
 export default function Home() {
   return (
