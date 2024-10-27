@@ -1,6 +1,4 @@
-import DashBoardHeader from "@/components/DashBoardHeader";
 import DashBoardSideBar from "@/components/DashBoardSideBar";
-import Header from "@/components/Header";
 
 export default function RootLayout({
   children,

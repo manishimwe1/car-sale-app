@@ -1,12 +1,10 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { useMutation } from "convex/react";
 import { Upload } from "lucide-react";
+import Image from "next/image";
 import { Dispatch, SetStateAction, useState } from "react";
 import Dropzone from "react-dropzone";
-import { api } from "../../convex/_generated/api";
-import Image from "next/image";
 
 const DropeZOne = ({
   setFiles,
@@ -58,10 +56,10 @@ const DropeZOne = ({
               <div className="flex  gap-4 items-center justify-center">
                 {imageUrls.length > 0 ? (
                   imageUrls.map((file) => {
-                    console.log(file);
+                    // console.log(file);
 
                     return (
-                      <div className="flex flex-col gap-2">
+                      <div key={file} className="flex flex-col gap-2">
                         <Image
                           src={file}
                           alt="file"
