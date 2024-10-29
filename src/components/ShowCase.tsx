@@ -17,6 +17,7 @@ import { Button } from "./ui/button";
 
 const ShowCase = () => {
   const cars = useQuery(api.cars.getCar);
+  // const logo = useQuery(api.cars.getCarlogo);
 
   
   return (
@@ -53,7 +54,7 @@ const ShowCase = () => {
                       className="rounded-xl" 
                     />
                     <Image
-                      src="/logo.webp"
+                    src={car.logoUrls ?? ''}
                       alt="car"
                       width={50}
                       height={50}

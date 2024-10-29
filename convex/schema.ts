@@ -4,6 +4,7 @@ import { v } from "convex/values";
 export default defineSchema({
   cars: defineTable({
     brand: v.string(),
+    logoId: v.id("_storage"),
     money: v.float64(),
     name: v.string(),
     imageIds: v.array(v.id("_storage"))

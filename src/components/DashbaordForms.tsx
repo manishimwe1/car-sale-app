@@ -31,6 +31,7 @@ const formSchema = z.object({
     message: "Brand must be at least 2 characters.",
   }),
   money: z.coerce.number(),
+  // file: z.instanceof(File),
 });
 
 export function DashboardForm() {
@@ -38,6 +39,8 @@ export function DashboardForm() {
   const generateUploadUrl = useMutation(api.cars.generateUploadUrl);
 
   const [files, setFiles] = useState<File[]>([]);
+  const [logo, setLogo] = useState<File | null>(null);
+  // const [logoId, setLogoId] = useState<Id<"_storage">>();
   const [loading, setLoading] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -46,20 +49,23 @@ export function DashboardForm() {
       name: "",
       money: 0,
       brand: "",
-
     },
   });
+  // console.log(logo, "logo");
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      if(files.length <= 0){
-        return
+      if (files.length <= 0 ) {
+        console.log('no file found');
+         
+        return;
       }
       setLoading(true);
       const postUrl = await generateUploadUrl();
+      const logoUrl = await generateUploadUrl();
 
       const imageUrls: Id<"_storage">[] = [];
-
+      const logoId : Id<"_storage">[] =[] 
       const uploadPromises = files.map(async (file) => {
         const result = await fetch(postUrl, {
           method: "POST",
@@ -71,23 +77,47 @@ export function DashboardForm() {
           console.error("Image upload failed:", await result.text());
           return;
         }
-        console.log(result,'ths is results');
-        
-        const { storageId} = await result.json();
-       
-// https://famous-chihuahua-933.convex.cloud/api/storage/5e881ae0-c6e5-4af2-955f-85ac40367069
-// "https://famous-chihuahua-933.convex.cloud/api/storage/kg28aqbrjybkmhg3h385g0b38d73k2ej"
+        // console.log(result, "ths is results");
+
+        const { storageId } = await result.json();
+
+        // https://famous-chihuahua-933.convex.cloud/api/storage/5e881ae0-c6e5-4af2-955f-85ac40367069
+        // "https://famous-chihuahua-933.convex.cloud/api/storage/kg28aqbrjybkmhg3h385g0b38d73k2ej"
         imageUrls.push(storageId);
       });
+      const logoUpload = async () => {
+        const result = await fetch(logoUrl, {
+          method: "POST",
+          headers: { "Content-Type": logo?.type ?? ''},
+          body: logo, 
+        });
 
-      await Promise.all(uploadPromises);
-      console.log(imageUrls, "image ids");
+        if (!result.ok) {
+          console.error("Image upload failed:", await result.text());
+          return;
+        }
+        console.log(result, "ths is results");
 
+        const { storageId } = await result.json();
+
+        // https://famous-chihuahua-933.convex.cloud/api/storage/5e881ae0-c6e5-4af2-955f-85ac40367069
+        // "https://famous-chihuahua-933.convex.cloud/api/storage/kg28aqbrjybkmhg3h385g0b38d73k2ej"
+        if(storageId){
+          logoId.push(storageId)
+        } 
+      }
+
+      await Promise.all([uploadPromises,logoUpload()]);
+      // console.log(imageUrls, "image ids");
+
+      
+ 
       await uploadCar({
         name: values.name,
         brand: values.brand,
         money: values.money,
         imageUrls: imageUrls,
+        logoID:logoId[0]
       });
 
       setLoading(false);
@@ -140,25 +170,37 @@ export function DashboardForm() {
               </FormItem>
             )}
           />
-          <FormField
-            control={form.control}
-            name="brand"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Brand</FormLabel>
-                <FormControl>
-                  <Input placeholder="Brand.." {...field} />
-                </FormControl>
-                <FormDescription>
-                  This is your car display Brand.
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          <div className="w-full flex text-center justify-between">
+            <FormField
+              control={form.control}
+              name="brand"
+              render={({ field }) => (
+                <FormItem className="text-left ">
+                  <FormLabel className="">Brand</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Brand.." {...field} />
+                  </FormControl>
+                  <FormDescription>
+                    This is your car display Brand.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <div>
+              <input
+                type="file"
+                onChange={(e) =>
+                  setLogo(e.target?.files ? e.target?.files[0] : null)
+                }
+              />
+            </div>
+          </div>
           <div className="w-full border">
             <DropeZOne setFiles={setFiles} />
           </div>
+
           <Button type="submit" disabled={loading}>
             {loading ? (
               <>
