@@ -1,3 +1,4 @@
+
 "use client";
 
 import {
@@ -13,103 +14,56 @@ import Image from "next/image";
 import { api } from "../../convex/_generated/api";
 import Loader from "./Loader";
 import { Button } from "./ui/button";
-import { useEffect, useState } from "react";
-import { Id } from "../../convex/_generated/dataModel";
 
 const ShowCase = () => {
-  const [imageUrls, setImageUrls] = useState<URL[]>([]);
-  const data = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   const cars = useQuery(api.cars.getCar);
-  // console.log(cars);
 
-  // e.g. https://happy-animal-123.convex.site/getImage?storageId=456
-  useEffect(() => {
-    cars?.map((car) => {
-      car.imageIds.map((storageId) => {
-        console.log(storageId.length);
-
-        const getImageUrl = new URL(
-          `${process.env.NEXT_PUBLIC_CONVEX_URL}/getImage`
-        );
-        getImageUrl.searchParams.set("storageId", storageId);
-
-        imageUrls.push(getImageUrl);
-      });
-    });
-  }, []);
-  console.log(imageUrls, "image urls");
+  
   return (
+    
     <section className="space-y-4  p-2">
       <div className="md:flex text-center items-center justify-between">
-        <div className="flex flex-col space-y-1">
+        <div className="flex flex-col space-y-1"> 
           <h1 className="text-2xl  font-bold text-center md:text-left">
             New Cars
-          </h1>
+          </h1> 
           <p className="text-[14px] text-pretty font-medium text-slate-800">
             Here you can see different new cars
           </p>
         </div>
-        <Button variant={"link"} className="hidden md:flex">
+        < Button variant={"link"} className="hidden md:flex">
           View all <MoveRight className="text-slate-800 w-4 ml-1 " />
         </Button>
       </div>
-      <div className="grid container mx-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3 place-items-center gap-32  justify-center px-12 ">
+      <div className="grid container mx-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 space-x-4 place-items-center gap-32  justify-center px-12 ">
         {cars ? (
-          cars.map((car, i) => (
-            <div key={car._id} className=" w-[400px] h-[280px] pt-2">
+          cars.map((car, i) => {
+           return <div key={car._id} className=" w-[400px] h-[280px] pt-2">
               <Carousel>
                 <CarouselContent className=" rounded-xl flex ">
-                  <CarouselItem>
-                    <div className="relative w-[400px] h-[280px]  flex flex-col space-y-1 rounded-xl">
-                      <Image
-                        src={"/2.webp"}
-                        alt="car"
-                        fill
-                        className="rounded-xl"
-                      />
-                      <Image
-                        src="/logo.webp"
-                        alt="car"
-                        width={50}
-                        height={50}
-                        className="rounded-full absolute bottom-0 object-contain right-4"
-                      />
-                    </div>
-                  </CarouselItem>
-                  <CarouselItem>
-                    <div className="relative w-[400px] h-[280px]  flex flex-col space-y-1 rounded-xl">
-                      <Image
-                        src="/11.webp"
-                        alt="car"
-                        fill
-                        className="rounded-xl"
-                      />
-                      <Image
-                        src="/logo.webp"
-                        alt="car"
-                        width={50}
-                        height={50}
-                        className="rounded-full absolute bottom-0 object-contain right-4"
-                      />
-                    </div>
-                  </CarouselItem>
-                  <CarouselItem>
-                    <div className="relative w-[400px] h-[280px]  flex flex-col space-y-1 rounded-xl">
-                      <Image
-                        src="/3.webp"
-                        alt="car"
-                        fill
-                        className="rounded-xl"
-                      />
-                      <Image
-                        src="/logo.webp"
-                        alt="car"
-                        width={50}
-                        height={50}
-                        className="rounded-full absolute bottom-0 object-contain right-4"
-                      />
-                    </div>
-                  </CarouselItem>
+                {car.urls.map((url)=>{
+                  
+                  
+                  return<CarouselItem key={url}>
+                  <div className="relative w-[400px] h-[280px]  flex flex-col space-y-1 rounded-xl">
+                    <Image
+                      src={url ?? ''}
+                      alt="car"
+                      fill
+                      className="rounded-xl" 
+                    />
+                    <Image
+                      src="/logo.webp"
+                      alt="car"
+                      width={50}
+                      height={50}
+                      className="rounded-full absolute bottom-0 object-contain right-4"
+                    />
+                  </div>
+                </CarouselItem>
+
+                })} 
+                  
                 </CarouselContent>
                 <CarouselPrevious className="ml-[50px]" />
                 <CarouselNext className="mr-[50px]" />
@@ -144,9 +98,9 @@ const ShowCase = () => {
                   <Heart className="text-secondary-foreground h-5 w-5" />
                 </div>
               </div>
-            </div>
-          ))
-        ) : (
+            </div>}
+))
+         : (
           <Loader />
         )}
       </div>

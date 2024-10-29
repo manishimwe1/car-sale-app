@@ -18,7 +18,7 @@ const DropeZOne = ({
   const onDrop = (acceptedFiles: File[]) => {
     setFiles(acceptedFiles);
     if (acceptedFiles) {
-      const urls = files.map((file) => URL.createObjectURL(file));
+      const urls = acceptedFiles.map((file) => URL.createObjectURL(file));
       setImageUrls(urls);
     }
   };

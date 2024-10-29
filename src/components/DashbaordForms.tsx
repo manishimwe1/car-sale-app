@@ -26,6 +26,7 @@ const formSchema = z.object({
   name: z.string().min(2, {
     message: "Name must be at least 2 characters.",
   }),
+
   brand: z.string().min(2, {
     message: "Brand must be at least 2 characters.",
   }),
@@ -45,11 +46,15 @@ export function DashboardForm() {
       name: "",
       money: 0,
       brand: "",
+
     },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
+      if(files.length <= 0){
+        return
+      }
       setLoading(true);
       const postUrl = await generateUploadUrl();
 
@@ -66,9 +71,12 @@ export function DashboardForm() {
           console.error("Image upload failed:", await result.text());
           return;
         }
-
-        const { storageId } = await result.json();
-
+        console.log(result,'ths is results');
+        
+        const { storageId} = await result.json();
+       
+// https://famous-chihuahua-933.convex.cloud/api/storage/5e881ae0-c6e5-4af2-955f-85ac40367069
+// "https://famous-chihuahua-933.convex.cloud/api/storage/kg28aqbrjybkmhg3h385g0b38d73k2ej"
         imageUrls.push(storageId);
       });
 
@@ -79,7 +87,7 @@ export function DashboardForm() {
         name: values.name,
         brand: values.brand,
         money: values.money,
-        imageIds: imageUrls,
+        imageUrls: imageUrls,
       });
 
       setLoading(false);
