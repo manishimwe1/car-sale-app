@@ -8,10 +8,9 @@ import Dropzone from "react-dropzone";
 
 const DropeZOne = ({
   setFiles,
-  files,
 }: {
   setFiles: Dispatch<SetStateAction<[] | File[]>>;
-  files: File[];
+
 }) => {
   const [imageUrls, setImageUrls] = useState<string[]>([]);
 

@@ -1,8 +1,5 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -14,13 +11,16 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "convex/react";
-import { api } from "../../convex/_generated/api";
-import DropeZOne from "./Dropzone"; // Ensure the component name matches
-import { useState } from "react";
-import { Id } from "../../convex/_generated/dataModel";
 import { ConvexError } from "convex/values";
 import { Loader2 } from "lucide-react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { api } from "../../convex/_generated/api";
+import { Id } from "../../convex/_generated/dataModel";
+import DropeZOne from "./Dropzone"; // Ensure the component name matches
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -157,7 +157,7 @@ export function DashboardForm() {
             )}
           />
           <div className="w-full border">
-            <DropeZOne setFiles={setFiles} files={files} />
+            <DropeZOne setFiles={setFiles} />
           </div>
           <Button type="submit" disabled={loading}>
             {loading ? (

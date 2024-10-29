@@ -37,7 +37,7 @@ const ShowCase = () => {
       </div>
       <div className="grid container mx-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 space-x-4 place-items-center gap-32  justify-center px-12 ">
         {cars ? (
-          cars.map((car, i) => {
+          cars.map((car) => {
            return <div key={car._id} className=" w-[400px] h-[280px] pt-2">
               <Carousel>
                 <CarouselContent className=" rounded-xl flex ">
