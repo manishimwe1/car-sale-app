@@ -49,7 +49,28 @@ export const getCar = query({
   },
 });
 
+export const getCarById = query({
+  args:{
+    id:v.id('cars'),
+  },
+  handler: async (ctx,args) => {
+    const newCarId = await ctx.db.get(args.id);
+  
+    if(!newCarId) return console.log('semothing went wrong');
+    const logoUrls = await ctx.storage.getUrl(newCarId.logoId);
+    const images = await Promise.all(
+      newCarId.imageIds.map(async (id) => {
+        const urls = await ctx.storage.getUrl(id);
+        return urls;
+      })
+    );
+    // console.log(newCarId, 'here');
+    
+    return {...newCarId,images,logoUrls};
+  },
+});
+
 export const generateUploadUrl = mutation(async (ctx) => {
   return await ctx.storage.generateUploadUrl();
 });
-     
+      

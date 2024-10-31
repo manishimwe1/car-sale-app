@@ -55,9 +55,9 @@ export function DashboardForm() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      if (files.length <= 0 ) {
-        console.log('no file found');
-         
+      if (files.length <= 0) {
+        console.log("no file found");
+
         return;
       }
       setLoading(true);
@@ -65,7 +65,7 @@ export function DashboardForm() {
       const logoUrl = await generateUploadUrl();
 
       const imageUrls: Id<"_storage">[] = [];
-      const logoId : Id<"_storage">[] =[] 
+      const logoId: Id<"_storage">[] = [];
       const uploadPromises = files.map(async (file) => {
         const result = await fetch(postUrl, {
           method: "POST",
@@ -88,8 +88,8 @@ export function DashboardForm() {
       const logoUpload = async () => {
         const result = await fetch(logoUrl, {
           method: "POST",
-          headers: { "Content-Type": logo?.type ?? ''},
-          body: logo, 
+          headers: { "Content-Type": logo?.type ?? "" },
+          body: logo,
         });
 
         if (!result.ok) {
@@ -102,22 +102,20 @@ export function DashboardForm() {
 
         // https://famous-chihuahua-933.convex.cloud/api/storage/5e881ae0-c6e5-4af2-955f-85ac40367069
         // "https://famous-chihuahua-933.convex.cloud/api/storage/kg28aqbrjybkmhg3h385g0b38d73k2ej"
-        if(storageId){
-          logoId.push(storageId)
-        } 
-      }
+        if (storageId) {
+          logoId.push(storageId);
+        }
+      };
 
-      await Promise.all([uploadPromises,logoUpload()]);
+      await Promise.all([uploadPromises, logoUpload()]);
       // console.log(imageUrls, "image ids");
 
-      
- 
       await uploadCar({
         name: values.name,
         brand: values.brand,
         money: values.money,
         imageUrls: imageUrls,
-        logoID:logoId[0]
+        logoID: logoId[0],
       });
 
       setLoading(false);
@@ -170,7 +168,7 @@ export function DashboardForm() {
               </FormItem>
             )}
           />
-          <div className="w-full flex text-center justify-between">
+          <div className="w-full flex gap-3 text-center justify-between">
             <FormField
               control={form.control}
               name="brand"
@@ -188,13 +186,18 @@ export function DashboardForm() {
               )}
             />
 
-            <div>
+            <div className="w-fit flex flex-col border text-center justify-between">
+              <FormLabel className="text-left">Logo</FormLabel>
+
               <input
                 type="file"
                 onChange={(e) =>
                   setLogo(e.target?.files ? e.target?.files[0] : null)
                 }
               />
+              <FormDescription className="text-left ">
+                This is your car displaying logo.
+              </FormDescription>
             </div>
           </div>
           <div className="w-full border">

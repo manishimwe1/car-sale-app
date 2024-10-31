@@ -7,7 +7,7 @@ import Link from "next/link";
 
 const Header = () => {
   return (
-    <header className="sticky top-0 flex h-16 items-center w-full overflow-x-hidden gap-4  z-50 bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-50">
+    <header className="sticky top-0 flex h-16 md:px-3 px-2 items-center w-full overflow-x-hidden gap-4  z-50 bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-50">
       <nav className=" gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:justify-between  w-full md:gap-5 md:text-sm lg:gap-6">
         <Link href="/">
           <div className=" h-10 w-40 relative">
@@ -15,30 +15,31 @@ const Header = () => {
           </div>
           <span className="sr-only">BetterWhips</span>
         </Link>
-        <div className="md:flex items-center gap-3 hidden">
+        <div className="md:flex items-center gap-5 hidden">
           <Link
             href="#"
-            className="text-white transition-colors hover:text-foreground"
+            className="text-slate-900 font-semibold  transition-colors hover:text-foreground"
           >
             Home
           </Link>
           <Link
             href="#"
-            className="text-white transition-colors hover:text-foreground"
+            className="text-slate-900 font-semibold  transition-colors hover:text-foreground"
           >
             Vehicles
           </Link>
           <Link
             href="#"
-            className="text-white transition-colors hover:text-foreground"
+            className="text-slate-900 font-semibold  transition-colors hover:text-foreground"
           >
             Blog
           </Link>
           <Link
             href="#"
-            className="text-white transition-colors hover:text-foreground"
+            className="text-slate-900 font-semibold  flex text-center flex-col  transition-colors hover:text-foreground"
           >
-            Contacts
+            Call us on
+            <span>0798894137</span>
           </Link>
 
           <form className="ml-auto flex-1 sm:flex-initial ">

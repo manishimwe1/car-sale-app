@@ -14,6 +14,7 @@ const nextConfig = {
             hostname: "famous-chihuahua-933.convex.cloud",
             
           },
+          
         ],
       },
 };
