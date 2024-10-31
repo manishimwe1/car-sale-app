@@ -28,7 +28,10 @@ const CarOverView = () => {
         </div>
         <div className="flex flex-wrap gap-3 ;g:w-[72%] w-full  items-start justify-start">
           {Features.map((feature) => (
-            <div className="flex gap-1 items-center rounded-lg justify-between bg-slate-50 h-fit w-fit p-2 px-4">
+            <div
+              key={feature}
+              className="flex gap-1 items-center rounded-lg justify-between bg-slate-50 h-fit w-fit p-2 px-4"
+            >
               <p>{feature}</p>
               <CheckCircledIcon className="text-green-500 h-5 w-5" />
             </div>
