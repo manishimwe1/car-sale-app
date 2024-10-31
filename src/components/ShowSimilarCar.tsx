@@ -25,10 +25,10 @@ const ShowSimilarCar = ({ id }: { id: Id<"cars"> }) => {
       <div className="md:flex text-center items-center justify-between">
         <div className="flex flex-col space-y-1">
           <h1 className="text-2xl  font-bold text-center md:text-left">
-            New Cars
+            Similar Cars
           </h1>
           <p className="text-[14px] text-pretty font-medium text-slate-800">
-            Here you can see different new cars
+            Here you can see different similar cars
           </p>
         </div>
         <Button variant={"link"} className="hidden md:flex">

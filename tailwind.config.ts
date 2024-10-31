@@ -12,7 +12,7 @@ module.exports = {
   theme: {
   	extend: {
       backgroundImage: {
-        'hero-bg': "url('/car2.jpg')"},
+        'hero-bg': "url('/car2.webp')"},
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',

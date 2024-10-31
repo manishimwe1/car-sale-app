@@ -1,3 +1,34 @@
+export const CarCategories = [
+    {
+        title:'compact',
+        href:'/compact',
+        imageUrl:"/compact.webp"
+    },
+    {
+        title:'Cross-over SUV',
+        href:'/Cross-over-suv',
+        imageUrl:'/cross.webp'
+    },
+    {
+        title:'Hatchback',
+        href:'/hatchback',
+        imageUrl:'/hatchbac.webp'
+    },
+    {
+        title:'pick up',
+        href:'/pick-up',
+        imageUrl:'/pcup.webp'
+    },{
+        title:'sedan',
+        href:'/sedan',
+        imageUrl:'/sedan.webp'
+    },
+    {
+        title:'suv',
+        href:'/suv',
+        imageUrl:'/suv.webp'
+    },
+]
 export const AboutUsData = [
     {
         title:'5 Days Refund Policy',

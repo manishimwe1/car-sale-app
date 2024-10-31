@@ -27,6 +27,8 @@ import Image from "next/image";
 import { SocialIcon } from "react-social-icons";
 import { api } from "../../../../../convex/_generated/api";
 import { Id } from "../../../../../convex/_generated/dataModel";
+import WhyChooseUs from "@/components/WhyChooseUs";
+import Banner from "@/components/Banner";
 type Props = {
   params: {
     brand: string;
@@ -193,6 +195,8 @@ const DetailsPage = ({ params }: Props) => {
       <div>
         <ShowSimilarCar id={params.id} />
       </div>
+      <WhyChooseUs />
+      <Banner />
     </section>
   );
 };
