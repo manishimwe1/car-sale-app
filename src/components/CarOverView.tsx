@@ -3,7 +3,7 @@ import { CheckCircledIcon } from "@radix-ui/react-icons";
 
 const CarOverView = () => {
   return (
-    <div className="w-full container py-10">
+    <div className="w-full container py-10 px-5">
       <div className="flex items-center py-2 justify-center">
         <hr className=" border-4 w-16  border-blue-600" />
         <hr className=" border-4 w-16  border-black" />

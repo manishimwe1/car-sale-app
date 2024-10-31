@@ -77,7 +77,7 @@ export const getCarLessThanMoney = query({
   handler: async (ctx,args) => {
     const newCarId = await ctx.db
   .query("cars")
-  .filter((q) => q.lte(q.field("money"), args.money))
+  .filter((q) => q.lte(q.field("money"), args.money)).order('asc')
   .collect();
     const images = await Promise.all(
       newCarId.map(async (message) => {

@@ -41,8 +41,8 @@ const DetailsPage = ({ params }: Props) => {
   if (!params.id) return;
 
   return (
-    <section className="flex flex-col gap-6 w-full container mx-auto py-10  px-5  ">
-      <div className="w-full flex flex-col lg:flex-row  lg:px-10 text-center justify-between gap-8">
+    <section className="flex flex-col gap-6 w-full container mx-auto py-10 ">
+      <div className="w-full flex flex-col lg:flex-row px-5 lg:px-10 text-center justify-between gap-8">
         <div className="w-full shadow-md shadow-sky-200 rounded-xl">
           <Carousel>
             <CarouselContent className=" rounded-xl flex ">
@@ -186,7 +186,7 @@ const DetailsPage = ({ params }: Props) => {
           </div>
         </div>
       </div>
-      <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 py-10 gap-4">
+      <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 py-10 gap-4 px-5">
         {AboutUsData.map((data) => (
           <AboutUs key={data.title} data={data} />
         ))}
@@ -195,7 +195,7 @@ const DetailsPage = ({ params }: Props) => {
       <div>
         <ShowSimilarCar id={params.id} />
       </div>
-      <div className="mt-32">
+      <div className="mt-4 space-y-4">
         <WhyChooseUs />
         <Banner />
       </div>

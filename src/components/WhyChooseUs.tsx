@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const WhyChooseUs = () => {
   return (
-    <section className=" bg-gray-50 px-6">
+    <section className=" bg-gray-50 px-6 w-full">
       <div className=" container mx-auto py-5">
         <h1 className="text-2xl  font-bold text-center ">
           Why Choose BetterWhips

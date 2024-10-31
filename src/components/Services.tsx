@@ -40,20 +40,22 @@ const Services = () => {
 
         <div className="flex flex-wrap w-full gap-1 overflow-hidden md:gap-3 space-x-4 items-center justify-center mt-3">
           {cars?.map((car) => (
-            <div
-              key={car._id}
-              className="flex flex-col space-y-2 gap-1 rounded-md cursor-pointer px-4 py-2 hover:border-2 border-blue-700 justify-center items-center"
-            >
-              <Image
-                src={car.logoUrls ?? ""}
-                alt="car brand"
-                width={40}
-                height={40}
-              />
-              <p className="text-sm text-pretty font-medium text-center capitalize">
-                {car.brand}
-              </p>
-            </div>
+            <Link href={`/search/${car.brand}`}>
+              <div
+                key={car._id}
+                className="flex flex-col space-y-2 gap-1 rounded-md cursor-pointer px-4 py-2 hover:border-2 border-blue-700 justify-center items-center"
+              >
+                <Image
+                  src={car.logoUrls ?? ""}
+                  alt="car brand"
+                  width={40}
+                  height={40}
+                />
+                <p className="text-sm text-pretty font-medium text-center capitalize">
+                  {car.brand}
+                </p>
+              </div>
+            </Link>
           ))}
         </div>
       </div>

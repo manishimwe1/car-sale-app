@@ -112,7 +112,9 @@ const CarShowCard = ({ car }: { car: carType }) => {
                   height={20}
                   className="border border-green-400 rounded-full"
                 />
-                <p className="text-green-400 font-normal text-xs">6 Months</p>
+                <p className="text-green-400 font-normal text-xs text-nowrap">
+                  6 Months
+                </p>
               </div>
             </div>
           </div>

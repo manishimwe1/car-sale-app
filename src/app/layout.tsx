@@ -4,6 +4,7 @@ import { Roboto } from "next/font/google";
 import { ConvexClientProvider } from "./ConvexClientProvider";
 import "./globals.css";
 import Header from "@/components/Header";
+import NextTopLoader from "nextjs-toploader";
 
 const roboto = Roboto({
   weight: ["400", "500", "900"],
@@ -27,6 +28,7 @@ export default function RootLayout({
         <body
           className={`${roboto.className} antialiased flex flex-col w-full`}
         >
+          <NextTopLoader />
           <ConvexClientProvider>
             <Header />
             {children}
