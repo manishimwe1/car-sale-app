@@ -195,8 +195,10 @@ const DetailsPage = ({ params }: Props) => {
       <div>
         <ShowSimilarCar id={params.id} />
       </div>
-      <WhyChooseUs />
-      <Banner />
+      <div className="mt-32">
+        <WhyChooseUs />
+        <Banner />
+      </div>
     </section>
   );
 };

@@ -1,6 +1,6 @@
 
 
-import { Id } from "./_generated/dataModel";
+import { Doc, Id } from "./_generated/dataModel";
 import { mutation, query } from "./_generated/server";
 import { v,} from "convex/values";
 
@@ -29,7 +29,7 @@ export const createCar = mutation({
 
 export const getCar = query({
   handler: async (ctx) => {
-    const newCarId = await ctx.db.query("cars").order("desc").collect();
+    const newCarId:Doc<'cars'>[] = await ctx.db.query("cars").order("desc").collect();
     
     const images = await Promise.all(
       newCarId.map(async (message) => {
@@ -54,6 +54,30 @@ export const getSimilarCar = query({
     const newCarId = await ctx.db
   .query("cars")
   .filter((q) => q.neq(q.field("_id"), args.id))
+  .collect();
+    const images = await Promise.all(
+      newCarId.map(async (message) => {
+        const logoUrls = await ctx.storage.getUrl(message.logoId);
+        const urls = await Promise.all(
+          message.imageIds.map(async (storageId) => {
+            return await ctx.storage.getUrl(storageId);
+          })
+        );
+        return { ...message, urls,logoUrls };
+      })
+    );
+
+    console.log(images, 'here');
+    
+    return images;
+  },
+});
+export const getCarLessThanMoney = query({
+  args:{money:v.number()},
+  handler: async (ctx,args) => {
+    const newCarId = await ctx.db
+  .query("cars")
+  .filter((q) => q.lte(q.field("money"), args.money))
   .collect();
     const images = await Promise.all(
       newCarId.map(async (message) => {

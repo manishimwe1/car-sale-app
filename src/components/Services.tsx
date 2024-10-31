@@ -11,7 +11,7 @@ const Services = () => {
   const cars = useQuery(api.cars.getCar);
 
   return (
-    <section className="space-y-4 pt-28 ">
+    <section className="space-y-4">
       <h3 className="text-2xl  font-bold text-center ">Search by categories</h3>
 
       <ScrollArea className="w-full  whitespace-nowrap ">
