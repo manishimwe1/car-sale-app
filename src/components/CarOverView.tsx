@@ -11,11 +11,9 @@ const CarOverView = () => {
       <h1 className="text-4xl  font-bold text-center ">Car Overview</h1>
 
       <div className="mt-12 flex flex-col lg:flex-row gap-6 w-full">
-        <div className="w-full">
+        <div className="w-full overflow-hidden ">
           <iframe
-            className="rounded-xl"
-            width="660"
-            height="400"
+            className="rounded-xl h-[300px] lg:h-[400px] w-full lg:w-[660px]"
             src="https://www.youtube.com/embed/RcLbJZHHJho?si=mJp4OHZIAQkHFY3T"
             title="YouTube video player"
             frameBorder="0"

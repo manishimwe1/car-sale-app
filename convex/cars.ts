@@ -48,6 +48,30 @@ export const getCar = query({
     return images;
   },
 });
+export const getSimilarCar = query({
+  args:{id:v.id('cars')},
+  handler: async (ctx,args) => {
+    const newCarId = await ctx.db
+  .query("cars")
+  .filter((q) => q.neq(q.field("_id"), args.id))
+  .collect();
+    const images = await Promise.all(
+      newCarId.map(async (message) => {
+        const logoUrls = await ctx.storage.getUrl(message.logoId);
+        const urls = await Promise.all(
+          message.imageIds.map(async (storageId) => {
+            return await ctx.storage.getUrl(storageId);
+          })
+        );
+        return { ...message, urls,logoUrls };
+      })
+    );
+
+    console.log(images, 'here');
+    
+    return images;
+  },
+});
 
 export const getCarById = query({
   args:{

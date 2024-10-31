@@ -128,7 +128,7 @@ export function DashboardForm() {
   }
 
   return (
-    <div className="min-w-[400px] h-full py-10 mx-auto flex items-center justify-center">
+    <div className="w-full md:min-w-[400px] h-full py-10 mx-auto flex items-center justify-center">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}

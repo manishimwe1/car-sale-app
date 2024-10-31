@@ -2,6 +2,7 @@
 
 import AboutUs from "@/components/AboutUs";
 import CarOverView from "@/components/CarOverView";
+import ShowSimilarCar from "@/components/ShowSimilarCar";
 import { Button } from "@/components/ui/button";
 import {
   Carousel,
@@ -189,9 +190,9 @@ const DetailsPage = ({ params }: Props) => {
         ))}
       </div>
       <CarOverView />
-      {/* <div>
-        <ShowCase />
-      </div> */}
+      <div>
+        <ShowSimilarCar id={params.id} />
+      </div>
     </section>
   );
 };
