@@ -1,7 +1,5 @@
 import { Features } from "@/constants";
 import { CheckCircledIcon } from "@radix-ui/react-icons";
-import { CheckCheck, Clock12 } from "lucide-react";
-import React from "react";
 
 const CarOverView = () => {
   return (

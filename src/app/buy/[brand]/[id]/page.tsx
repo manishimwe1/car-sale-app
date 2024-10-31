@@ -1,5 +1,7 @@
 "use client";
 
+import AboutUs from "@/components/AboutUs";
+import CarOverView from "@/components/CarOverView";
 import { Button } from "@/components/ui/button";
 import {
   Carousel,
@@ -8,6 +10,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { AboutUsData } from "@/constants";
 import { useQuery } from "convex/react";
 import {
   Cable,
@@ -18,16 +21,11 @@ import {
   Heart,
   Share2,
   ThumbsUp,
-  Timer,
 } from "lucide-react";
 import Image from "next/image";
+import { SocialIcon } from "react-social-icons";
 import { api } from "../../../../../convex/_generated/api";
 import { Id } from "../../../../../convex/_generated/dataModel";
-import { SocialIcon } from "react-social-icons";
-import AboutUs from "@/components/AboutUs";
-import { AboutUsData } from "@/constants";
-import CarOverView from "@/components/CarOverView";
-import ShowCase from "@/components/ShowCase";
 type Props = {
   params: {
     brand: string;
