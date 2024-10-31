@@ -34,8 +34,6 @@ type Props = {
 };
 
 const DetailsPage = ({ params }: Props) => {
-  ID: {
-  }
   const car = useQuery(api.cars.getCarById, { id: params.id });
   if (!params.id) return;
 
@@ -186,7 +184,7 @@ const DetailsPage = ({ params }: Props) => {
         </div>
       </div>
       <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 py-10 gap-4">
-        {AboutUsData.map((data, i) => (
+        {AboutUsData.map((data) => (
           <AboutUs key={data.title} data={data} />
         ))}
       </div>
