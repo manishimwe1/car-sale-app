@@ -24,9 +24,8 @@ type Props = {
 const DetailsPage = ({ params }: Props) => {
   ID: {
   }
-  if (!params.id) return;
   const car = useQuery(api.cars.getCarById, { id: params.id });
-  console.log(car);
+  if (!params.id) return;
 
   return (
     <section className="w-full flex flex-col lg:flex-row container mx-auto  py-10  px-5 lg:px-10 text-center justify-between gap-4">
