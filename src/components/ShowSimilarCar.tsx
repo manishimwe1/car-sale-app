@@ -1,22 +1,11 @@
 "use client";
 
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
 import { useQuery } from "convex/react";
-import { Cable, Car, Heart, MoveRight, Share2 } from "lucide-react";
-import Image from "next/image";
 import { api } from "../../convex/_generated/api";
-import Loader from "./Loader";
-import { Button } from "./ui/button";
-import Link from "next/link";
 import { Id } from "../../convex/_generated/dataModel";
-import SectionHeaderBox from "./SectionHeaderBox";
 import CarShowCard from "./CarShowCard";
+import Loader from "./Loader";
+import SectionHeaderBox from "./SectionHeaderBox";
 
 const ShowSimilarCar = ({ id }: { id: Id<"cars"> }) => {
   const cars = useQuery(api.cars.getSimilarCar, { id });
