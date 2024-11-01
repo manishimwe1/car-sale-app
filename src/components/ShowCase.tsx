@@ -21,7 +21,7 @@ const ShowCase = () => {
           ? cars.map((car) => {
               return <CarShowCard car={car} key={car._id} />;
             })
-          : [1, 23, 4].map(() => <Loader />)}
+          : [1, 23, 4].map((i) => <Loader key={i} />)}
       </div>
     </section>
   );
