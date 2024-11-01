@@ -29,6 +29,8 @@ import { api } from "../../../../../convex/_generated/api";
 import { Id } from "../../../../../convex/_generated/dataModel";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import Banner from "@/components/Banner";
+import { Skeleton } from "@/components/ui/skeleton";
+
 type Props = {
   params: {
     brand: string;
@@ -46,8 +48,8 @@ const DetailsPage = ({ params }: Props) => {
         <div className="w-full shadow-md shadow-sky-200 rounded-xl">
           <Carousel>
             <CarouselContent className=" rounded-xl flex ">
-              {car?.images.map((url) => {
-                return (
+              {car ? (
+                car.images.map((url) => (
                   <CarouselItem key={url}>
                     <div className="relative w-full h-[350px] lg:h-[500px]  flex flex-col space-y-1 rounded-xl">
                       <Image
@@ -65,18 +67,28 @@ const DetailsPage = ({ params }: Props) => {
                       />
                     </div>
                   </CarouselItem>
-                );
-              })}
+                ))
+              ) : (
+                <Skeleton className="w-full h-[350px] lg:h-[500px] rounded-xl space-y-1 " />
+              )}
             </CarouselContent>
-            <CarouselPrevious className="ml-[80px]" />
-            <CarouselNext className="mr-[80px]" />
+            {car ? (
+              <>
+                <CarouselPrevious className="ml-[80px]" />
+                <CarouselNext className="mr-[80px]" />
+              </>
+            ) : null}
           </Carousel>
         </div>
         <div className="bg-[#f0f9ff] w-full lg:w-[60%] h-full lg:h-[400px]  rounded-sm rounded-r-xl p-2 shadow-sm shadow-blue-400/20">
           <div className="flex justify-between text-start p-4">
-            <p className="text-3xl font-bold text-blue-700 md:text-left mt-2">
-              {Number(car?.money).toLocaleString("us")} Rwf
-            </p>
+            {car ? (
+              <p className="text-3xl font-bold text-blue-700 md:text-left mt-2">
+                {Number(car?.money).toLocaleString("us")} Rwf
+              </p>
+            ) : (
+              <Skeleton className="w-[200px] h-10 rounded-md" />
+            )}
             <div className="flex items-center gap-3">
               <Share2 className="text-slate-600 h-5 w-5 cursor-pointer" />
               <Heart className="text-slate-600 h-5 w-5 cursor-pointer" />
@@ -91,32 +103,47 @@ const DetailsPage = ({ params }: Props) => {
             </Button>
           </div>
           <div className="flex items-start flex-col mt-1  bg-white overflow-hidden p-2 mx-4 rounded-md py-3">
-            <p className="text-xl text-pretty capitalize font-medium text-slate-800 ">
-              {car?.name}
-            </p>
-            <div className="flex gap-4 text-center justify-center mt-4">
-              <div className="flex w-full text-center gap-1 items-center border-r px-4 rounded-lg border-black/40">
-                <Car className="text-slate-800 h-7 w-5" />
-                <p className="text-[9px] md:text-[14px] text-nowrap  font-medium capitalize text-slate-800">
-                  {car?.brand}
-                </p>
-              </div>
+            {car ? (
+              <p className="text-xl text-pretty capitalize font-medium text-slate-800 ">
+                {car?.name}
+              </p>
+            ) : (
+              <Skeleton className="w-full h-6 mb-2 rounded-md" />
+            )}
 
-              <div className="flex w-full text-center gap-1 items-center border-r px-4 rounded-lg border-black/40">
-                <Cable className="text-slate-800 h-7 w-4" />
-                <p className=" text-[9px] md:text-[14px] text-pretty font-medium capitalize text-slate-800">
-                  Electric
-                </p>
-              </div>
+            {car ? (
+              <div className="flex gap-4 text-center justify-center mt-4">
+                <div className="flex w-full text-center gap-1 items-center border-r px-4 rounded-lg border-black/40">
+                  <Car className="text-slate-800 h-7 w-5" />
+                  <p className="text-[9px] md:text-[14px] text-nowrap  font-medium capitalize text-slate-800">
+                    {car?.brand}
+                  </p>
+                </div>
 
-              <div className="flex w-full text-center gap-1 items-center">
-                <Clock2 className="text-slate-800 h-7 w-4" />
-                <p className=" text-[9px] md:text-[14px] text-pretty font-medium capitalize text-slate-800">
-                  0 Km
-                </p>
-              </div>
-            </div>
+                <div className="flex w-full text-center gap-1 items-center border-r px-4 rounded-lg border-black/40">
+                  <Cable className="text-slate-800 h-7 w-4" />
+                  <p className=" text-[9px] md:text-[14px] text-pretty font-medium capitalize text-slate-800">
+                    Electric
+                  </p>
+                </div>
 
+                <div className="flex w-full text-center gap-1 items-center">
+                  <Clock2 className="text-slate-800 h-7 w-4" />
+                  <p className=" text-[9px] md:text-[14px] text-pretty font-medium capitalize text-slate-800">
+                    0 Km
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <div className="flex flex-col gap-2 text-center justify-center">
+                <Skeleton className="w-full h-6 rounded-md" />
+                <div className="flex gap-1 text-center justify-center">
+                  <Skeleton className="w-24 h-6 rounded-md" />
+                  <Skeleton className="w-24 h-6 rounded-md" />
+                  <Skeleton className="w-16 h-6 rounded-md" />
+                </div>
+              </div>
+            )}
             <div className="flex items-center gap-3 justify-center w-full mt-2">
               <div className="flex items-center gap-1 ">
                 <Image
