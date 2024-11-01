@@ -1,10 +1,16 @@
 import { Loader2 } from "lucide-react";
 import React from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const Loader = () => {
   return (
-    <div className="w-full h-full flex items-center justify-center">
-      <Loader2 className="h-10 w-10 animate-spin" />
+    <div className="flex flex-col space-y-3 w-full">
+      <Skeleton className="w-full h-[200px] rounded-xl" />
+      <div className="space-y-2">
+        <Skeleton className="h-6 w-[250px]" />
+        <Skeleton className="h-4 w-[200px]" />
+        <Skeleton className="h-4 w-[300px]" />
+      </div>
     </div>
   );
 };
