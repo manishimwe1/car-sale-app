@@ -17,19 +17,19 @@ const Header = () => {
         </Link>
         <div className="md:flex items-center gap-5 hidden">
           <Link
-            href="#"
+            href="/"
             className="text-slate-900 font-semibold  transition-colors hover:text-foreground"
           >
             Home
           </Link>
           <Link
-            href="#"
+            href="#new"
             className="text-slate-900 font-semibold  transition-colors hover:text-foreground"
           >
             Vehicles
           </Link>
           <Link
-            href="#"
+            href="/blog"
             className="text-slate-900 font-semibold  transition-colors hover:text-foreground"
           >
             Blog

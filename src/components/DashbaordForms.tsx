@@ -21,6 +21,7 @@ import { z } from "zod";
 import { api } from "../../convex/_generated/api";
 import { Id } from "../../convex/_generated/dataModel";
 import DropeZOne from "./Dropzone"; // Ensure the component name matches
+import SelectType from "./SelectType";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -42,6 +43,9 @@ export function DashboardForm() {
   const [logo, setLogo] = useState<File | null>(null);
   // const [logoId, setLogoId] = useState<Id<"_storage">>();
   const [loading, setLoading] = useState(false);
+  const [typeOfCar, setTypeOfCar] = useState<
+    "diesel" | "electric" | "hybrid"
+  >();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -51,7 +55,7 @@ export function DashboardForm() {
       brand: "",
     },
   });
-  // console.log(logo, "logo");
+  console.log(typeOfCar, "logo");
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
@@ -168,7 +172,7 @@ export function DashboardForm() {
               </FormItem>
             )}
           />
-          <div className="w-full flex gap-3 text-center justify-between">
+          <div className="w-full flex flex-col md:flex-row gap-3 text-center justify-between">
             <FormField
               control={form.control}
               name="brand"
@@ -186,7 +190,7 @@ export function DashboardForm() {
               )}
             />
 
-            <div className="w-fit flex flex-col border text-center justify-between">
+            <div className="w-fit flex flex-col text-center justify-between">
               <FormLabel className="text-left">Logo</FormLabel>
 
               <input
@@ -199,6 +203,10 @@ export function DashboardForm() {
                 This is your car displaying logo.
               </FormDescription>
             </div>
+          </div>
+          <div>
+            <FormLabel className="">Brand</FormLabel>
+            <SelectType typeOfCar={typeOfCar} setType={setTypeOfCar} />
           </div>
           <div className="w-full border">
             <DropeZOne setFiles={setFiles} />

@@ -1,35 +1,35 @@
 "use client";
-import { Button } from "@/components/ui/button";
 import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { Button } from "./ui/moving-border";
 
 const Hero = () => {
   return (
     <section className="bg-cover bg-center h-screen flex flex-col  bg-hero-bg rounded-b-[30px] relative">
       <div className="bg-gradient-to-b from-black/40 via-black/40 to-transparent  mx-auto w-full h-fit ">
-        <div className=" mt-16 flex items-center flex-col">
-          <h2 className="text-pretty text-4xl md:text-6xl font-bold tracking-widest text-white sm:text-6xl mb-6">
+        <div className=" mt-32 md:mt-16 flex items-center flex-col">
+          <h2 className=" text-balance text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter text-white sm:text-6xl mb-6">
             BetterWhips
           </h2>
           <div className="px-4 py-2 flex flex-col items-center  mb-4">
             <p className="text-[16px] text-pretty font-medium text-green-50">
-              We sell professional car{" "}
+              Where Quality Drives Forward
             </p>
             <motion.p
               // animate={{ x: 100 }}
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
-              className="text-lg text-pretty font-medium text-white"
+              className="text-2xl capitalize text-pretty font-medium text-white"
             >
-              Where Quality Drives Forward
+              We sell professional car{" "}
             </motion.p>
           </div>
           <Button
-            className="bg-black hover:bg-black/60 text-white py-3 px-6 rounded-lg"
-            asChild
+            borderRadius="1.75rem"
+            className="bg-slate-900 text-white dark:text-white border-neutral-200 dark:border-slate-800"
           >
             <Link href={"#new"}>Open Fleet</Link>
           </Button>
