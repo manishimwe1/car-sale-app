@@ -4,6 +4,7 @@ import ShowCase from "@/components/ShowCase";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import Hero from "../components/Hero";
 import ShowCaseOverMoney from "@/components/ShowCaseOverMoney";
+import CustomersReviews from "@/components/CustomersReviews";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
         <Services />
       </div>
       <WhyChooseUs />
+      <CustomersReviews />
       <Banner />
     </section>
   );

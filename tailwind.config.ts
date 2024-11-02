@@ -11,6 +11,17 @@ module.exports = {
   ],
   theme: {
   	extend: {
+		animation: {
+        scroll:
+          "scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
+      },
+	  keyframes: {
+        scroll: {
+          to: {
+            transform: "translate(calc(-50% - 0.5rem))",
+          },
+        },
+      },
       backgroundImage: {
         'hero-bg': "url('/car2.webp')"},
   		borderRadius: {
@@ -19,6 +30,7 @@ module.exports = {
   			sm: 'calc(var(--radius) - 4px)'
   		},
   		colors: {
+			sky:'#c3e6ff',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {

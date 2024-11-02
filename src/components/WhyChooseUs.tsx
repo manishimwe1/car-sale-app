@@ -8,7 +8,7 @@ const WhyChooseUs = () => {
           Why Choose BetterWhips
         </h1>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10 mt-5 md:mt-10">
-          <div className="p-4 bg-[#c3e6ff] flex flex-col items-center justify-center rounded-xl">
+          <div className="p-4 bg-sky flex flex-col items-center justify-center rounded-xl">
             <div className="h-28 w-32 relative">
               <Image src={"/auto.webp"} alt="auto" fill />
             </div>

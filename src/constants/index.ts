@@ -76,3 +76,28 @@ export const Features=[
 'Imported',
 
 ] 
+export const ABOUTUS=[
+'Contact Us',
+'About Us',
+'FAQ',
+'Careers',
+'Terms of Use',
+'Privacy Policy',
+] 
+
+export const FOLLOWUS=[
+    'Facebook',
+    'Instagram',
+    'Tiktok',
+    'X',
+    'Youtube',
+    ] 
+    
+    
+    
+    
+    
+    
+
+
+

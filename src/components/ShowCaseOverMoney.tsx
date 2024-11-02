@@ -13,6 +13,7 @@ const ShowCaseOverMoney = () => {
   return (
     <section className="space-y-4 px-4">
       <SectionHeaderBox
+        showNextBtn={true}
         title="Cars Under 10 000 000 RWF"
         subTitle="Here you can see different cheap cars under 10 000 000 RWF"
       />

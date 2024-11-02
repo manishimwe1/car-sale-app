@@ -4,7 +4,9 @@ import { Roboto } from "next/font/google";
 import { ConvexClientProvider } from "./ConvexClientProvider";
 import "./globals.css";
 import Header from "@/components/Header";
+
 import NextTopLoader from "nextjs-toploader";
+import Footer from "@/components/Footer";
 
 const roboto = Roboto({
   weight: ["400", "500", "900"],
@@ -32,6 +34,9 @@ export default function RootLayout({
           <ConvexClientProvider>
             <Header />
             {children}
+            <div className="bg-sky w-full">
+              <Footer />
+            </div>
           </ConvexClientProvider>
         </body>
       </html>

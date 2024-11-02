@@ -5,9 +5,11 @@ import { MoveRight } from "lucide-react";
 const SectionHeaderBox = ({
   title,
   subTitle,
+  showNextBtn,
 }: {
   title: string;
   subTitle: string;
+  showNextBtn?: boolean;
 }) => {
   return (
     <div className="md:flex text-center items-center justify-between">
@@ -19,9 +21,11 @@ const SectionHeaderBox = ({
           {subTitle}
         </p>
       </div>
-      <Button variant={"link"} className="hidden md:flex">
-        View all <MoveRight className="text-slate-800 w-4 ml-1 " />
-      </Button>
+      {showNextBtn ? (
+        <Button variant={"link"} className="hidden md:flex">
+          View all <MoveRight className="text-slate-800 w-4 ml-1 " />
+        </Button>
+      ) : null}
     </div>
   );
 };

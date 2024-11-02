@@ -14,6 +14,7 @@ const ShowSimilarCar = ({ id }: { id: Id<"cars"> }) => {
   return (
     <section className="space-y-4 px-4">
       <SectionHeaderBox
+        showNextBtn={true}
         title="Similar Cars"
         subTitle="Here you can see different similar cars"
       />

@@ -13,6 +13,7 @@ const ShowCase = () => {
   return (
     <section className="space-y-4 px-4 w-full">
       <SectionHeaderBox
+        showNextBtn={true}
         title="new cars"
         subTitle="Here you can see different new cars"
       />
