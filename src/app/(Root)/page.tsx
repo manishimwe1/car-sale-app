@@ -2,9 +2,9 @@ import Banner from "@/components/Banner";
 import Services from "@/components/Services";
 import ShowCase from "@/components/ShowCase";
 import WhyChooseUs from "@/components/WhyChooseUs";
-import Hero from "../components/Hero";
 import ShowCaseOverMoney from "@/components/ShowCaseOverMoney";
 import CustomersReviews from "@/components/CustomersReviews";
+import Hero from "@/components/Hero";
 
 export default function Home() {
   return (

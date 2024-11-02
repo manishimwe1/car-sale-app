@@ -12,7 +12,7 @@ const SectionHeaderBox = ({
   showNextBtn?: boolean;
 }) => {
   return (
-    <div className="md:flex text-center items-center justify-between">
+    <div className="md:flex text-center items-center justify-between px-2">
       <div className="flex flex-col space-y-1">
         <h1 className="text-2xl capitalize font-bold text-center md:text-left">
           {title}

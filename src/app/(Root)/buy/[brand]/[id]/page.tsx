@@ -25,11 +25,11 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { SocialIcon } from "react-social-icons";
-import { api } from "../../../../../convex/_generated/api";
-import { Id } from "../../../../../convex/_generated/dataModel";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import Banner from "@/components/Banner";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Id } from "../../../../../../convex/_generated/dataModel";
+import { api } from "../../../../../../convex/_generated/api";
 
 type Props = {
   params: {
