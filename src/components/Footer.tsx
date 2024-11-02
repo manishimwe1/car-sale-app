@@ -13,25 +13,25 @@ const Footer = () => {
       <div className="flex flex-col gap-2 w-full">
         <Headers label="Popular Makes" />
         {CarCategories.map((label) => (
-          <Labels label={label.title} />
+          <Labels label={label.title} key={label.title} />
         ))}
       </div>
 
       <div className="flex flex-col gap-2 w-full">
         <Headers label="Popular Car Types" />
-        {cars?.map((label) => <Labels label={label.brand} />)}
+        {cars?.map((label) => <Labels key={label._id} label={label.brand} />)}
       </div>
 
       <div className="flex flex-col gap-2 w-full">
         <Headers label="ABOUT US" />
         {ABOUTUS.map((label) => (
-          <Labels label={label} />
+          <Labels label={label} key={label} />
         ))}
       </div>
       <div className="flex flex-col gap-2 w-full">
         <Headers label="FOLLOW US" />
         {FOLLOWUS.map((label) => (
-          <Labels label={label} />
+          <Labels label={label} key={label} />
         ))}
       </div>
     </section>
