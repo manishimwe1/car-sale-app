@@ -44,9 +44,6 @@ export function DashboardForm() {
   const [logo, setLogo] = useState<File | null>(null);
   // const [logoId, setLogoId] = useState<Id<"_storage">>();
   const [loading, setLoading] = useState(false);
-  const [typeOfCar, setTypeOfCar] = useState<
-    "diesel" | "electric" | "hybrid"
-  >();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -57,7 +54,6 @@ export function DashboardForm() {
       KM_Done: 0,
     },
   });
-  console.log(typeOfCar, "logo");
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {

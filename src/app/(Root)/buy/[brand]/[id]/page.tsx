@@ -1,7 +1,9 @@
 "use client";
 
 import AboutUs from "@/components/AboutUs";
+import Banner from "@/components/Banner";
 import CarOverView from "@/components/CarOverView";
+import { CarDetails } from "@/components/CarShowCard";
 import ShowSimilarCar from "@/components/ShowSimilarCar";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,26 +13,15 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { Skeleton } from "@/components/ui/skeleton";
+import WhyChooseUs from "@/components/WhyChooseUs";
 import { AboutUsData } from "@/constants";
 import { useQuery } from "convex/react";
-import {
-  Cable,
-  Car,
-  Clock2,
-  Eye,
-  Globe,
-  Heart,
-  Share2,
-  ThumbsUp,
-} from "lucide-react";
+import { Eye, Globe, Heart, Share2, ThumbsUp } from "lucide-react";
 import Image from "next/image";
 import { SocialIcon } from "react-social-icons";
-import WhyChooseUs from "@/components/WhyChooseUs";
-import Banner from "@/components/Banner";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Id } from "../../../../../../convex/_generated/dataModel";
 import { api } from "../../../../../../convex/_generated/api";
-import { CarDetails } from "@/components/CarShowCard";
+import { Id } from "../../../../../../convex/_generated/dataModel";
 
 type Props = {
   params: {
