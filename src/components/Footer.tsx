@@ -43,12 +43,12 @@ const Footer = () => {
         </div>
       </div>
       <div className="w-full py-4 px-2 flex flex-col   items-center justify-center ">
-        <p className="text-balance text-sm text-black font-semibold">
+        <p className="text-balance text-sm text-slate-400 font-semibold">
           Copyright © Africar Group Pty Ltd - All rights reserved.
         </p>
-        <p className="text-balance text-sm text-black font-semibold">
+        <p className="text-balance text-sm text-slate-400 font-semibold">
           BetterWhps, a member of the AFRICAR Group (Pty) Ltd, a duly registered
-          in Rwanda with TIN: 121357235
+          in Rwanda
         </p>
       </div>
     </section>

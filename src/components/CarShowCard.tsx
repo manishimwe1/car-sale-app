@@ -7,10 +7,10 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { Cable, Car, Heart, Share2 } from "lucide-react";
+import { Cable, Car, Clock12, Fuel, Heart, Share2, Vault } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { Id } from "../../convex/_generated/dataModel";
+import { Doc, Id } from "../../convex/_generated/dataModel";
 import CarShowCardFooter from "./CarShowCardFooter";
 type carType = {
   urls: (string | null)[];
@@ -22,6 +22,9 @@ type carType = {
   money: number;
   name: string;
   imageIds: Id<"_storage">[];
+  KM_Done: number;
+  typeOfCar: string;
+  numberOfViews: number;
 };
 const CarShowCard = ({ car }: { car: carType }) => {
   return (
@@ -64,22 +67,7 @@ const CarShowCard = ({ car }: { car: carType }) => {
             <p className="text-2xl  font-bold text-blue-700 md:text-left mt-2">
               {Number(car.money).toLocaleString("us")} Rwf
             </p>
-            <div className="flex items-center mt-1 gap-2">
-              <div className="flex">
-                <Car className="text-slate-800 h-5 w-4" />
-                <p className="text-[14px] text-pretty font-medium text-slate-800">
-                  {car.brand}
-                </p>
-              </div>
-
-              <hr className="h-3 w-0 border border-slate-500" />
-              <div className="flex">
-                <Cable className="text-slate-800 h-5 w-4" />
-                <p className="text-[14px] text-pretty font-medium text-slate-800">
-                  Electric
-                </p>
-              </div>
-            </div>
+            <CarDetails car={car} />
             <CarShowCardFooter />
           </div>
           <div className="flex items-center gap-2">
@@ -93,3 +81,48 @@ const CarShowCard = ({ car }: { car: carType }) => {
 };
 
 export default CarShowCard;
+
+export function CarDetails({ car }: { car: Doc<"cars"> }) {
+  return (
+    <div className="flex items-center mt-1 gap-4">
+      <div className="flex">
+        <Car className="text-slate-800 h-5 w-4" />
+        <p className="text-[14px] text-pretty font-medium capitalize text-slate-800">
+          {car.brand}
+        </p>
+      </div>
+
+      <hr className="h-3 w-0 border border-slate-500" />
+      {car.typeOfCar === "electric" && (
+        <div className="flex items-center gap-1">
+          <Cable className="text-slate-500 h-5 w-4" />
+          <p className="text-[14px] text-pretty font-medium text-slate-800">
+            {car.typeOfCar}
+          </p>
+        </div>
+      )}
+      {car.typeOfCar === "diesel" && (
+        <div className="flex items-center gap-1">
+          <Fuel className="text-slate-500 h-5 w-4" />
+          <p className="text-[14px] text-pretty font-medium text-slate-800">
+            {car.typeOfCar}
+          </p>
+        </div>
+      )}
+      {car.typeOfCar === "hybrid" && (
+        <div className="flex items-center gap-1">
+          <Vault className="text-slate-500 h-5 w-4" />
+          <p className="text-[14px] text-pretty font-medium text-slate-800">
+            {car.typeOfCar}
+          </p>
+        </div>
+      )}
+      <div className="flex items-center gap-1">
+        <Clock12 className="text-slate-500 h-5 w-4" />
+        <p className="text-[14px] text-pretty font-medium text-slate-800">
+          {car.KM_Done}KM
+        </p>
+      </div>
+    </div>
+  );
+}

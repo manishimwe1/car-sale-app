@@ -8,29 +8,25 @@ import {
 import { Dispatch, SetStateAction } from "react";
 
 const SelectType = ({
-  typeOfCar,
   setType,
 }: {
-  typeOfCar: "diesel" | "electric" | "hybrid" | undefined;
   setType: Dispatch<
     SetStateAction<"diesel" | "electric" | "hybrid" | undefined>
   >;
 }) => {
   return (
-    <Select>
+    <Select
+      onValueChange={(value) =>
+        setType(value as "diesel" | "electric" | "hybrid")
+      }
+    >
       <SelectTrigger className="w-[180px]">
-        <SelectValue placeholder={"Hybrid"} />
+        <SelectValue placeholder="Hybrid" />
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value="diesel" onChange={() => setType("diesel")}>
-          Diesel
-        </SelectItem>
-        <SelectItem value="electric" onChange={() => setType("electric")}>
-          Electric
-        </SelectItem>
-        <SelectItem value="hybrid" onChange={() => setType("hybrid")}>
-          Hybrid
-        </SelectItem>
+        <SelectItem value="diesel">Diesel</SelectItem>
+        <SelectItem value="electric">Electric</SelectItem>
+        <SelectItem value="hybrid">Hybrid</SelectItem>
       </SelectContent>
     </Select>
   );

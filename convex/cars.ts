@@ -2,24 +2,33 @@
 
 import { Doc, Id } from "./_generated/dataModel";
 import { mutation, query } from "./_generated/server";
-import { v,} from "convex/values";
+import { ConvexError, v,} from "convex/values";
 
 // Create a new carInfo with the given text
 export const createCar = mutation({
   args: { name: v.string(),
     money: v.number(),
+    KM_Done: v.number(),
     brand:v.string(),
     imageUrls:v.array(v.id("_storage")),
     logoID:v.id("_storage"),
+    typeOfCar:v.string()
  
 },
   handler: async (ctx, args) => {
+    const numberOfViews=0
+    if(args.imageUrls.length === 0){
+      return new Error('somethng went wrong')
+    }
     const newCarId = await ctx.db.insert("cars", { 
         name: args.name,
         logoId:args.logoID,
         money: args.money,
         brand: args.brand,
-        imageIds: args.imageUrls
+        imageIds: args.imageUrls,
+        typeOfCar:args.typeOfCar,
+        numberOfViews,
+        KM_Done:args.KM_Done
     });
     return newCarId;
   },

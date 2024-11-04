@@ -30,6 +30,7 @@ import Banner from "@/components/Banner";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Id } from "../../../../../../convex/_generated/dataModel";
 import { api } from "../../../../../../convex/_generated/api";
+import { CarDetails } from "@/components/CarShowCard";
 
 type Props = {
   params: {
@@ -113,26 +114,7 @@ const DetailsPage = ({ params }: Props) => {
 
             {car ? (
               <div className="flex gap-4 text-center justify-center mt-4">
-                <div className="flex w-full text-center gap-1 items-center border-r px-4 rounded-lg border-black/40">
-                  <Car className="text-slate-800 h-7 w-5" />
-                  <p className="text-[9px] md:text-[14px] text-nowrap  font-medium capitalize text-slate-800">
-                    {car?.brand}
-                  </p>
-                </div>
-
-                <div className="flex w-full text-center gap-1 items-center border-r px-4 rounded-lg border-black/40">
-                  <Cable className="text-slate-800 h-7 w-4" />
-                  <p className=" text-[9px] md:text-[14px] text-pretty font-medium capitalize text-slate-800">
-                    Electric
-                  </p>
-                </div>
-
-                <div className="flex w-full text-center gap-1 items-center">
-                  <Clock2 className="text-slate-800 h-7 w-4" />
-                  <p className=" text-[9px] md:text-[14px] text-pretty font-medium capitalize text-slate-800">
-                    0 Km
-                  </p>
-                </div>
+                <CarDetails car={car} />
               </div>
             ) : (
               <div className="flex flex-col gap-2 text-center justify-center">
