@@ -91,6 +91,7 @@ export const FOLLOWUS=[
     'Tiktok',
     'X',
     'Youtube',
+    'whatsapp'
     ] 
     
     

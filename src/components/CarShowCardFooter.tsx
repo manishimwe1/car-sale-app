@@ -28,7 +28,7 @@ const CarShowCardFooter = () => {
       </div>
 
       <div className="w-1.5 bg-gray-400 rounded-full h-1.5" />
-      <div className="flex items-center gap-1 ">
+      <div className="flex items-center gap-1 flex-nowrap">
         <Image
           src={"/warranted.svg"}
           alt="certfeid"
