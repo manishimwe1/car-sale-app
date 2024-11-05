@@ -1,15 +1,18 @@
 import React from "react";
 import { Button } from "./ui/button";
 import { MoveRight } from "lucide-react";
+import Link from "next/link";
 
 const SectionHeaderBox = ({
   title,
   subTitle,
   showNextBtn,
+  link,
 }: {
   title: string;
   subTitle: string;
   showNextBtn?: boolean;
+  link?: string;
 }) => {
   return (
     <div className="md:flex text-center items-center justify-between px-2">
@@ -22,9 +25,11 @@ const SectionHeaderBox = ({
         </p>
       </div>
       {showNextBtn ? (
-        <Button variant={"link"} className="hidden md:flex">
-          View all <MoveRight className="text-slate-800 w-4 ml-1 " />
-        </Button>
+        <Link href={link ?? ""}>
+          <Button variant={"link"} className="hidden md:flex">
+            View all <MoveRight className="text-slate-800 w-4 ml-1 " />
+          </Button>
+        </Link>
       ) : null}
     </div>
   );

@@ -22,6 +22,7 @@ import Image from "next/image";
 import { SocialIcon } from "react-social-icons";
 import { api } from "../../../../../../convex/_generated/api";
 import { Id } from "../../../../../../convex/_generated/dataModel";
+import { useState } from "react";
 
 type Props = {
   params: {
@@ -31,6 +32,7 @@ type Props = {
 };
 
 const DetailsPage = ({ params }: Props) => {
+  const [openFull, setopenFull] = useState(false);
   const car = useQuery(api.cars.getCarById, { id: params.id });
   if (!params.id) return;
 
@@ -45,6 +47,7 @@ const DetailsPage = ({ params }: Props) => {
                   <CarouselItem key={url}>
                     <div className="relative w-full h-[350px] lg:h-[500px]  flex flex-col space-y-1 rounded-xl">
                       <Image
+                        onDoubleClick={() => setopenFull(true)}
                         src={url ?? ""}
                         alt="car"
                         fill
@@ -66,8 +69,8 @@ const DetailsPage = ({ params }: Props) => {
             </CarouselContent>
             {car ? (
               <>
-                <CarouselPrevious className="ml-[80px]" />
-                <CarouselNext className="mr-[80px]" />
+                <CarouselPrevious className="ml-[80px] hidden md:flex" />
+                <CarouselNext className="mr-[80px] hidden md:flex" />
               </>
             ) : null}
           </Carousel>

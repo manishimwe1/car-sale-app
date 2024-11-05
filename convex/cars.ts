@@ -52,7 +52,7 @@ export const getCar = query({
       })
     );
 
-    console.log(images, 'here');
+    // console.log(images, 'here');
     
     return images;
   },
@@ -125,6 +125,33 @@ export const getCarById = query({
     
     return {...newCarId,images,logoUrls};
   },
+});
+export const getCarByBrand = query({
+  args:{
+    brand:v.string()
+  },
+  handler: async (ctx,args) => {
+    const newCar = await ctx.db.query('cars').filter((q) => q.eq(q.field("brand"), args.brand))
+    .collect();
+  
+    if(!newCar) return console.log('semothing went wrong');
+    const images = await Promise.all(
+      newCar.map(async (message) => {
+        const logoUrls = await ctx.storage.getUrl(message.logoId);
+        const urls = await Promise.all(
+          message.imageIds.map(async (storageId) => {
+            return await ctx.storage.getUrl(storageId);
+          })
+        );
+        return { ...message, urls,logoUrls };
+      })
+    );
+
+    // console.log(images, 'here');
+    
+    return images;
+  },
+    
 });
 
 export const generateUploadUrl = mutation(async (ctx) => {

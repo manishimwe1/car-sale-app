@@ -4,6 +4,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, Package2, Search } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import SearchBox from "./SearchBox";
 
 const Header = () => {
   return (
@@ -42,16 +43,7 @@ const Header = () => {
             <span>0798894137</span>
           </Link>
 
-          <form className="ml-auto flex-1 sm:flex-initial ">
-            <div className="relative">
-              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-white" />
-              <Input
-                type="search"
-                placeholder="Search car..."
-                className="pl-8 sm:w-[300px] md:w-[200px] text-white lg:w-[300px] placeholder:text-white/50"
-              />
-            </div>
-          </form>
+          <SearchBox />
         </div>
       </nav>
       <Sheet>
@@ -64,38 +56,22 @@ const Header = () => {
         <SheetContent side="left">
           <nav className="grid gap-6 text-lg font-medium">
             <Link
-              href="#"
-              className="flex items-center gap-2 text-lg font-semibold"
+              href="/"
+              className="text-slate-900 font-semibold  transition-colors hover:text-foreground"
             >
-              <Package2 className="h-6 w-6" />
-              <span className="sr-only">Acme Inc</span>
-            </Link>
-            <Link href="#" className="hover:text-foreground">
-              Dashboard
+              Home
             </Link>
             <Link
-              href="#"
-              className="text-muted-foreground hover:text-foreground"
+              href="#new"
+              className="text-slate-900 font-semibold  transition-colors hover:text-foreground"
             >
-              Orders
+              Vehicles
             </Link>
             <Link
-              href="#"
-              className="text-muted-foreground hover:text-foreground"
+              href="/blog"
+              className="text-slate-900 font-semibold  transition-colors hover:text-foreground"
             >
-              Products
-            </Link>
-            <Link
-              href="#"
-              className="text-muted-foreground hover:text-foreground"
-            >
-              Customers
-            </Link>
-            <Link
-              href="#"
-              className="text-muted-foreground hover:text-foreground"
-            >
-              Analytics
+              Blog
             </Link>
           </nav>
         </SheetContent>

@@ -21,7 +21,7 @@ const Footer = () => {
             </div>
 
             <div className="flex flex-col gap-2 w-full">
-              <Headers label="Popular Car Types" />
+              <Headers label="Popular Car Brand" />
               {cars?.map((label) => (
                 <Labels key={label._id} label={label.brand} />
               ))}
@@ -44,11 +44,11 @@ const Footer = () => {
       </div>
       <div className="w-full py-4 px-2 flex flex-col   items-center justify-center ">
         <p className="text-balance text-sm text-slate-400 font-semibold">
-          Copyright © Africar Group Pty Ltd - All rights reserved.
+          Copyright © BetterWhips Group Ltd - All rights reserved.
         </p>
-        <p className="text-balance text-sm text-slate-400 font-semibold">
-          BetterWhps, a member of the AFRICAR Group (Pty) Ltd, a duly registered
-          in Rwanda
+        <p className="text-balance hidden md:flex text-sm text-slate-400 font-semibold">
+          BetterWhips, a member of the AFRICAR Group (Pty) Ltd, a duly
+          registered in Rwanda
         </p>
       </div>
     </section>

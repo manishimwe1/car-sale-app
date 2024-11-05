@@ -38,9 +38,12 @@ const Hero = () => {
       <div className="bg-white/90 hidden md:block py-6 p-4 rounded-2xl shadow-black shadow-lg md:w-80 w-full  h-fit absolute bottom-0 md:bottom-10 right-0 sm:right-10">
         <h4 className="text-black"></h4>
         <Tabs defaultValue="account" className="w-full border-black ">
-          <TabsList>
-            <TabsTrigger value="account" className="!py-2 !bg-green-400">
-              Experience the Drive Before You Decide!
+          <TabsList className="!w-full">
+            <TabsTrigger
+              value="account"
+              className="!py-2  !bg-gradient-to-r from-blue-400 via-blue-500 to-blue-300 !w-full !text-white"
+            >
+              Drive a Dream
             </TabsTrigger>
           </TabsList>
           <TabsContent value="account" className="w-full">

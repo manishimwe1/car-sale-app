@@ -18,7 +18,9 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-  	extend: {
+  	extend: {scrollBehavior: {
+        'smooth': 'smooth',
+      },
 		animation: {
 			"meteor-effect": "meteor 5s linear infinite",
         scroll:

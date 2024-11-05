@@ -47,6 +47,7 @@ const Services = () => {
                   alt="car brand"
                   width={40}
                   height={40}
+                  className="object-contain rounded-full"
                 />
                 <p className="text-sm text-pretty font-medium text-center capitalize">
                   {car.brand}

@@ -47,7 +47,7 @@ const CarShowCard = ({ car }: { car: carType }) => {
                       alt="car"
                       width={50}
                       height={50}
-                      className="rounded-full absolute bottom-0 object-contain right-4"
+                      className="rounded-full absolute bottom-0 object-cover right-4"
                     />
                   </div>
                 </CarouselItem>
@@ -85,12 +85,14 @@ export default CarShowCard;
 export function CarDetails({ car }: { car: Doc<"cars"> }) {
   return (
     <div className="flex items-center mt-1 gap-4">
-      <div className="flex">
-        <Car className="text-slate-800 h-5 w-4" />
-        <p className="text-[14px] text-pretty font-medium capitalize text-slate-800">
-          {car.brand}
-        </p>
-      </div>
+      <Link href={`/search/${car.brand}`}>
+        <div className="flex gap-1 items-center hover:text-blue-500">
+          <Car className="text-slate-800 h-5 w-4" />
+          <p className="text-[14px] text-pretty font-medium capitalize text-slate-800">
+            {car.brand}
+          </p>
+        </div>
+      </Link>
 
       <hr className="h-3 w-0 border border-slate-500" />
       {car.typeOfCar === "electric" && (
