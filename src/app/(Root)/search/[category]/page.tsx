@@ -1,26 +1,18 @@
 "use client";
 
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Skeleton } from "@/components/ui/skeleton";
+import CarShowCard from "@/components/CarShowCard";
+import FilterBox from "@/components/FilterBox";
+import Loader from "@/components/Loader";
+import SectionHeaderBox from "@/components/SectionHeaderBox";
 import { useQuery } from "convex/react";
 import { api } from "../../../../../convex/_generated/api";
-import { ChevronDown } from "lucide-react";
-import FilterBox from "@/components/FilterBox";
-import SectionHeaderBox from "@/components/SectionHeaderBox";
-import CarShowCard from "@/components/CarShowCard";
-import Loader from "@/components/Loader";
 
 type Props = {
   params: {
     category: string;
   };
 };
-const page = ({ params }: Props) => {
+const Searchpage = ({ params }: Props) => {
   const cars = useQuery(api.cars.getCarByBrand, {
     brand: params.category.toLowerCase(),
   });
@@ -48,4 +40,4 @@ const page = ({ params }: Props) => {
   );
 };
 
-export default page;
+export default Searchpage;
