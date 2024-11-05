@@ -31,7 +31,10 @@ const FilterBox = ({ params }: Props) => {
           <DropdownMenuContent className="!w-full border-red-700 focus:border-none focus:outline-none focus-visible:border-none outline-none focus-visible:outline-none">
             {cars ? (
               cars.map((car) => (
-                <DropdownMenuItem className="flex items-center justify-between !w-full">
+                <DropdownMenuItem
+                  key={car._id}
+                  className="flex items-center justify-between !w-full"
+                >
                   {car.brand}
                 </DropdownMenuItem>
               ))
@@ -57,7 +60,10 @@ const FilterBox = ({ params }: Props) => {
           <DropdownMenuContent className="!w-full focus:border-none focus:outline-none focus-visible:border-none outline-none focus-visible:outline-none">
             {cars ? (
               cars.map((car) => (
-                <DropdownMenuItem className="flex items-center justify-between !w-full">
+                <DropdownMenuItem
+                  key={car._id}
+                  className="flex items-center justify-between !w-full"
+                >
                   {car.brand}
                 </DropdownMenuItem>
               ))
