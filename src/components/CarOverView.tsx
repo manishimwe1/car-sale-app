@@ -22,7 +22,7 @@ const CarOverView = () => {
             allowFullScreen
           />
         </div>
-        <div className="flex flex-wrap gap-3 ;g:w-[72%] w-full  items-start justify-start">
+        <div className="flex flex-wrap gap-3 lg:w-[72%] w-full  items-start justify-start">
           {Features.map((feature) => (
             <div
               key={feature}

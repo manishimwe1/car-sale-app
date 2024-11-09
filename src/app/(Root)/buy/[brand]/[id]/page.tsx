@@ -16,12 +16,14 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import { AboutUsData } from "@/constants";
-import { useQuery } from "convex/react";
-import { Eye, Globe, Heart, Share2, ThumbsUp } from "lucide-react";
+import { useMutation, useQuery } from "convex/react";
+import { Eye, Globe, HandCoins, Heart, Share2, ThumbsUp } from "lucide-react";
 import Image from "next/image";
 import { SocialIcon } from "react-social-icons";
 import { api } from "../../../../../../convex/_generated/api";
 import { Id } from "../../../../../../convex/_generated/dataModel";
+import { updateCar } from "../../../../../../convex/cars";
+import Link from "next/link";
 
 type Props = {
   params: {
@@ -31,10 +33,11 @@ type Props = {
 };
 
 const DetailsPage = ({ params }: Props) => {
-  // const [openFull, setopenFull] = useState(false);
+  const viewed = 1;
   const car = useQuery(api.cars.getCarById, { id: params.id });
   if (!params.id) return;
 
+  // useMutation(api.cars.updateCar);
   return (
     <section className="flex flex-col gap-6 w-full container mx-auto py-10 ">
       <div className="w-full flex flex-col lg:flex-row px-5 lg:px-10 text-center justify-between gap-8">
@@ -88,12 +91,20 @@ const DetailsPage = ({ params }: Props) => {
               <Heart className="text-slate-600 h-5 w-5 cursor-pointer" />
             </div>
           </div>
-          <div className="w-full flex p-4">
+          <div className="w-full flex p-4 items-center gap-4">
             <Button
               variant={"ghost"}
               className="shadow-md shadow-sky-300 items-center"
             >
               <ThumbsUp className="h-4 w-4" /> Favorite
+            </Button>
+            <Button
+              asChild
+              className="bg-blue-600 shadow-md shadow-blue-300 items-center text-sky transition-all hover:bg-blue-400"
+            >
+              <Link href={`/pay/${car?._id}`}>
+                <HandCoins className="h-4 w-4" /> pay in installments
+              </Link>
             </Button>
           </div>
           <div className="flex items-start flex-col mt-1  bg-white overflow-hidden p-2 mx-4 rounded-md py-3">
@@ -157,7 +168,7 @@ const DetailsPage = ({ params }: Props) => {
             </div>
           </div>
           <div className="w-full flex text-center justify-around p-4  ">
-            <Button className="bg-blue-600 shadow-md shadow-sky-300">
+            <Button className="bg-blue-300 shadow-md shadow-sky-300">
               <Globe className="h-4 w-4" /> Buy online
             </Button>
             <Button>

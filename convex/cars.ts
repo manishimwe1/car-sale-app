@@ -1,8 +1,8 @@
 
 
-import { Doc, Id } from "./_generated/dataModel";
+import { v } from "convex/values";
+import { Doc } from "./_generated/dataModel";
 import { mutation, query } from "./_generated/server";
-import { ConvexError, v,} from "convex/values";
 
 // Create a new carInfo with the given text
 export const createCar = mutation({
@@ -31,6 +31,25 @@ export const createCar = mutation({
         KM_Done:args.KM_Done
     });
     return newCarId;
+  },
+
+});
+
+
+export const updateCar = mutation({
+  args: {
+    id:v.id("cars"),
+    numberOfViews:v.number()
+ 
+},
+  handler: async (ctx, args) => {
+    const newCarId = await ctx.db.get(args.id);
+  
+    if(!newCarId) return console.log('semothing went wrong');
+    await ctx.db.patch(newCarId._id, { 
+        numberOfViews:args.numberOfViews,
+    });
+   
   },
 
 });
