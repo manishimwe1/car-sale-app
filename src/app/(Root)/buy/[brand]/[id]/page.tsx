@@ -16,13 +16,12 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import { AboutUsData } from "@/constants";
-import { useMutation, useQuery } from "convex/react";
+import { useQuery } from "convex/react";
 import { Eye, Globe, HandCoins, Heart, Share2, ThumbsUp } from "lucide-react";
 import Image from "next/image";
 import { SocialIcon } from "react-social-icons";
 import { api } from "../../../../../../convex/_generated/api";
 import { Id } from "../../../../../../convex/_generated/dataModel";
-import { updateCar } from "../../../../../../convex/cars";
 import Link from "next/link";
 
 type Props = {
@@ -33,7 +32,7 @@ type Props = {
 };
 
 const DetailsPage = ({ params }: Props) => {
-  const viewed = 1;
+  // const viewed = 1;
   const car = useQuery(api.cars.getCarById, { id: params.id });
   if (!params.id) return;
 

@@ -1,8 +1,11 @@
+
+
+import { authTables } from "@convex-dev/auth/server";
 import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
-import { number } from "zod";
 
 export default defineSchema({
+  ...authTables,
   cars: defineTable({
     brand: v.string(),
     logoId: v.id("_storage"),
