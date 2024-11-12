@@ -28,7 +28,7 @@ export default function SignIn() {
           </h2>
           <p className="text-[16px] text-pretty font-medium text-green-50">
             {step === "signIn"
-              ? "You don't have an account"
+              ? "You dont have an account"
               : "Already have an account"}
             <span
               className="text-blue-300 font-semibold ml-2 cursor-pointer"

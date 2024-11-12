@@ -210,7 +210,7 @@ export function DashboardForm() {
               </FormDescription>
             </div>
           </div>
-          <div>
+          <div className="flex items-center justify-between">
             <FormField
               control={form.control}
               name="typeOfCar"

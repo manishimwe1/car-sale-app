@@ -6,7 +6,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className="h-screen items-center py-10 justify-between">
+    <main className="h-screen items-center justify-between">
       {/* <DashBoardHeader /> */}
       <section className="flex  ">
         <DashBoardSideBar />
