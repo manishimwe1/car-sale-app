@@ -1,7 +1,15 @@
-import { convexAuth } from "@convex-dev/auth/server";
-import { Password } from "@convex-dev/auth/providers/Password";
+import { internal } from "./_generated/api";
+import { httpAction } from "./_generated/server";
 
-export const { auth, signIn, signOut, store } = convexAuth({
-  providers: [Password],
-   
+export const postMessage = httpAction(async (ctx, request) => {
+  const { author, body } = await request.json();
+  console.log(body, "ths its body");
+
+  await ctx.runQuery(internal.user.getUser, {
+    email: body,
+  });
+
+  return new Response(null, {
+    status: 200,
+  });
 });

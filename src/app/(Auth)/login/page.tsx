@@ -20,6 +20,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { api } from "../../../../convex/_generated/api";
+import { signIn } from "@/auth";
 const formSchema = z.object({
   firstname: z.string().min(2, {
     message: "Name must be at least 2 characters.",
@@ -32,10 +33,9 @@ const formSchema = z.object({
   password: z.string(),
   role: z.string(),
 });
-export default function SignIn() {
-  const { signIn } = useAuthActions();
+export default function LoginPage() {
+  // const { signIn } = useAuthActions();
   const [errorInRegister, setErrorInRegister] = useState<string | null>(null);
-  const [step, setStep] = useState<"signUp" | "signIn">("signIn");
   const [loading, setLoading] = useState(false);
   const registerUser = useAction(api.user.registerUser);
   const router = useRouter();
@@ -53,46 +53,46 @@ export default function SignIn() {
   });
   // Get the redirect URL from query parameters, default to "/pay" if not provided
   const redirectUrl = searchParams.get("redirect") || "/pay";
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    const { success, error } = await registerUser({
-      firstname: values.firstname,
-      lastname: values.lastname,
-      email: values.email,
-      password: values.password,
-      role: "user",
-    });
+  // async function onSubmit(values: z.infer<typeof formSchema>) {
+  //   console.log(values);
+  //   const { success, error } = await registerUser({
+  //     firstname: values.firstname,
+  //     lastname: values.lastname,
+  //     email: values.email,
+  //     password: values.password,
+  //     role: "user",
+  //   });
 
-    if (error !== null) {
-      setErrorInRegister(error);
-    }
-    if (success) {
-      router.push("/login");
-    }
-  }
+  //   if (error !== null) {
+  //     setErrorInRegister(error);
+  //   }
+  //   if (success) {
+  //     router.push("/login");
+  //   }
+  // }
   return (
     <section className="flex items-center justify-center w-full h-screen">
       <div className="w-full hidden overflow-hidden bg-cover bg-center h-screen md:flex flex-col  bg-hero-bg" />
       <div className="md:w-[70%] w-full h-screen flex items-center flex-col space-y-4 justify-center bg-slate-900 px-10 lg:px-20">
         <div className="flex gap-2 flex-col">
           <h2 className=" text-balance text-xl md:text-3xl font-bold tracking-tighter text-white">
-            {step === "signIn" ? "Welcome back" : "Create an account"}
+            "Welcome back"
           </h2>
           <p className="text-[16px] text-pretty font-medium text-green-50">
-            {step === "signIn"
-              ? "You dont have an account"
-              : "Already have an account"}
-            <span
+            "You dont have an account"
+            <Link
+              href={"/register"}
               className="text-blue-300 font-semibold ml-2 cursor-pointer"
-              onClick={() => setStep(step === "signIn" ? "signUp" : "signIn")}
             >
-              {step === "signIn" ? "Sign up" : "Login"}
-            </span>
+              "Sign up"
+            </Link>
           </p>
         </div>
         <Form {...form}>
           <form
-            onSubmit={form.handleSubmit(onSubmit)}
+            action={async () => {
+              await signIn("credentials");
+            }}
             className="space-y-8 w-full"
           >
             {/* <form
@@ -101,48 +101,7 @@ export default function SignIn() {
           }} */}
             {/* className="space-y-8 py-5 rounded-md " */}
             {/* > */}
-            <div className="flex items-center justify-center gap-2 md:gap-8 text-white">
-              <div className="flex items-start flex-col justify-center gap-2 w-full">
-                <FormField
-                  control={form.control}
-                  name="firstname"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>First Name</FormLabel>
-                      <FormControl>
-                        <Input
-                          className="text-white"
-                          type="text"
-                          placeholder="first name.."
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <div className="flex items-start flex-col justify-center gap-2 w-full">
-                <FormField
-                  control={form.control}
-                  name="lastname"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Last Name</FormLabel>
-                      <FormControl>
-                        <Input
-                          className="text-white"
-                          type="text"
-                          placeholder="last name"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-            </div>
+
             <FormField
               control={form.control}
               name="email"
