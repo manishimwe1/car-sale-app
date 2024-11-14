@@ -1,6 +1,6 @@
 "use server";
 
-import { auth, signIn } from "@/auth";
+import { signIn } from "@/auth";
 
 export async function handleSignIn(email: string, password: string) {
   try {

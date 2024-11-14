@@ -29,7 +29,7 @@ export default function LoginPage() {
   if (session) {
     redirect("/dashboard");
   }
-  const [errorInRegister, setErrorInRegister] = useState<string | null>(null);
+  const [errorInRegister] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
