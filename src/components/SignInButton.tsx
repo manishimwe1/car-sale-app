@@ -1,5 +1,3 @@
-import { signIn } from "@/auth";
-// import { SignInAction } from "@/lib/actions/signinActions";
 import React from "react";
 import { Button } from "./ui/button";
 import Image from "next/image";

@@ -1,15 +1,6 @@
 "use client";
-import { useQuery } from "convex/react";
-import React from "react";
-import { api } from "../../convex/_generated/api";
+import { ArrowUpAZ, Heart, LayoutDashboard, PackagePlus } from "lucide-react";
 import Link from "next/link";
-import {
-  ArrowUpAZ,
-  Heart,
-  LayoutDashboard,
-  Loader2,
-  PackagePlus,
-} from "lucide-react";
 
 const DashBoardSideBar = () => {
   return (
