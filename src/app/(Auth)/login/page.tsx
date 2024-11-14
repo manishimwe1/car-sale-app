@@ -43,21 +43,17 @@ export default function LoginPage() {
   // Get the redirect URL from query parameters, default to "/pay" if not provided
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setLoading(true);
-    const { success, error } = await handleSignIn(
-      values.email,
-      values.password
-    );
+    const user = await handleSignIn(values.email, values.password);
+    console.log(user, "!!!!!!!!!!!!!");
 
-    if (error !== null) {
-      setErrorInRegister(error);
-      setLoading(false);
-    }
-    if (success) {
+    if (user?.success) {
       form.reset();
       setLoading(false);
-      router.push("/login");
+      router.push("/dashboard");
     }
-    if (error) {
+    if (user?.error) {
+      router.refresh();
+      // setErrorInRegister(user?.error);
       form.reset();
       setLoading(false);
     }

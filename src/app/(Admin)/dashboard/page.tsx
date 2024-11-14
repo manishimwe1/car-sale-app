@@ -9,7 +9,11 @@ const Dashboardpage = async () => {
   if (!session?.user) {
     redirect("/login");
   }
-  return <div>Dashboardpage</div>;
+  return (
+    <section className="p-10 h-full w-full">
+      <div></div>
+    </section>
+  );
 };
 
 export default Dashboardpage;
