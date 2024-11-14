@@ -12,6 +12,8 @@ export async function handleSignIn(email: string, password: string) {
     });
     return { succuss: true, error: null };
   } catch (error) {
+    console.log(error);
+
     return { success: false, error: "Incorrect Password " };
   }
 }
