@@ -1,31 +1,35 @@
-import { 
-    convexAuthNextjsMiddleware, 
-    createRouteMatcher,
-  } from "@convex-dev/auth/nextjs/server";
-  import { NextRequest } from "next/server";
-  
-  const isProtectedRoute = createRouteMatcher(["/pay(.*)"]); 
-  
-  export default convexAuthNextjsMiddleware(
-    (request: NextRequest, { convexAuth }) => {
-      if (isProtectedRoute(request) && !convexAuth.isAuthenticated()) {
-        // Get the current origin
-        const origin = request.nextUrl.origin;
-        const pathname = request.nextUrl.pathname;
-        
-        // Construct the URL string directly without any encoding
-        const redirectUrl = `${origin}/sign-in?redirect=${pathname}`;
-        
-        // Use Response.redirect directly to avoid additional encoding
-        return Response.redirect(redirectUrl);
-      }
-    }
+import { auth } from "./auth";
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+
+export default auth((req) => {
+  const isLoggedIn = !!req.auth;
+  const { pathname } = req.nextUrl;
+
+  // Add paths that should be accessible only to logged-in users
+  const protectedPaths = ["/dashboard", "/profile"];
+
+  // Add paths that should be accessible only to non-logged-in users
+  const authPaths = ["/login", "/register"];
+
+  const isProtectedPath = protectedPaths.some((path) =>
+    pathname.startsWith(path)
   );
-  
-  export const config = {
-    matcher: [
-      "/((?!.*\\..*|_next).*)",
-      "/",
-      "/(api|trpc)(.*)"
-    ],
-  };
+
+  const isAuthPath = authPaths.some((path) => pathname.startsWith(path));
+
+  if (isProtectedPath && !isLoggedIn) {
+    return NextResponse.redirect(new URL("/login", req.nextUrl));
+  }
+
+  if (isAuthPath && isLoggedIn) {
+    return NextResponse.redirect(new URL("/dashboard", req.nextUrl));
+  }
+
+  return NextResponse.next();
+});
+
+// Optionally configure middleware matcher
+export const config = {
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+};

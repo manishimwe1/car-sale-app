@@ -6,8 +6,6 @@ import { internal } from "./_generated/api";
 
 const http = httpRouter();
 
-// auth.addHttpRoutes(http);
-
 http.route({
   path: "/getMessagesByAuthor",
   method: "GET",
@@ -45,6 +43,86 @@ http.route({
         "Content-Type": "application/json",
       },
     });
+  }),
+});
+
+http.route({
+  path: "/createUser",
+  method: "POST",
+  handler: httpAction(async (ctx, request) => {
+    // Parse the request body
+    const body = await request.json();
+
+    // Validate required fields
+    if (!body.email) {
+      return new Response(
+        JSON.stringify({
+          error: "Email and password are required",
+        }),
+        {
+          status: 400,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+    }
+
+    try {
+      // Check if user already exists
+      const existingUser = await ctx.runQuery(internal.user.getUser, {
+        email: body.email,
+      });
+
+      if (existingUser) {
+        return new Response(
+          JSON.stringify({
+            error: "User already exists",
+          }),
+          {
+            status: 409,
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+      }
+
+      // Create new user
+      const newUser = await ctx.runMutation(internal.user.createUser, {
+        email: body.email,
+        // Add any other fields you need
+        firstname: body.name,
+        lastname: body.lastname,
+        role: body.role || "user",
+      });
+
+      return new Response(
+        JSON.stringify({
+          message: "User created successfully",
+          user: newUser,
+        }),
+        {
+          status: 201,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+    } catch (error: any) {
+      return new Response(
+        JSON.stringify({
+          error: "Failed to create user",
+          details: error.message,
+        }),
+        {
+          status: 500,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+    }
   }),
 });
 

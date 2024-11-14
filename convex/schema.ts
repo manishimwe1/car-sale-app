@@ -15,9 +15,10 @@ export default defineSchema({
   }),
   user: defineTable({
     firstname: v.string(),
-    lastname: v.string(),
+    lastname: v.optional(v.string()),
     email: v.string(),
-    password: v.string(),
+    password: v.optional(v.string()),
+    image: v.optional(v.string()),
     role: v.string(),
   }),
 });

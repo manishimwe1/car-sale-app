@@ -19,7 +19,7 @@ import { AboutUsData } from "@/constants";
 import { useQuery } from "convex/react";
 import { Eye, Globe, HandCoins, Heart, Share2, ThumbsUp } from "lucide-react";
 import Image from "next/image";
-import { SocialIcon } from "react-social-icons";
+
 import { api } from "../../../../../../convex/_generated/api";
 import { Id } from "../../../../../../convex/_generated/dataModel";
 import Link from "next/link";
@@ -171,11 +171,12 @@ const DetailsPage = ({ params }: Props) => {
               <Globe className="h-4 w-4" /> Buy online
             </Button>
             <Button>
-              <SocialIcon
-                // url="https://whatsapp.com"
-                network="whatsapp"
-                style={{ height: 20, width: 20 }}
-                className="object-contain"
+              <Image
+                src={"/whatsapp.svg"}
+                className="size-4"
+                alt="google logo"
+                width={3}
+                height={3}
               />
               Whatsapp
             </Button>

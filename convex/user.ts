@@ -11,10 +11,11 @@ import {
 export const createUser = internalMutation({
   args: {
     firstname: v.string(),
-    lastname: v.string(),
+    lastname: v.optional(v.string()),
     email: v.string(),
-    password: v.string(),
+    password: v.optional(v.string()),
     role: v.string(),
+    image: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     const newUser = await ctx.db.insert("user", {
@@ -23,6 +24,7 @@ export const createUser = internalMutation({
       email: args.email,
       password: args.password,
       role: args.role,
+      image: args.image,
     });
 
     if (!newUser)
