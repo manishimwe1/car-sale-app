@@ -23,23 +23,25 @@ import Image from "next/image";
 import { api } from "../../../../../../convex/_generated/api";
 import { Id } from "../../../../../../convex/_generated/dataModel";
 import Link from "next/link";
+import React from "react";
 
-type Props = {
-  params: {
-    brand: string;
-    id: Id<"cars">;
-  };
-};
+// type Props = {
+//   params: {
+//     brand: string;
 
-const DetailsPage = ({ params }: Props) => {
+//   };
+// };
+
+const DetailsPage = ({ params }: { params: Promise<{ id: Id<"cars"> }> }) => {
   // const viewed = 1;
-  const car = useQuery(api.cars.getCarById, { id: params.id });
-  if (!params.id) return;
+  const { id } = React.use(params);
+  const car = useQuery(api.cars.getCarById, { id });
+  if (!id) return;
 
   // useMutation(api.cars.updateCar);
   return (
-    <section className="flex flex-col gap-6 w-full container mx-auto py-10 ">
-      <div className="w-full flex flex-col lg:flex-row px-5 lg:px-10 text-center justify-between gap-8">
+    <div className="flex flex-col gap-6 w-full mx-auto py-10 overflow-y-scroll h-full">
+      <div className="w-full h-full flex flex-col lg:flex-row px-5 lg:px-10 text-center justify-between gap-8">
         <div className="w-full shadow-md shadow-sky-200 rounded-xl">
           <Carousel>
             <CarouselContent className=" rounded-xl flex ">
@@ -206,13 +208,13 @@ const DetailsPage = ({ params }: Props) => {
       </div>
       <CarOverView />
       <div>
-        <ShowSimilarCar id={params.id} />
+        <ShowSimilarCar id={id} />
       </div>
       <div className="mt-4 space-y-4">
         <WhyChooseUs />
         <Banner />
       </div>
-    </section>
+    </div>
   );
 };
 

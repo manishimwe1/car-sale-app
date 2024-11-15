@@ -20,74 +20,74 @@ import { redirect, useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+
+// Move schema outside component to prevent recreating on each render
 const formSchema = z.object({
-  email: z.string().email(),
-  password: z.string(),
+  email: z.string().email("Please enter a valid email address"),
+  password: z.string().min(6, "Password must be at least 6 characters"),
 });
+
+type FormValues = z.infer<typeof formSchema>;
+
 export default function LoginPage() {
-  const { data: session } = useSession();
-  if (session) {
-    redirect("/dashboard");
-  }
-  const [errorInRegister] = useState<string | null>(null);
+  const { data: session, status } = useSession();
+  const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const form = useForm<z.infer<typeof formSchema>>({
+  // Redirect if already authenticated
+  if (status !== "loading" && session) {
+    redirect("/dashboard");
+  }
+
+  const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: "",
       password: "",
     },
   });
-  // Get the redirect URL from query parameters, default to "/pay" if not provided
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    setLoading(true);
-    const user = await handleSignIn(values.email, values.password);
-    console.log(user, "!!!!!!!!!!!!!");
 
-    if (user?.success) {
-      form.reset();
-      setLoading(false);
-      router.push("/dashboard");
-    }
-    if (user?.error) {
-      router.refresh();
-      // setErrorInRegister(user?.error);
-      form.reset();
+  async function onSubmit(values: FormValues) {
+    try {
+      setLoading(true);
+      setError(null);
+
+      const response = await handleSignIn(values.email, values.password);
+
+      if (response.success) {
+        // Success case
+        form.reset();
+        router.push("/dashboard");
+        return;
+      }
+
+      // Error case
+      setError(response.error || "Failed to sign in");
+      form.reset({ email: values.email, password: "" }); // Keep email, clear password
+    } catch (err) {
+      console.error("Login error:", err);
+      setError("An unexpected error occurred");
+    } finally {
       setLoading(false);
     }
   }
+
   return (
     <section className="flex items-center justify-center w-full h-screen">
-      <div className="w-full hidden overflow-hidden bg-cover bg-center h-screen md:flex flex-col  bg-hero-bg" />
+      <div className="w-full hidden overflow-hidden bg-cover bg-center h-screen md:flex flex-col bg-hero-bg" />
       <div className="md:w-[70%] w-full h-screen flex items-center flex-col space-y-4 justify-center bg-slate-900 px-10 lg:px-20">
         <div className="flex gap-2 flex-col">
-          <h2 className=" text-balance text-xl md:text-3xl font-bold tracking-tighter text-white">
+          <h2 className="text-balance text-xl md:text-3xl font-bold tracking-tighter text-white">
             Welcome back
           </h2>
-          {/* <p className="text-[16px] text-pretty font-medium text-green-50">
-            "You dont have an account"
-            <Link
-              href={"/register"}
-              className="text-blue-300 font-semibold ml-2 cursor-pointer"
-            >
-              "Sign up"
-            </Link>
-          </p> */}
         </div>
+
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
             className="space-y-8 w-full"
           >
-            {/* <form
-          action={async (formData: FormData) => {
-            
-          }} */}
-            {/* className="space-y-8 py-5 rounded-md " */}
-            {/* > */}
-
             <FormField
               control={form.control}
               name="email"
@@ -99,6 +99,7 @@ export default function LoginPage() {
                       className="text-white"
                       type="email"
                       placeholder="john@gmail.com"
+                      autoComplete="email"
                       {...field}
                     />
                   </FormControl>
@@ -106,6 +107,7 @@ export default function LoginPage() {
                 </FormItem>
               )}
             />
+
             <FormField
               control={form.control}
               name="password"
@@ -113,48 +115,49 @@ export default function LoginPage() {
                 <FormItem>
                   <FormLabel className="text-white">Password</FormLabel>
                   <FormControl>
-                    <Input className="text-white" type="password" {...field} />
+                    <Input
+                      className="text-white"
+                      type="password"
+                      autoComplete="current-password"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
+
+            {error && (
+              <div className="text-red-500 text-sm text-center">{error}</div>
+            )}
+
             <Button
               disabled={loading}
               className="w-full bg-blue-600 disabled:bg-stone-700 disabled:cursor-wait hover:bg-blue-700 shadow-lg shadow-black"
               type="submit"
             >
               {loading ? (
-                <p className="flex items-center gap-2 justify-center">
-                  <Loader2 className="animate-spin h-4 w-4 " /> Login... &rarr;
-                </p>
+                <span className="flex items-center gap-2 justify-center">
+                  <Loader2 className="animate-spin h-4 w-4" />
+                  Signing in...
+                </span>
               ) : (
-                <p>Login &rarr;</p>
+                "Sign in"
               )}
             </Button>
-            {errorInRegister ? (
-              <p className="flex items-center gap-1 justify-center text-red-500 font-thin text-sm">
-                {errorInRegister} try to{" "}
-                <Link
-                  href="/register"
-                  className="text-red-200 underline cursor-pointer underline-offset-2"
-                >
-                  Register
-                </Link>
-              </p>
-            ) : (
-              <p className="flex items-end gap-1 justify-end text-white font-thin text-sm">
-                You dont have an account{" "}
-                <Link
-                  href="/register"
-                  className="underline ml-2 cursor-pointer"
-                >
-                  Register
-                </Link>
-              </p>
-            )}
+
+            <p className="flex items-end gap-1 justify-end text-white font-thin text-sm">
+              Don't have an account?{" "}
+              <Link
+                href="/register"
+                className="underline ml-2 hover:text-blue-300 transition-colors"
+              >
+                Register
+              </Link>
+            </p>
           </form>
         </Form>
+
         <SignInButton />
       </div>
     </section>

@@ -8,12 +8,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <body>
+    <main className="w-full h-screen overflow-hidden ">
       <Header />
-      {children}
-      <div className=" w-full">
+      <div className="overflow-y-scroll h-full w-full pb-10">{children}</div>
+      <div className=" w-full h-full ">
         <Footer />
       </div>
-    </body>
+    </main>
   );
 }

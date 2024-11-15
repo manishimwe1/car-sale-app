@@ -9,7 +9,7 @@ import ReserveForm from "./ReserveForm";
 
 const Hero = () => {
   return (
-    <section className="bg-cover bg-center h-screen flex flex-col  bg-hero-bg rounded-b-[30px] relative">
+    <section className="bg-cover bg-center w-full bg-hero-bg h-screen flex flex-col rounded-b-[30px] relative">
       <div className="bg-gradient-to-b from-black/40 via-black/40 to-transparent  mx-auto w-full h-fit ">
         <div className=" mt-32 md:mt-16 flex items-center flex-col">
           <h2 className=" text-balance text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter text-white sm:text-6xl mb-6">

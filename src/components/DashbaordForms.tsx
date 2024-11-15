@@ -188,27 +188,11 @@ export function DashboardForm() {
                   <FormControl>
                     <Input placeholder="Brand.." {...field} />
                   </FormControl>
-                  <FormDescription>
-                    This is your car display Brand.
-                  </FormDescription>
+
                   <FormMessage />
                 </FormItem>
               )}
             />
-
-            <div className="w-fit flex flex-col text-center justify-between">
-              <FormLabel className="text-left">Logo</FormLabel>
-
-              <input
-                type="file"
-                onChange={(e) =>
-                  setLogo(e.target?.files ? e.target?.files[0] : null)
-                }
-              />
-              <FormDescription className="text-left ">
-                This is your car displaying logo.
-              </FormDescription>
-            </div>
           </div>
           <div className="flex items-center justify-between">
             <FormField
@@ -220,9 +204,7 @@ export function DashboardForm() {
                   <FormControl>
                     <SelectType setType={field.onChange} />
                   </FormControl>
-                  <FormDescription>
-                    This is your car display Brand.
-                  </FormDescription>
+
                   <FormMessage />
                 </FormItem>
               )}
@@ -245,6 +227,19 @@ export function DashboardForm() {
                 </FormItem>
               )}
             />
+          </div>
+          <div className="w-fit flex flex-col text-center justify-between">
+            <FormLabel className="text-left">Logo</FormLabel>
+
+            <input
+              type="file"
+              onChange={(e) =>
+                setLogo(e.target?.files ? e.target?.files[0] : null)
+              }
+            />
+            <FormDescription className="text-left ">
+              This is your car displaying logo.
+            </FormDescription>
           </div>
           <div className="w-full border">
             <DropeZOne setFiles={setFiles} />

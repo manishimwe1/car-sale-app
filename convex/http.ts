@@ -52,6 +52,7 @@ http.route({
   handler: httpAction(async (ctx, request) => {
     // Parse the request body
     const body = await request.json();
+    console.log("boody", body);
 
     // Validate required fields
     if (!body.email) {
@@ -92,9 +93,10 @@ http.route({
       const newUser = await ctx.runMutation(internal.user.createUser, {
         email: body.email,
         // Add any other fields you need
-        firstname: body.name,
+        firstname: body.firstname,
         lastname: body.lastname,
-        role: body.role || "user",
+        role: body.role,
+        image: body.image,
       });
 
       return new Response(

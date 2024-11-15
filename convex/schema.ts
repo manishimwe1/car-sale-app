@@ -1,4 +1,3 @@
-import { authTables } from "@convex-dev/auth/server";
 import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
 
@@ -14,7 +13,7 @@ export default defineSchema({
     KM_Done: v.number(),
   }),
   user: defineTable({
-    firstname: v.string(),
+    firstname: v.optional(v.string()),
     lastname: v.optional(v.string()),
     email: v.string(),
     password: v.optional(v.string()),

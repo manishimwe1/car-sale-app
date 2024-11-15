@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
+import localFont from "next/font/local";
 import { ConvexClientProvider } from "./ConvexClientProvider";
 import "./globals.css";
-import { ConvexAuthNextjsServerProvider } from "@convex-dev/auth/nextjs/server";
 import NextTopLoader from "nextjs-toploader";
 
-const roboto = Roboto({
-  weight: ["400", "500", "900"],
-  subsets: ["latin"],
+const roboto = localFont({
+  src: "./fonts/Roboto-Bold.ttf",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -22,15 +21,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ConvexAuthNextjsServerProvider>
-      <html lang="en" className="scroll-smooth">
-        <body
-          className={`${roboto.className} antialiased flex flex-col w-full`}
-        >
-          <NextTopLoader />
-          <ConvexClientProvider>{children}</ConvexClientProvider>
-        </body>
-      </html>
-    </ConvexAuthNextjsServerProvider>
+    <html lang="en">
+      <body
+        className={`${roboto.className} antialiased scroll-smooth flex flex-col w-full h-full `}
+      >
+        <NextTopLoader />
+
+        <ConvexClientProvider>{children}</ConvexClientProvider>
+      </body>
+    </html>
   );
 }

@@ -85,14 +85,12 @@ export default CarShowCard;
 export function CarDetails({ car }: { car: Doc<"cars"> }) {
   return (
     <div className="flex items-center mt-1 gap-4">
-      <Link href={`/search/${car.brand}`}>
-        <div className="flex gap-1 items-center hover:text-blue-500">
-          <Car className="text-slate-800 h-5 w-4" />
-          <p className="text-[14px] text-pretty font-medium capitalize text-slate-800">
-            {car.brand}
-          </p>
-        </div>
-      </Link>
+      <div className="flex gap-1 items-center hover:text-blue-500">
+        <Car className="text-slate-800 h-5 w-4" />
+        <p className="text-[14px] text-pretty font-medium capitalize text-slate-800">
+          {car.brand}
+        </p>
+      </div>
 
       <hr className="h-3 w-0 border border-slate-500" />
       {car.typeOfCar === "electric" && (

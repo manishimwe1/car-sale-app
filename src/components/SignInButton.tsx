@@ -1,16 +1,12 @@
 import React from "react";
 import { Button } from "./ui/button";
 import Image from "next/image";
+import { handleSignInWithGoogle } from "@/lib/actions/signinActions";
 
 const SignInButton = () => {
   return (
     <div>
-      <form
-      // action={async () => {
-      //   "use server";
-      //   await signIn("google");
-      // }}
-      >
+      <form action={handleSignInWithGoogle}>
         <Button variant={"secondary"} type="submit">
           <Image
             src={"/google.svg"}

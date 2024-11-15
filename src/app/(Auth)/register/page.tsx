@@ -106,17 +106,17 @@ export default function SignIn() {
           }} */}
             {/* className="space-y-8 py-5 rounded-md " */}
             {/* > */}
-            <div className="flex items-center justify-center gap-2 md:gap-8 text-white">
+            <div className="flex items-center justify-center gap-2 lg:gap-8 text-white w-full">
               <div className="flex items-start flex-col justify-center gap-2 w-full">
                 <FormField
                   control={form.control}
                   name="firstname"
                   render={({ field }) => (
-                    <FormItem>
+                    <FormItem className="w-full">
                       <FormLabel>First Name</FormLabel>
-                      <FormControl>
+                      <FormControl className="w-full">
                         <Input
-                          className="text-white"
+                          className="text-white !w-full"
                           type="text"
                           placeholder="first name.."
                           {...field}
@@ -132,11 +132,11 @@ export default function SignIn() {
                   control={form.control}
                   name="lastname"
                   render={({ field }) => (
-                    <FormItem>
+                    <FormItem className="w-full">
                       <FormLabel>Last Name</FormLabel>
-                      <FormControl>
+                      <FormControl className="w-full">
                         <Input
-                          className="text-white"
+                          className="text-white !w-full"
                           type="text"
                           placeholder="last name"
                           {...field}

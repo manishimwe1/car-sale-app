@@ -1,4 +1,5 @@
 import DashBoardSideBar from "@/components/DashBoardSideBar";
+import Header from "@/components/Header";
 
 export default function RootLayout({
   children,
@@ -6,14 +7,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className="bg-gradient-to-r from-blue-50/20 via-blue-100/20 to-blue-200/20 overflow-hidden">
-      {/* <DashBoardHeader /> */}
-      <section className="flex flex-col relative  h-screen  w-full ">
-        <div className="w-full h-20 md:min-h-screen  rounded-t-3xl shadow-md shadow-blue-400 flex items-center z-20 bg-slate-950 lg:bg-neutral-50 py-5 justify-center absolute bottom-0  inset-x-0">
+    <main className="bg-gradient-to-r from-blue-50/20 via-blue-100/20 to-blue-200/20 overflow-hidden flex flex-col">
+      <Header />
+      <section className="flex flex-col relative overflow-hidden h-screen  w-full ">
+        <div className="border  w-full md:w-60 min-h-20 fixed bottom-0 md:min-h-screen  rounded-t-3xl shadow-md shadow-blue-400 z-20 bg-slate-950 lg:bg-neutral-50">
           <DashBoardSideBar />
         </div>
 
-        {children}
+        <div className="pb-12 overflow-y-scroll px-6 h-full w-full">
+          {children}
+        </div>
       </section>
     </main>
   );

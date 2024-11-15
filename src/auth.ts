@@ -43,7 +43,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
           const response = await fetch(
             `https://famous-chihuahua-933.convex.site/getMessagesByAuthor?email=${email}`,
-            { cache: "no-store" }
+            {
+              cache: "no-store",
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
           );
 
           if (!response.ok) {
@@ -81,48 +86,61 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   pages: {
     signIn: "/login",
     error: "/error",
-    newUser: "/register", // Add this if you have a registration page
   },
   callbacks: {
-    async session({ session, token }) {
-      return {
-        ...session,
-        user: {
-          ...session.user,
-          id: token.sub,
-          role: token.role as string,
-        },
-      };
-    },
-    async jwt({ token, user }) {
-      if (user) {
+    async jwt({ token, user, trigger, session }) {
+      if (trigger === "signIn" && user) {
         token.sub = user.id;
+        token.role = "user";
+        token.email = user.email;
       }
+
+      if (trigger === "update" && session) {
+        // Handle session updates if needed
+        token = { ...token, ...session };
+      }
+
       return token;
     },
+
+    async session({ session, token }) {
+      if (token && session.user) {
+        session.user.id = token.sub as string;
+        session.user.role = token.role as string;
+        session.user.email = token.email as string;
+      }
+      return session;
+    },
+
     async signIn({ user, account }) {
       try {
         if (account?.provider === "google") {
-          const { email, name, image } = user;
+          const { email, name: firstname, image } = user;
 
-          if (!email) {
-            return false;
-          }
+          if (!email) return false;
 
           const response = await fetch(
-            `https://famous-chihuahua-933.convex.site/getMessagesByAuthor?email=${email}`,
-            { cache: "no-store" }
+            `https://famous-chihuahua-933.convex.site/getMessagesByAuthor?email=${encodeURIComponent(email)}`,
+            {
+              cache: "no-store",
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
           );
 
-          if (!response.ok) {
-            throw new Error("Failed to fetch user");
-          }
+          // if (!response.ok) {
+          //   throw new Error("Failed to fetch user");
+          // }
 
           const existingUser = await response.json();
+          console.log(existingUser, "existing user");
 
-          if (!existingUser) {
+          if (existingUser.error === "User not found") {
+            console.log({ email: email, firstname, image: image });
+
             const createResponse = await fetch(
-              `https://famous-chihuahua-933.convex.site/createUser`,
+              "https://famous-chihuahua-933.convex.site/createUser",
               {
                 method: "POST",
                 headers: {
@@ -130,7 +148,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                 },
                 body: JSON.stringify({
                   email,
-                  firstname: name,
+                  firstname,
                   role: "user",
                   image,
                 }),
@@ -150,9 +168,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         return false;
       }
     },
+
     async redirect({ url, baseUrl }) {
-      if (url.startsWith(baseUrl)) return url;
-      if (url.startsWith("/")) return new URL(url, baseUrl).toString();
+      // Allows relative callback URLs
+      if (url.startsWith("/")) return `${baseUrl}${url}`;
+      // Allows callback URLs on the same origin
+      else if (new URL(url).origin === baseUrl) return url;
       return baseUrl;
     },
   },

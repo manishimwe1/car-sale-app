@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const DashBoardSideBar = () => {
   return (
-    <section className=" w-full md:w-52 border-r-2 absolute bottom-0 inset-0 border-white/10 px-2 flex justify-center items-center ">
+    <section className=" w-full md:w-52 border-r-2 absolute bottom-0 inset-0 border-white/10 px-2 flex justify-center items-center lg:pt-20">
       <nav className="flex md:flex-col w-full md:h-full md:gap-4 py-10 items-center  md:items-start md:justify-start justify-between px-8 md:px-3 ">
         <Link
           href={"/dashboard"}
