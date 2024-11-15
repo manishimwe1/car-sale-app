@@ -12,20 +12,14 @@ import { ChevronDown } from "lucide-react";
 import { api } from "../../convex/_generated/api";
 import { Slider } from "@/components/ui/slider";
 
-type Props = {
-  params: {
-    category: string;
-  };
-};
-
-const FilterBox = ({ params }: Props) => {
+const FilterBox = ({ category }: { category: string }) => {
   const cars = useQuery(api.cars.getCar);
   return (
     <div className="w-full h-full grid grid-cols-1 md:grid-cols-3 gap-4">
       <div className="py-2 border px-2 w-full rounded-md">
         <DropdownMenu>
           <DropdownMenuTrigger className=" !w-full flex items-center justify-between text-slate-500">
-            {params.category}
+            {category}
             <ChevronDown className="text-slate-400 h-8 w-8" />
           </DropdownMenuTrigger>
           <DropdownMenuContent className="!w-full border-red-700 focus:border-none focus:outline-none focus-visible:border-none outline-none focus-visible:outline-none">
