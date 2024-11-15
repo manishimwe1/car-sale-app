@@ -147,7 +147,7 @@ export default function LoginPage() {
             </Button>
 
             <p className="flex items-end gap-1 justify-end text-white font-thin text-sm">
-              Don't have an account?{" "}
+              Dont have an account?{" "}
               <Link
                 href="/register"
                 className="underline ml-2 hover:text-blue-300 transition-colors"
