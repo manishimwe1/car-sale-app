@@ -8,11 +8,6 @@ import { useQuery } from "convex/react";
 import { api } from "../../../../../convex/_generated/api";
 import React from "react";
 
-type Props = {
-  params: {
-    category: string;
-  };
-};
 const Searchpage = ({ params }: { params: Promise<{ category: string }> }) => {
   const { category } = React.use(params);
   const cars = useQuery(api.cars.getCarByBrand, {
