@@ -4,13 +4,36 @@ import { useQuery } from "convex/react";
 import { Loader2 } from "lucide-react";
 import { api } from "../../../../../convex/_generated/api";
 import AllCarscard from "../_components/allCarscard";
+import { DataTable } from "./data-table";
+import { columns } from "./collumns";
+import { carsType } from "../../../../../types";
+import { Id } from "../../../../../convex/_generated/dataModel";
+
+export type carType = {
+  urls: (string | null)[];
+  logoUrls: string | null;
+  _id: Id<"cars">;
+  _creationTime: number;
+  name: string;
+  brand: string;
+  money: number;
+  KM_Done: number;
+  typeOfCar: string;
+  logoId: Id<"_storage">;
+  imageIds: Id<"_storage">[];
+  numberOfViews: number;
+};
 
 const AllCarPage = () => {
-  const cars = useQuery(api.cars.getCar);
+  const cars: carType[] | undefined = useQuery(api.cars.getCar);
+
   return (
-    <section className="hidden md:flex flex-col md:border-r-2 h-screen  border-slate-200/60 shadow-md shadow-slate-200/60 md:w-[200px]  px-2 space-y-2">
+    <section className="flex mx-auto items-start justify-center w-full px-6 pt-10 pb-20">
       {cars ? (
-        cars.map((car) => <AllCarscard car={car} key={car._id} />)
+        // cars.map((car) => <AllCarscard car={car} key={car._id} />)
+        <div className="w-full h-full">
+          <DataTable columns={columns} data={cars} />
+        </div>
       ) : (
         <Loader2 className="animate-spin h-4 w-4" />
       )}

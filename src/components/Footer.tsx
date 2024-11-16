@@ -60,5 +60,7 @@ const Headers = ({ label }: { label: string }) => (
   <h2 className="text-lg capitalize font-semibold mb-2">{label}</h2>
 );
 const Labels = ({ label }: { label: string }) => (
-  <p className="text-base text-slate-800 capitalize">{label}</p>
+  <p className="text-base text-stone-600 cursor-pointer hover:text-slate-900 capitalize">
+    {label}
+  </p>
 );

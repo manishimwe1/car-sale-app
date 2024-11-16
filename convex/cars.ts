@@ -78,7 +78,7 @@ export const getSimilarCar = query({
     const newCarId = await ctx.db
       .query("cars")
       .filter((q) => q.neq(q.field("_id"), args.id))
-      .collect();
+      .take(4);
     const images = await Promise.all(
       newCarId.map(async (message) => {
         const logoUrls = await ctx.storage.getUrl(message.logoId);
@@ -147,8 +147,6 @@ export const getCarByBrand = query({
     brand: v.string(),
   },
   handler: async (ctx, args) => {
-    console.log("brand", args.brand);
-
     const car = await ctx.db
       .query("cars")
       .filter((q) => q.eq(q.field("brand"), args.brand))

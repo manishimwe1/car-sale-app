@@ -7,25 +7,37 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Slider } from "@/components/ui/slider";
 import { useQuery } from "convex/react";
 import { ChevronDown } from "lucide-react";
+import { Dispatch } from "react";
 import { api } from "../../convex/_generated/api";
-import { Slider } from "@/components/ui/slider";
 
-const FilterBox = ({ category }: { category: string }) => {
+const FilterBox = ({
+  category,
+  setValue,
+  value,
+}: {
+  category: string;
+  value: string | undefined;
+  setValue: Dispatch<React.SetStateAction<string | undefined>>;
+}) => {
   const cars = useQuery(api.cars.getCar);
   return (
     <div className="w-full h-full grid grid-cols-1 md:grid-cols-3 gap-4">
       <div className="py-2 border px-2 w-full rounded-md">
         <DropdownMenu>
           <DropdownMenuTrigger className=" !w-full flex items-center justify-between text-slate-500 capitalize">
-            {category}
+            {value ? value : category}
             <ChevronDown className="text-slate-400 h-8 w-8" />
           </DropdownMenuTrigger>
           <DropdownMenuContent className="!w-full border-red-700 focus:border-none focus:outline-none focus-visible:border-none outline-none focus-visible:outline-none">
             {cars ? (
               cars.map((car) => (
                 <DropdownMenuItem
+                  onClick={(e) => {
+                    setValue(e.currentTarget.innerText);
+                  }}
                   key={car._id}
                   className="flex items-center justify-between !w-full"
                 >

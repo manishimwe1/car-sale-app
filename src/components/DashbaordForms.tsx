@@ -216,18 +216,19 @@ export function DashboardForm() {
               )}
             />
           </div>
-          <div className="flex items-center justify-between gap-2">
+          <div className="flex items-end justify-between gap-2 md:gap-4">
             <FormField
               control={form.control}
               name="KM_Done"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="!w-full flex-1">
                   <FormLabel>Km Done</FormLabel>
-                  <FormControl>
+                  <FormControl className="w-full">
                     <Input
                       type="number"
                       inputMode="numeric"
                       placeholder="Enter an amount.."
+                      className="w-full"
                       {...field}
                     />
                   </FormControl>
@@ -235,20 +236,19 @@ export function DashboardForm() {
                 </FormItem>
               )}
             />
-          </div>
-          <div className="w-fit flex flex-col text-center justify-between">
-            <FormLabel className="text-left">Logo</FormLabel>
+            <div className="w-fit md:w-[300px] h-full ml-2 text-stone-600 cursor-pointer flex flex-col text-center justify-between gap-1">
+              <FormLabel className="text-left">Logo</FormLabel>
 
-            <input
-              type="file"
-              onChange={(e) =>
-                setLogo(e.target?.files ? e.target?.files[0] : null)
-              }
-            />
-            <FormDescription className="text-left ">
-              This is your car displaying logo.
-            </FormDescription>
+              <input
+                type="file"
+                onChange={(e) =>
+                  setLogo(e.target?.files ? e.target?.files[0] : null)
+                }
+                className="!w-[180px] "
+              />
+            </div>
           </div>
+
           <div className="w-full border">
             <DropeZOne setFiles={setFiles} />
           </div>

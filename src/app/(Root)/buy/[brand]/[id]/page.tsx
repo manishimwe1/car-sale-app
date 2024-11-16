@@ -41,7 +41,7 @@ const DetailsPage = ({ params }: { params: Promise<{ id: Id<"cars"> }> }) => {
   // useMutation(api.cars.updateCar);
   return (
     <div className="flex flex-col gap-6 w-full mx-auto py-10 overflow-y-scroll h-full">
-      <div className="w-full h-full flex flex-col lg:flex-row px-5 lg:px-10 text-center justify-between gap-8">
+      <div className="w-full h-fit flex flex-col lg:flex-row px-5 lg:px-10 text-center justify-between gap-8">
         <div className="w-full shadow-md shadow-sky-200 rounded-xl">
           <Carousel>
             <CarouselContent className=" rounded-xl flex ">
@@ -54,7 +54,7 @@ const DetailsPage = ({ params }: { params: Promise<{ id: Id<"cars"> }> }) => {
                         src={url ?? ""}
                         alt="car"
                         fill
-                        className="rounded-xl object-cover"
+                        className="rounded-xl object-contain aspect-square"
                       />
                       <Image
                         src={car.logoUrls ?? ""}
@@ -174,8 +174,8 @@ const DetailsPage = ({ params }: { params: Promise<{ id: Id<"cars"> }> }) => {
             </Button>
             <Button>
               <Image
-                src={"/whatsapp.svg"}
-                className="size-4"
+                src={"/whatsapp.png"}
+                className="size-4 rounded-full"
                 alt="google logo"
                 width={3}
                 height={3}
@@ -201,7 +201,7 @@ const DetailsPage = ({ params }: { params: Promise<{ id: Id<"cars"> }> }) => {
           </div>
         </div>
       </div>
-      <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 py-10 gap-4 px-5">
+      <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 py-10 gap-4 px-5 h-full">
         {AboutUsData.map((data) => (
           <AboutUs key={data.title} data={data} />
         ))}

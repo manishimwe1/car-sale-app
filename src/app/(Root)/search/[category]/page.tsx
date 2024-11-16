@@ -6,52 +6,42 @@ import Loader from "@/components/Loader";
 import SectionHeaderBox from "@/components/SectionHeaderBox";
 import { useQuery } from "convex/react";
 import { api } from "../../../../../convex/_generated/api";
-import React from "react";
+import React, { useState } from "react";
 import Footer from "@/components/Footer";
-import { Doc, Id } from "../../../../../convex/_generated/dataModel";
-
-type carsType =
-  | {
-      urls: (string | null)[];
-      logoUrls: string | null;
-      _id: Id<"cars">;
-      _creationTime: number;
-      brand: string;
-      logoId: Id<"_storage">;
-      money: number;
-      name: string;
-      imageIds: Id<"_storage">[];
-      typeOfCar: string;
-      numberOfViews: number;
-      KM_Done: number;
-    }[]
-  | undefined
-  | null;
 
 const Searchpage = ({ params }: { params: Promise<{ category: string }> }) => {
   const { category } = React.use(params);
-  let cars: carsType;
+  const [value, setValue] = useState<string | undefined>();
 
-  if (category === "all-cars") {
-    cars = useQuery(api.cars.getCar);
-  } else {
-    cars = useQuery(api.cars.getCarByBrand, {
-      brand: category.toLowerCase(),
-    });
-  }
+  const cars = useQuery(
+    category === "all-cars" ? api.cars.getCar : api.cars.getCarByBrand,
+    category === "all-cars"
+      ? "skip"
+      : {
+          brand: value
+            ? value.toLowerCase()
+            : decodeURI(category).toLowerCase(),
+        }
+  );
 
   return (
     <section className="w-full lg:px-0 space-y-10">
-      <div className="w-full h-full container mx-auto py-10 ">
+      <div className="w-full h-full container mx-auto py-10 flex flex-col items-center justify-center gap-4">
         <div className="h-full w-full mt-10 py-10">
-          <FilterBox category={category} />
+          <FilterBox
+            category={decodeURI(category)}
+            setValue={setValue}
+            value={value}
+          />
         </div>
-        <SectionHeaderBox
-          showNextBtn={false}
-          title={`Search for ${category}`}
-          subTitle=""
-        />
-        <div className="grid w-full  grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 space-x-4 place-items-center gap-8 justify-center">
+        <div className="flex items-start justify-start w-full">
+          <SectionHeaderBox
+            showNextBtn={false}
+            title={`Search for ${decodeURI(category)}`}
+            subTitle=""
+          />
+        </div>
+        <div className="grid w-full md:px-4 lg:px-6 py-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 space-x-4 place-items-center gap-8 justify-center">
           {cars
             ? cars.map((car) => {
                 return <CarShowCard car={car} key={car._id} />;

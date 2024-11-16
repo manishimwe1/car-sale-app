@@ -33,13 +33,8 @@ const BrandSelecter = ({
   const cars = useQuery(api.cars.getCar);
   if (cars === undefined) return;
 
-  function onSubmit() {
-    if (!value) return;
-    setBrandName(brandName);
-    setValue("");
-  }
   return (
-    <Select onValueChange={(value) => setBrand(value)}>
+    <Select onValueChange={() => setBrand(brandName ? brandName : value)}>
       <SelectTrigger className="w-full">
         <SelectValue placeholder={cars[0].brand} />
       </SelectTrigger>
@@ -59,7 +54,14 @@ const BrandSelecter = ({
             <Skeleton className="h-4 w-full" />
           </SelectItem>
         )}
-        {brandName && <SelectItem value={brandName}>{brandName}</SelectItem>}
+        {brandName && (
+          <SelectItem
+            className="cursor-pointer hover:bg-slate-800"
+            value={brandName}
+          >
+            {brandName}
+          </SelectItem>
+        )}
         <AlertDialog>
           <AlertDialogTrigger>
             <div className="!flex items-center px-4 cursor-pointer py-2 text-center justify-center gap-2 w-full">
@@ -79,7 +81,14 @@ const BrandSelecter = ({
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction onClick={onSubmit}>Continue</AlertDialogAction>
+              <AlertDialogAction
+                onClick={() => {
+                  setBrandName(value);
+                  setValue("");
+                }}
+              >
+                Continue
+              </AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>

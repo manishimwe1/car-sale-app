@@ -28,9 +28,12 @@ type carType = {
 };
 const CarShowCard = ({ car }: { car: carType }) => {
   return (
-    <div key={car._id} className="w-full  cursor-pointer">
+    <div
+      key={car._id}
+      className="w-full  cursor-pointer hover:shadow-md shadow-sky rounded-xl "
+    >
       <Carousel>
-        <Link href={`/buy/${car.brand}/${car._id}`}>
+        <Link href={`/buy/${car.brand}/${car._id}`} className="group">
           <CarouselContent className=" rounded-xl ">
             {car.urls.map((url) => {
               return (
@@ -40,14 +43,14 @@ const CarShowCard = ({ car }: { car: carType }) => {
                       src={url ?? ""}
                       alt="car"
                       fill
-                      className="rounded-xl"
+                      className="rounded-xl object-contain aspect-video"
                     />
                     <Image
                       src={car.logoUrls ?? ""}
                       alt="car"
-                      width={50}
-                      height={50}
-                      className="rounded-full absolute bottom-0 object-cover right-4"
+                      width={60}
+                      height={60}
+                      className="rounded-full absolute bottom-0 object-contain aspect-auto right-4"
                     />
                   </div>
                 </CarouselItem>
@@ -59,7 +62,7 @@ const CarShowCard = ({ car }: { car: carType }) => {
         <CarouselNext className="mr-[50px]" />
       </Carousel>
       <Link href={`/buy/${car.brand}/${car._id}`}>
-        <div className=" py-4 px-6 w-full flex justify-between items-center">
+        <div className=" py-4 px-6 w-full hover:shadow-md rounded-xl shadow-sky  flex justify-between items-center">
           <div className="flex flex-col ">
             <p className="text-[14px] text-pretty font-medium text-slate-800">
               {car.name}
@@ -84,7 +87,7 @@ export default CarShowCard;
 
 export function CarDetails({ car }: { car: Doc<"cars"> }) {
   return (
-    <div className="flex items-center mt-1 gap-4">
+    <div className="flex items-center mt-1 gap-4 py-2">
       <div className="flex gap-1 items-center hover:text-blue-500">
         <Car className="text-slate-800 h-5 w-4" />
         <p className="text-[14px] text-pretty font-medium capitalize text-slate-800">
