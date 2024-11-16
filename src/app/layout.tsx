@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${roboto.className} antialiased scroll-smooth flex flex-col w-full h-full `}
+        className={`${roboto.className} antialiased flex flex-col w-full h-full overflow-hidden`}
       >
         <NextTopLoader />
 

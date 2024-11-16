@@ -9,8 +9,8 @@ import ReserveForm from "./ReserveForm";
 
 const Hero = () => {
   return (
-    <section className="bg-cover bg-center w-full bg-hero-bg h-screen flex flex-col rounded-b-[30px] relative">
-      <div className="bg-gradient-to-b from-black/40 via-black/40 to-transparent  mx-auto w-full h-fit ">
+    <section className="bg-cover bg-center w-full bg-hero-bg h-screen flex flex-col rounded-b-[30px] rounded-tr-[30px] relative">
+      <div className="bg-gradient-to-b from-black/40 via-black/40 to-transparent  mx-auto w-full h-fit rounded-tr-[30px] ">
         <div className=" mt-32 md:mt-16 flex items-center flex-col">
           <h2 className=" text-balance text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter text-white sm:text-6xl mb-6">
             BetterWhips
@@ -36,7 +36,6 @@ const Hero = () => {
       </div>
 
       <div className="bg-white/90 hidden md:block py-6 p-4 rounded-2xl shadow-black shadow-lg md:w-80 w-full  h-fit absolute bottom-0 md:bottom-10 right-0 sm:right-10">
-        <h4 className="text-black"></h4>
         <Tabs defaultValue="account" className="w-full border-black ">
           <TabsList className="!w-full">
             <TabsTrigger

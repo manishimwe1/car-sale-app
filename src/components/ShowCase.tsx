@@ -9,10 +9,11 @@ import SectionHeaderBox from "./SectionHeaderBox";
 const ShowCase = () => {
   const cars = useQuery(api.cars.getCar);
   // const logo = useQuery(api.cars.getCarlogo);
-
+  const CATEGORY = "all-cars";
   return (
     <section className="space-y-4 px-4 w-full">
       <SectionHeaderBox
+        link={`/search/${CATEGORY}`}
         showNextBtn={true}
         title="new cars"
         subTitle="Here you can see different new cars"

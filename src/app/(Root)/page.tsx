@@ -5,10 +5,11 @@ import WhyChooseUs from "@/components/WhyChooseUs";
 import ShowCaseOverMoney from "@/components/ShowCaseOverMoney";
 import CustomersReviews from "@/components/CustomersReviews";
 import Hero from "@/components/Hero";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <section className="h-full w-full ">
+    <section className="h-full w-full space-y-10">
       <Hero />
       <div className="container mx-auto space-y-10" id="new">
         <ShowCase />
@@ -17,7 +18,10 @@ export default function Home() {
       </div>
       <WhyChooseUs />
       <CustomersReviews />
-      <Banner />
+      <div>
+        <Banner />
+        <Footer />
+      </div>
     </section>
   );
 }

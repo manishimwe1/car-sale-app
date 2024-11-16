@@ -18,7 +18,7 @@ const FilterBox = ({ category }: { category: string }) => {
     <div className="w-full h-full grid grid-cols-1 md:grid-cols-3 gap-4">
       <div className="py-2 border px-2 w-full rounded-md">
         <DropdownMenu>
-          <DropdownMenuTrigger className=" !w-full flex items-center justify-between text-slate-500">
+          <DropdownMenuTrigger className=" !w-full flex items-center justify-between text-slate-500 capitalize">
             {category}
             <ChevronDown className="text-slate-400 h-8 w-8" />
           </DropdownMenuTrigger>

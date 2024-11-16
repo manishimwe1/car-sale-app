@@ -20,7 +20,7 @@ const SelectType = ({
         setType(value as "diesel" | "electric" | "hybrid")
       }
     >
-      <SelectTrigger className="w-[180px]">
+      <SelectTrigger className="w-full">
         <SelectValue placeholder="Hybrid" />
       </SelectTrigger>
       <SelectContent>

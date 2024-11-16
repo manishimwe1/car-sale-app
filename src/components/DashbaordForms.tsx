@@ -22,6 +22,7 @@ import { api } from "../../convex/_generated/api";
 import { Id } from "../../convex/_generated/dataModel";
 import DropeZOne from "./Dropzone"; // Ensure the component name matches
 import SelectType from "./SelectType";
+import BrandSelecter from "@/app/(Admin)/dashboard/_components/BrandSelecter";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -144,62 +145,67 @@ export function DashboardForm() {
           onSubmit={form.handleSubmit(onSubmit)}
           className="space-y-8 w-full"
         >
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Name</FormLabel>
-                <FormControl>
-                  <Input placeholder="Name.." {...field} />
-                </FormControl>
-                <FormDescription>
-                  This is your car display name.
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="money"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Money</FormLabel>
-                <FormControl>
-                  <Input
-                    type="number"
-                    inputMode="numeric"
-                    placeholder="Enter an amount.."
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <div className="w-full flex flex-col md:flex-row gap-3 text-center justify-between">
+          <div className="flex items-center justify-between gap-2 md:gap-4">
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel>Name</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Name.." {...field} />
+                  </FormControl>
+                  <FormDescription>
+                    This is your car display name.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="money"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel>Money</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="number"
+                      inputMode="numeric"
+                      placeholder="Enter an amount.."
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    How much money for this car .
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+
+          <div className="flex items-center justify-between gap-2 md:gap-4">
             <FormField
               control={form.control}
               name="brand"
               render={({ field }) => (
-                <FormItem className="text-left ">
+                <FormItem className="text-left  w-full">
                   <FormLabel className="">Brand</FormLabel>
                   <FormControl>
-                    <Input placeholder="Brand.." {...field} />
+                    <BrandSelecter setBrand={field.onChange} />
                   </FormControl>
 
                   <FormMessage />
                 </FormItem>
               )}
             />
-          </div>
-          <div className="flex items-center justify-between">
             <FormField
               control={form.control}
               name="typeOfCar"
               render={({ field }) => (
-                <FormItem className="text-left">
+                <FormItem className="text-left w-full">
                   <FormLabel>Type of car</FormLabel>
                   <FormControl>
                     <SelectType setType={field.onChange} />
@@ -209,6 +215,8 @@ export function DashboardForm() {
                 </FormItem>
               )}
             />
+          </div>
+          <div className="flex items-center justify-between gap-2">
             <FormField
               control={form.control}
               name="KM_Done"
