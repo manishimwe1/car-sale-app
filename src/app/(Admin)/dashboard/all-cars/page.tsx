@@ -3,10 +3,8 @@
 import { useQuery } from "convex/react";
 import { Loader2 } from "lucide-react";
 import { api } from "../../../../../convex/_generated/api";
-import AllCarscard from "../_components/allCarscard";
 import { DataTable } from "./data-table";
 import { columns } from "./collumns";
-import { carsType } from "../../../../../types";
 import { Id } from "../../../../../convex/_generated/dataModel";
 
 export type carType = {
