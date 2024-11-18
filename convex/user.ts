@@ -68,6 +68,16 @@ export const getUserIndb = query({
     return User[0];
   },
 });
+export const getAllUsers = query({
+  handler: async (ctx) => {
+    const User = await ctx.db.query("user").collect();
+
+    if (!User) {
+      throw new ConvexError("something went wrong in creating user!");
+    }
+    return User;
+  },
+});
 export const registerUser = action({
   args: {
     firstname: v.string(),

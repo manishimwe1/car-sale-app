@@ -45,10 +45,10 @@ const AllCarPage = () => {
   const deleteAction = useMutation(api.cars.deleteCar);
 
   return (
-    <section className="flex flex-col gap-3 mx-auto items-start justify-center w-full px-6 pt-10 pb-20">
+    <section className="flex flex-col gap-3 mx-auto items-start justify-center w-full h-full py-10">
       <div className="w-full flex items-center justify-end transition-all ">
         {deleteUi.length > 0 && (
-          <div className="flex items-center justify-center gap-2">
+          <div className="flex items-center justify-center gap-2 ">
             <Button variant={"secondary"} asChild>
               <Link href={`/dashboard/edit/${deleteUi[0]}`}>Edit</Link>
             </Button>
@@ -86,7 +86,6 @@ const AllCarPage = () => {
         )}
       </div>
       {cars ? (
-        // cars.map((car) => <AllCarscard car={car} key={car._id} />)
         <div className="w-full h-full">
           <DataTable columns={columns} data={cars} />
         </div>
