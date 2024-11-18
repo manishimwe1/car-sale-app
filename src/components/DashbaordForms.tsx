@@ -38,18 +38,6 @@ const formSchema = z.object({
   KM_Done: z.coerce.number(),
   typeOfCar: z.enum(["diesel", "electric", "hybrid"]),
 });
-const editSchema = z.object({
-  name: z.string().min(2, {
-    message: "Name must be at least 2 characters.",
-  }),
-
-  brand: z.string().min(2, {
-    message: "Brand must be at least 2 characters.",
-  }),
-  money: z.coerce.number(),
-  KM_Done: z.coerce.number(),
-  typeOfCar: z.enum(["diesel", "electric", "hybrid"]),
-});
 
 export function DashboardForm({ car }: { car?: carType }) {
   const uploadCar = useMutation(api.cars.createCar);
@@ -78,9 +66,7 @@ export function DashboardForm({ car }: { car?: carType }) {
     },
   });
 
-  async function onSubmit(
-    values: z.infer<typeof formSchema | typeof editSchema>
-  ) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       if (files.length <= 0) {
         console.log("No file found");

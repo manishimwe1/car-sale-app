@@ -1,11 +1,8 @@
 "use client";
 import { ArrowUpAZ, Heart, LayoutDashboard, PackagePlus } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 
 const DashBoardSideBar = () => {
-  const pathname = usePathname();
-
   return (
     <section className=" md:w-full h-full border border-green-400 border-r-2 bottom-0 inset-0 border-white/10 px-2 flex justify-center items-center ">
       <nav className="flex md:flex-col w-full md:h-full md:gap-4 gap-8 py-10 items-center  md:items-start md:justify-start justify-between px-8 md:px-3 ">

@@ -20,7 +20,6 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { useRouter } from "next/navigation";
 
 export type carType = {
   urls: (string | null)[];
@@ -39,7 +38,7 @@ export type carType = {
 
 const AllCarPage = () => {
   const cars: carType[] | undefined = useQuery(api.cars.getCar);
-  const router = useRouter();
+
   const deleteUi = useBearStore((state) => state.carsId);
   const deleteId = useBearStore((state) => state.removeAll);
   console.log(deleteUi);
