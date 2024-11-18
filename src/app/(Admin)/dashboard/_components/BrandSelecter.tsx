@@ -28,18 +28,19 @@ const BrandSelecter = ({
 }: {
   setBrand: Dispatch<SetStateAction<string | undefined>>;
 }) => {
-  const [value, setValue] = useState("");
-  const [brandName, setBrandName] = useState<string | undefined>();
+  const [customBrand, setCustomBrand] = useState<string | undefined>();
   const cars = useQuery(api.cars.getCar);
-  if (cars === undefined) return;
+
+  // Determine the placeholder value
+  const placeholder = customBrand || (cars?.[0]?.brand ?? "Select a brand");
 
   return (
-    <Select onValueChange={() => setBrand(brandName ? brandName : value)}>
+    <Select onValueChange={(value) => setBrand(value)}>
       <SelectTrigger className="w-full">
-        <SelectValue placeholder={cars[0].brand} />
+        <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent>
-        {cars ? (
+        {cars && cars.length > 0 ? (
           cars.map((car) => (
             <SelectItem
               value={car.brand}
@@ -50,51 +51,67 @@ const BrandSelecter = ({
             </SelectItem>
           ))
         ) : (
-          <SelectItem value="">
+          <SelectItem value="loading" disabled>
             <Skeleton className="h-4 w-full" />
           </SelectItem>
         )}
-        {brandName && (
+        {customBrand && (
           <SelectItem
+            value={customBrand}
             className="cursor-pointer hover:bg-slate-800"
-            value={brandName}
           >
-            {brandName}
+            {customBrand}
           </SelectItem>
         )}
-        <AlertDialog>
-          <AlertDialogTrigger>
-            <div className="!flex items-center px-4 cursor-pointer py-2 text-center justify-center gap-2 w-full">
-              <PlusCircleIcon className="h-4 w-4 " /> <span>Add new brand</span>
-            </div>
-          </AlertDialogTrigger>
-          <AlertDialogContent>
-            <AlertDialogHeader>
-              <AlertDialogTitle>Your new brand</AlertDialogTitle>
-              <AlertDialogDescription>
-                <Input
-                  className="w-full !text-black"
-                  value={value}
-                  onChange={(e) => setValue(e.target.value)}
-                />
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction
-                onClick={() => {
-                  setBrandName(value);
-                  setValue("");
-                }}
-              >
-                Continue
-              </AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
+        <AlertDialogComponent setCustomBrand={setCustomBrand} />
       </SelectContent>
     </Select>
   );
 };
 
 export default BrandSelecter;
+
+const AlertDialogComponent = ({
+  setCustomBrand,
+}: {
+  setCustomBrand: Dispatch<SetStateAction<string | undefined>>;
+}) => {
+  const [value, setValue] = useState("");
+
+  return (
+    <AlertDialog>
+      <AlertDialogTrigger>
+        <div className="!flex items-center px-4 cursor-pointer py-2 text-center justify-center gap-2 w-full">
+          <PlusCircleIcon className="h-4 w-4" />
+          <span>Add new brand</span>
+        </div>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Add a New Brand</AlertDialogTitle>
+          <AlertDialogDescription>
+            <Input
+              className="w-full !text-black"
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
+              placeholder="Enter brand name"
+            />
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction
+            onClick={() => {
+              if (value.trim() !== "") {
+                setCustomBrand(value);
+                setValue("");
+              }
+            }}
+          >
+            Add Brand
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  );
+};

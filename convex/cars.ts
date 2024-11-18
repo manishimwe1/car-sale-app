@@ -158,7 +158,20 @@ export const deleteCar = mutation({
     id: v.id("cars"),
   },
   handler: async (ctx, args) => {
-    await ctx.db.delete(args.id);
+    try {
+      const car = await ctx.db.get(args.id);
+      if (!car) {
+        return console.log("SEmothing went wrong when get car");
+      }
+      const storageId = car.imageIds;
+      storageId.forEach(async (id) => {
+        return await ctx.storage.delete(id);
+      });
+      await ctx.storage.delete(car.logoId);
+      await ctx.db.delete(args.id);
+    } catch (error) {
+      console.log("SEmothing went wrong when get car and delete storage image");
+    }
   },
 });
 export const getCarByBrand = query({

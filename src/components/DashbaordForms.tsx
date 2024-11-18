@@ -159,7 +159,6 @@ export function DashboardForm({ car }: { car?: carType }) {
         setLoading(false);
         form.reset();
         setFiles([]);
-        router.push("/dashboard/all-cars");
       } else {
         await uploadCar({
           name: values.name,
@@ -174,6 +173,7 @@ export function DashboardForm({ car }: { car?: carType }) {
         form.reset();
         setFiles([]);
       }
+      router.push("/dashboard/all-cars");
     } catch (error) {
       console.log(error, "Something went wrong!");
       throw new ConvexError("Something went wrong while uploading new car");
