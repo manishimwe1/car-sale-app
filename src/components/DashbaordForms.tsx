@@ -15,7 +15,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "convex/react";
 import { ConvexError } from "convex/values";
 import { Loader2 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { api } from "../../convex/_generated/api";
@@ -23,6 +23,8 @@ import { Id } from "../../convex/_generated/dataModel";
 import DropeZOne from "./Dropzone"; // Ensure the component name matches
 import SelectType from "./SelectType";
 import BrandSelecter from "@/app/(Admin)/dashboard/_components/BrandSelecter";
+import { carType } from "../../types";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -36,27 +38,49 @@ const formSchema = z.object({
   KM_Done: z.coerce.number(),
   typeOfCar: z.enum(["diesel", "electric", "hybrid"]),
 });
+const editSchema = z.object({
+  name: z.string().min(2, {
+    message: "Name must be at least 2 characters.",
+  }),
 
-export function DashboardForm() {
+  brand: z.string().min(2, {
+    message: "Brand must be at least 2 characters.",
+  }),
+  money: z.coerce.number(),
+  KM_Done: z.coerce.number(),
+  typeOfCar: z.enum(["diesel", "electric", "hybrid"]),
+});
+
+export function DashboardForm({ car }: { car?: carType }) {
   const uploadCar = useMutation(api.cars.createCar);
+  const updateCar = useMutation(api.cars.updateCar);
   const generateUploadUrl = useMutation(api.cars.generateUploadUrl);
+  const router = useRouter();
 
   const [files, setFiles] = useState<File[]>([]);
-  const [logo, setLogo] = useState<File | null>(null);
+  const [logo, setLogo] = useState<File | null>(car ? car.logoId : null);
   // const [logoId, setLogoId] = useState<Id<"_storage">>();
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (car) {
+      setFiles(car.imageIds);
+    }
+  }, [car]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
-      money: 0,
-      brand: "",
-      KM_Done: 0,
+      name: car ? car.name : "",
+      money: car ? car.money : 0,
+      brand: car ? car.brand : "",
+      KM_Done: car ? car.KM_Done : 0,
     },
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(
+    values: z.infer<typeof formSchema | typeof editSchema>
+  ) {
     try {
       if (files.length <= 0) {
         console.log("No file found");
@@ -69,27 +93,29 @@ export function DashboardForm() {
 
       const imageUrls: Id<"_storage">[] = [];
       const uploadPromises = files.map(async (file) => {
-        try {
-          const result = await fetch(postUrl, {
-            method: "POST",
-            headers: { "Content-Type": file.type },
-            body: file,
-          });
+        if (!car) {
+          try {
+            const result = await fetch(postUrl, {
+              method: "POST",
+              headers: { "Content-Type": file.type },
+              body: file,
+            });
 
-          if (!result.ok) {
-            console.error("Image upload failed:", await result.text());
-            return;
+            if (!result.ok) {
+              console.error("Image upload failed:", await result.text());
+              return;
+            }
+
+            const { storageId } = await result.json();
+            imageUrls.push(storageId);
+          } catch (err) {
+            console.error("Image upload failed for a file:", err);
           }
-
-          const { storageId } = await result.json();
-          imageUrls.push(storageId);
-        } catch (err) {
-          console.error("Image upload failed for a file:", err);
         }
       });
 
       const logoId: Id<"_storage">[] = [];
-      if (logo) {
+      if (logo && !car) {
         const logoUpload = async () => {
           try {
             const result = await fetch(logoUrl, {
@@ -117,19 +143,37 @@ export function DashboardForm() {
       }
 
       // Proceed with uploading car data if uploads were successful
-      await uploadCar({
-        name: values.name,
-        brand: values.brand,
-        money: values.money,
-        imageUrls: imageUrls,
-        logoID: logoId[0], // Get the first logo ID if available
-        typeOfCar: values.typeOfCar,
-        KM_Done: values.KM_Done,
-      });
 
-      setLoading(false);
-      form.reset();
-      setFiles([]);
+      if (car) {
+        await updateCar({
+          carId: car._id,
+          name: values.name,
+          brand: values.brand,
+          money: values.money,
+          // imageUrls: files,
+          // logoID:car.logoId, // Get the first logo ID if available
+          typeOfCar: values.typeOfCar,
+          KM_Done: values.KM_Done,
+        });
+
+        setLoading(false);
+        form.reset();
+        setFiles([]);
+        router.push("/dashboard/all-cars");
+      } else {
+        await uploadCar({
+          name: values.name,
+          brand: values.brand,
+          money: values.money,
+          imageUrls: imageUrls,
+          logoID: logoId[0], // Get the first logo ID if available
+          typeOfCar: values.typeOfCar,
+          KM_Done: values.KM_Done,
+        });
+        setLoading(false);
+        form.reset();
+        setFiles([]);
+      }
     } catch (error) {
       console.log(error, "Something went wrong!");
       throw new ConvexError("Something went wrong while uploading new car");
@@ -250,7 +294,7 @@ export function DashboardForm() {
           </div>
 
           <div className="w-full border">
-            <DropeZOne setFiles={setFiles} />
+            <DropeZOne setFiles={setFiles} car={car} />
           </div>
 
           <Button type="submit" disabled={loading}>

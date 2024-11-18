@@ -5,12 +5,14 @@ import { Upload } from "lucide-react";
 import Image from "next/image";
 import { Dispatch, SetStateAction, useState } from "react";
 import Dropzone from "react-dropzone";
+import { carType } from "../../types";
 
 const DropeZOne = ({
   setFiles,
+  car,
 }: {
   setFiles: Dispatch<SetStateAction<[] | File[]>>;
-
+  car?: carType;
 }) => {
   const [imageUrls, setImageUrls] = useState<string[]>([]);
 
@@ -53,7 +55,23 @@ const DropeZOne = ({
                 <div className="text-red-500 ml-2">file is too large</div>
               )}
               <div className="flex  gap-4 items-center justify-center">
-                {imageUrls.length > 0 ? (
+                {car ? (
+                  car.images.map((file) => {
+                    console.log(file);
+
+                    return (
+                      <div key={file} className="flex flex-col gap-2">
+                        <img
+                          src={file ?? ""}
+                          alt="file"
+                          width={100}
+                          height={60}
+                          className="rounded-md"
+                        />
+                      </div>
+                    );
+                  })
+                ) : imageUrls.length > 0 ? (
                   imageUrls.map((file) => {
                     // console.log(file);
 

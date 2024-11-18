@@ -31,19 +31,28 @@ export const createCar = mutation({
     return newCarId;
   },
 });
-
 export const updateCar = mutation({
   args: {
-    id: v.id("cars"),
-    numberOfViews: v.number(),
+    carId: v.id("cars"),
+    name: v.string(),
+    money: v.number(),
+    KM_Done: v.number(),
+    brand: v.string(),
+
+    typeOfCar: v.string(),
   },
   handler: async (ctx, args) => {
-    const newCarId = await ctx.db.get(args.id);
+    const numberOfViews = 0;
 
-    if (!newCarId) return console.log("semothing went wrong");
-    await ctx.db.patch(newCarId._id, {
-      numberOfViews: args.numberOfViews,
+    const newCarId = await ctx.db.patch(args.carId, {
+      name: args.name,
+      money: args.money,
+      brand: args.brand.toLowerCase(),
+      typeOfCar: args.typeOfCar,
+      numberOfViews,
+      KM_Done: args.KM_Done,
     });
+    return newCarId;
   },
 });
 
@@ -127,6 +136,8 @@ export const getCarById = query({
     id: v.id("cars"),
   },
   handler: async (ctx, args) => {
+    console.log("args", args.id);
+
     const newCarId = await ctx.db.get(args.id);
 
     if (!newCarId) return console.log("semothing went wrong");
@@ -140,6 +151,14 @@ export const getCarById = query({
     // console.log(newCarId, 'here');
 
     return { ...newCarId, images, logoUrls };
+  },
+});
+export const deleteCar = mutation({
+  args: {
+    id: v.id("cars"),
+  },
+  handler: async (ctx, args) => {
+    await ctx.db.delete(args.id);
   },
 });
 export const getCarByBrand = query({

@@ -30,3 +30,20 @@ export type carsType =
     }[]
   | undefined
   | null;
+export type carType =
+  | {
+      images: (string | null)[];
+      logoUrls: string | null;
+      _id: Id<"cars">;
+      _creationTime: number;
+      brand: string;
+      logoId: Id<"_storage">;
+      money: number;
+      name: string;
+      imageIds: Id<"_storage">[];
+      typeOfCar: string;
+      numberOfViews: number;
+      KM_Done: number;
+    }
+  | null
+  | undefined;

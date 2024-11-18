@@ -2,7 +2,13 @@ import React from "react";
 import { Meteors } from "./ui/meteors";
 import Image from "next/image";
 import Link from "next/link";
-export function MeteorsDisplay() {
+export function MeteorsDisplay({
+  title,
+  link,
+}: {
+  title: string;
+  link?: string;
+}) {
   return (
     <div className="">
       <div className=" w-full relative max-w-xs">
@@ -25,9 +31,9 @@ export function MeteorsDisplay() {
             </svg>
           </div>
 
-          <div className="w-full flex justify-center items-center flex-col">
+          <div className="w-full flex justify-center items-center gap-2 flex-col">
             <h1 className="font-bold text-xl text-white mb-4 relative z-50">
-              Sorry no blog found right now!
+              {title}
             </h1>
             <Image src="/empty.svg" width={100} height={100} alt="empty" />
 
@@ -35,7 +41,7 @@ export function MeteorsDisplay() {
               we are cooking something that will help your car along way
             </p>
 
-            <Link href={"/"}>
+            <Link href={link ? link : "/"}>
               <button className="border px-4 py-1 rounded-lg  border-gray-500 text-gray-300">
                 Keep Explore
               </button>
