@@ -7,8 +7,8 @@ export default function RootLayout({
 }>) {
   return (
     <main className="bg-gradient-to-r  from-blue-50/20 via-blue-100/20 to-blue-200/20 overflow-hidden flex flex-col">
-      <section className="flex md:flex-row  flex-col-reverse overflow-hidden h-screen  w-full ">
-        <div className=" w-full relative md:w-60 h-16 shadow-lg shadow-black flex items-center justify-start md:h-full  ">
+      <section className="flex md:flex-row relative flex-col-reverse overflow-hidden h-full  w-full ">
+        <div className=" w-full fixed bottom-0 md:w-60 h-16 shadow-lg shadow-black flex items-center justify-start md:h-full  ">
           <div className="w-full h-full bg-slate-950 md:bg-transparent rounded-t-xl ">
             <DashBoardSideBar />
           </div>
