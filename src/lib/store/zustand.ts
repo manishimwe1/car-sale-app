@@ -1,18 +1,12 @@
 import { create } from "zustand";
 import { Id } from "../../../convex/_generated/dataModel";
 
-// Define the state shape
 interface BearStore {
   carsId: Id<"cars">[];
   increasePopulation: (id: Id<"cars">) => void;
   removeAllBears: (id: Id<"cars">) => void;
   removeAll: () => void;
 }
-// interface DeleteButtonStore {
-//   delete: boolean;
-//   setDelete: () => void;
-//   removeDelete: () => void;
-// }
 
 export const useBearStore = create<BearStore>((set) => ({
   carsId: [],
@@ -27,21 +21,7 @@ export const useBearStore = create<BearStore>((set) => ({
       carsId: state.carsId.filter((carId) => carId !== id),
     })),
   removeAll: () =>
-    set((state) => ({
+    set(() => ({
       carsId: [],
     })),
 }));
-
-// export const useDeleteButtonStore = create<DeleteButtonStore>((set) => ({
-//   delete: false,
-
-//   setDelete: () =>
-//     set((state) => ({
-//       delete: !state.delete, // Toggles the delete state
-//     })),
-
-//   removeDelete: () =>
-//     set({
-//       delete: false, // Explicitly sets delete to false
-//     }),
-// }));
