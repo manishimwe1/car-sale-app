@@ -1,6 +1,4 @@
 import { httpRouter } from "convex/server";
-import { postMessage } from "./auth";
-import { getUserIndb } from "./user";
 import { httpAction } from "./_generated/server";
 import { internal } from "./_generated/api";
 
@@ -115,6 +113,63 @@ http.route({
       return new Response(
         JSON.stringify({
           error: "Failed to create user",
+          details: error.message,
+        }),
+        {
+          status: 500,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+    }
+  }),
+});
+
+http.route({
+  path: "/createViewPage",
+  method: "POST",
+  handler: httpAction(async (ctx, request) => {
+    // Parse the request body
+    const body = await request.json();
+    console.log("views", body);
+
+    // Validate required fields
+    if (!body.views) {
+      return new Response(
+        JSON.stringify({
+          error: "Email and password are required",
+        }),
+        {
+          status: 400,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+    }
+
+    try {
+      const newView = await ctx.runMutation(internal.views.createViews, {
+        views: body.views,
+      });
+
+      return new Response(
+        JSON.stringify({
+          message: "User created successfully",
+          user: newView,
+        }),
+        {
+          status: 201,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+    } catch (error: any) {
+      return new Response(
+        JSON.stringify({
+          error: "Failed to create newView",
           details: error.message,
         }),
         {

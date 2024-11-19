@@ -3,7 +3,8 @@ import localFont from "next/font/local";
 import { ConvexClientProvider } from "./ConvexClientProvider";
 import "./globals.css";
 import NextTopLoader from "nextjs-toploader";
-import { Analytics } from "@vercel/analytics/react";
+import { Analytics, type BeforeSendEvent } from "@vercel/analytics/react";
+
 const roboto = localFont({
   src: "./fonts/Roboto-Bold.ttf",
   display: "swap",
@@ -29,7 +30,16 @@ export default function RootLayout({
 
         <ConvexClientProvider>
           {children}
-          <Analytics />
+          <Analytics
+            beforeSend={(event: BeforeSendEvent) => {
+              if (event.url.includes("/buy")) {
+                console.log(event);
+
+                return null;
+              }
+              return event;
+            }}
+          />
         </ConvexClientProvider>
       </body>
     </html>

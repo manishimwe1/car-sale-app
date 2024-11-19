@@ -20,4 +20,7 @@ export default defineSchema({
     image: v.optional(v.string()),
     role: v.string(),
   }),
+  views: defineTable({
+    views: v.number(),
+  }),
 });

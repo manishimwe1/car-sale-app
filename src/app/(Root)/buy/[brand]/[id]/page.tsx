@@ -24,7 +24,7 @@ import { api } from "../../../../../../convex/_generated/api";
 import { Id } from "../../../../../../convex/_generated/dataModel";
 import Link from "next/link";
 import React from "react";
-
+import { track } from "@vercel/analytics";
 // type Props = {
 //   params: {
 //     brand: string;
@@ -37,7 +37,9 @@ const DetailsPage = ({ params }: { params: Promise<{ id: Id<"cars"> }> }) => {
   const { id } = React.use(params);
   const car = useQuery(api.cars.getCarById, { id });
   if (!id) return;
-
+  track("pageDetails", {
+    views: 1,
+  });
   // useMutation(api.cars.updateCar);
   return (
     <div className="flex flex-col gap-6 w-full mx-auto py-10 overflow-y-scroll h-full">
