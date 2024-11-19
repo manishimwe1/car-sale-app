@@ -8,10 +8,13 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Cable, Car, Clock12, Fuel, Heart, Share2, Vault } from "lucide-react";
-import Image from "next/image";
+// import Image from "next/image";
 import Link from "next/link";
 import { Doc, Id } from "../../convex/_generated/dataModel";
 import CarShowCardFooter from "./CarShowCardFooter";
+import { Image } from "@nextui-org/image";
+import NextImage from "next/image";
+
 type carType = {
   urls: (string | null)[];
   logoUrls: string | null;
@@ -37,20 +40,29 @@ const CarShowCard = ({ car }: { car: carType }) => {
           <CarouselContent className=" rounded-xl ">
             {car.urls.map((url) => {
               return (
-                <CarouselItem key={url}>
-                  <div className="relative  w-full h-[280px]  flex flex-col space-y-1 rounded-xl">
+                <CarouselItem
+                  key={url}
+                  className="h-full w-full relative  rounded-xl"
+                >
+                  <div className="  w-full h-full overflow-hidden shadow-xl shadow-black/5 flex flex-col space-y-1 rounded-xl">
                     <Image
+                      as={NextImage}
+                      isBlurred
+                      isZoomed
+                      width={600}
+                      height={280}
+                      alt={car.name}
                       src={url ?? ""}
-                      alt="car"
-                      fill
-                      className="rounded-xl object-contain aspect-video"
+                      className=""
                     />
+                  </div>
+                  <div className="absolute flex items-center justify-center right-2 bottom-2 z-10 rounded-full">
                     <Image
                       src={car.logoUrls ?? ""}
                       alt="car"
                       width={60}
                       height={60}
-                      className="rounded-full absolute bottom-0 object-contain aspect-auto right-4"
+                      className="rounded-full object-contain aspect-auto"
                     />
                   </div>
                 </CarouselItem>

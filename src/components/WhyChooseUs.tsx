@@ -12,10 +12,10 @@ const WhyChooseUs = () => {
             <div className="h-28 w-32 relative">
               <Image src={"/auto.webp"} alt="auto" fill />
             </div>
-            <p className="text-lg font-bold text-center">
+            <p className=" font-bold text-center text-balance">
               Certified Used Cars Buy
             </p>
-            <p className="text-center text-sm">
+            <p className="text-center text-xs  text-stone-700 text-balance">
               {" "}
               used cars with trust and <br />
               transparency
@@ -25,10 +25,10 @@ const WhyChooseUs = () => {
             <div className="h-28 w-32 relative">
               <Image src={"/auto4.webp"} alt="auto" fill />
             </div>
-            <p className="text-lg font-bold text-center ">
+            <p className=" font-bold text-center text-balance ">
               100 Inspection Points
             </p>
-            <p className="text-center text-sm">
+            <p className="text-center text-xs text-balance text-stone-700 ">
               {" "}
               All our cars have been checked
               <br /> thoroughly
@@ -38,10 +38,10 @@ const WhyChooseUs = () => {
             <div className="h-28 w-32 relative">
               <Image src={"/auto2.webp"} alt="auto" fill />
             </div>
-            <p className="text-lg font-bold text-center ">
+            <p className=" font-bold text-center text-balance ">
               5 Days Refund Policy
             </p>
-            <p className="text-center text-sm">
+            <p className="text-center text-xs text-balance text-stone-700">
               {" "}
               You don’t like it, get refunded!
             </p>
@@ -50,8 +50,10 @@ const WhyChooseUs = () => {
             <div className="h-28 w-32 relative">
               <Image src={"/auto3.webp"} alt="auto" fill />
             </div>
-            <p className="text-lg font-bold text-center ">6 months warranty</p>
-            <p className="text-center text-sm">
+            <p className=" font-bold text-center text-balance ">
+              6 months warranty
+            </p>
+            <p className="text-center text-xs text-balance text-stone-700">
               {" "}
               Engine, gearbox and powertrain,
               <br /> 6 months warranted

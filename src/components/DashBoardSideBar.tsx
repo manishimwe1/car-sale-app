@@ -1,11 +1,5 @@
 "use client";
-import {
-  ArrowUpAZ,
-  Heart,
-  HomeIcon,
-  LayoutDashboard,
-  PackagePlus,
-} from "lucide-react";
+import { ArrowUpAZ, Heart, LayoutDashboard, PackagePlus } from "lucide-react";
 import Link from "next/link";
 
 const DashBoardSideBar = () => {

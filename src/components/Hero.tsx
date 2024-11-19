@@ -1,17 +1,49 @@
 "use client";
 import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Button } from "./ui/button";
 import ReserveForm from "./ReserveForm";
+import Autoplay from "embla-carousel-autoplay";
 
 const Hero = () => {
   return (
-    <section className="bg-cover bg-center w-full bg-hero-bg h-screen flex flex-col rounded-b-[30px] rounded-tr-[30px] relative">
-      <div className="bg-gradient-to-b from-black/40 via-black/40 to-transparent  mx-auto w-full h-fit rounded-tr-[30px] ">
-        <div className=" mt-32 md:mt-16 flex items-center flex-col">
+    <section className="w-full min-h-80 md:min-h-screen relative shadow-lg shadow-black/20 rounded-[30px] overflow-hidden">
+      <div className="w-full h-fit md:min-h-screen absolute">
+        <Carousel
+          plugins={[
+            //@ts-ignore
+            Autoplay({
+              delay: 3000,
+            }),
+          ]}
+        >
+          <CarouselContent>
+            <CarouselItem>
+              <div className="md:bg-cover bg-no-repeat bg-contain md:bg-center w-full bg-hero-bg min-h-screen flex flex-col rounded-b-[30px] md:rounded-[30px]" />
+            </CarouselItem>
+            <CarouselItem>
+              {" "}
+              <div className="md:bg-cover bg-no-repeat bg-contain md:bg-center w-full bg-hero-bg min-h-screen flex flex-col rounded-b-[30px] md:rounded-[30px]" />
+            </CarouselItem>
+            <CarouselItem>
+              {" "}
+              <div className="md:bg-cover bg-no-repeat bg-contain md:bg-center w-full bg-hero-bg min-h-screen flex flex-col rounded-b-[30px] md:rounded-[30px]" />
+            </CarouselItem>
+          </CarouselContent>
+        </Carousel>
+      </div>
+      <div className="bg-gradient-to-b from-black/40 via-black/40 to-transparent absolute  mx-auto w-full h-fit md:rounded-[30px] ">
+        <div className=" mt-14 md:mt-16 flex items-center flex-col">
           <h2 className=" text-balance text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter text-white sm:text-6xl mb-6">
             BetterWhips
           </h2>
@@ -35,7 +67,7 @@ const Hero = () => {
         </div>
       </div>
 
-      <div className="bg-white/90 hidden md:block py-6 p-4 rounded-2xl shadow-black shadow-lg md:w-80 w-full  h-fit absolute bottom-0 md:bottom-10 right-0 sm:right-10">
+      <div className="bg-white/90 hidden md:block py-6 p-4 rounded-2xl shadow-black shadow-lg md:w-80 w-full  h-fit absolute bottom-0 md:bottom-16 right-0 sm:right-10">
         <Tabs defaultValue="account" className="w-full border-black ">
           <TabsList className="!w-full">
             <TabsTrigger
