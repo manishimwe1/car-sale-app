@@ -26,7 +26,10 @@ const chartData = [
 
 const ChartComponents = () => {
   return (
-    <ChartContainer config={chartConfig} className="h-[200px] w-full">
+    <ChartContainer
+      config={chartConfig}
+      className="h-[200px] cursor-pointer w-full"
+    >
       <BarChart accessibilityLayer data={chartData}>
         <CartesianGrid vertical={false} />
         <XAxis
@@ -36,7 +39,7 @@ const ChartComponents = () => {
           axisLine={false}
           tickFormatter={(value) => value.slice(0, 3)}
         />
-        <ChartTooltip content={<ChartTooltipContent />} />
+        <ChartTooltip content={<ChartTooltipContent nameKey="page views" />} />
         <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4} />
         <Bar dataKey="mobile" fill="var(--color-mobile)" radius={4} />
       </BarChart>

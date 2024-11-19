@@ -19,21 +19,27 @@ const AllCarscard = ({ title, id }: { title: string; id: string }) => {
         <CardContent className="flex justify-end w-full !p-1">
           {id === "car" &&
             (car ? (
-              <p className="font-bold text-4xl ">{car?.length}</p>
+              <p className="font-bold text-stone-600 text-4xl ">
+                {car?.length}
+              </p>
             ) : (
               <Skeleton className="h-5 w-10 py-2 text-end" />
             ))}
 
           {id === "favorite" &&
             (car ? (
-              <p className="font-bold text-4xl ">{car?.length}</p>
+              <p className="font-bold text-stone-600 text-4xl ">
+                {car?.length}
+              </p>
             ) : (
               <Skeleton className="h-5 w-10 py-2 text-end" />
             ))}
 
           {id === "user" &&
             (allUser ? (
-              <p className="font-bold text-4xl ">{allUser?.length}</p>
+              <p className="font-bold text-stone-600 text-4xl ">
+                {allUser?.length}
+              </p>
             ) : (
               <Skeleton className="h-5 w-10 py-2 text-end" />
             ))}

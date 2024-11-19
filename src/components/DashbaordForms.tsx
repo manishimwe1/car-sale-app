@@ -175,7 +175,7 @@ export function DashboardForm({ car }: { car?: carType }) {
           onSubmit={form.handleSubmit(onSubmit)}
           className="space-y-8 w-full"
         >
-          <div className="flex items-center justify-between gap-2 md:gap-4">
+          <div className="flex items-center justify-between gap-2 md:gap-4 flex-col md:flex-row">
             <FormField
               control={form.control}
               name="name"
@@ -216,7 +216,7 @@ export function DashboardForm({ car }: { car?: carType }) {
             />
           </div>
 
-          <div className="flex items-center justify-between gap-2 md:gap-4">
+          <div className="flex items-center justify-between gap-2 md:gap-4 flex-col md:flex-row">
             <FormField
               control={form.control}
               name="brand"

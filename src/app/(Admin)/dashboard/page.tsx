@@ -2,7 +2,6 @@ import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import React from "react";
 import AllCarscard from "./_components/allCarscard";
-import { ChartContainer } from "@/components/ui/chart";
 import ChartComponents from "./_components/chart";
 
 const Dashboardpage = async () => {
@@ -21,7 +20,8 @@ const Dashboardpage = async () => {
         <AllCarscard title="Total costumers" id="user" />
       </div>
       <div className="w-full h-full flex flex-col md:flex-row gap-2 md:gap-4">
-        <div className="w-full h-full px-2">
+        <div className="w-full h-full p-2 bg-background ">
+          <h4 className="text-xl text-stone-600 ">Page views:</h4>
           <ChartComponents />
         </div>
         <div className="w-full h-full border"></div>

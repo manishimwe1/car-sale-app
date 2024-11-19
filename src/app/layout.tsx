@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 import { ConvexClientProvider } from "./ConvexClientProvider";
 import "./globals.css";
 import NextTopLoader from "nextjs-toploader";
-
+import { Analytics } from "@vercel/analytics/react";
 const roboto = localFont({
   src: "./fonts/Roboto-Bold.ttf",
   display: "swap",
@@ -27,7 +27,10 @@ export default function RootLayout({
       >
         <NextTopLoader />
 
-        <ConvexClientProvider>{children}</ConvexClientProvider>
+        <ConvexClientProvider>
+          {children}
+          <Analytics />
+        </ConvexClientProvider>
       </body>
     </html>
   );
