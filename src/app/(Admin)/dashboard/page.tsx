@@ -2,6 +2,8 @@ import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import React from "react";
 import AllCarscard from "./_components/allCarscard";
+import { ChartContainer } from "@/components/ui/chart";
+import ChartComponents from "./_components/chart";
 
 const Dashboardpage = async () => {
   const session = await auth();
@@ -12,10 +14,17 @@ const Dashboardpage = async () => {
     redirect("/login");
   }
   return (
-    <section className="p-10 h-full w-full">
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
+    <section className="py-10 h-full w-full flex flex-col space-y-10">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6  w-full h-full">
         <AllCarscard title="All cars in system" id="car" />
-        <AllCarscard title="All users" id="user" />
+        <AllCarscard title="Total Favorite" id="favorite" />
+        <AllCarscard title="Total costumers" id="user" />
+      </div>
+      <div className="w-full h-full flex flex-col md:flex-row gap-2 md:gap-4">
+        <div className="w-full h-full px-2">
+          <ChartComponents />
+        </div>
+        <div className="w-full h-full border"></div>
       </div>
     </section>
   );
