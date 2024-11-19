@@ -30,16 +30,7 @@ export default function RootLayout({
 
         <ConvexClientProvider>
           {children}
-          <Analytics
-            beforeSend={(event: BeforeSendEvent) => {
-              if (event.url.includes("/buy")) {
-                console.log(event);
-
-                return null;
-              }
-              return event;
-            }}
-          />
+          <Analytics />
         </ConvexClientProvider>
       </body>
     </html>

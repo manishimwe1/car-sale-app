@@ -22,5 +22,6 @@ export default defineSchema({
   }),
   views: defineTable({
     views: v.number(),
+    carId: v.id("cars"),
   }),
 });

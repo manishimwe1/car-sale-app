@@ -16,14 +16,14 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import { AboutUsData } from "@/constants";
-import { useQuery } from "convex/react";
+import { useMutation, useQuery } from "convex/react";
 import { Eye, Globe, HandCoins, Heart, Share2, ThumbsUp } from "lucide-react";
 import Image from "next/image";
 
 import { api } from "../../../../../../convex/_generated/api";
 import { Id } from "../../../../../../convex/_generated/dataModel";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 import { track } from "@vercel/analytics";
 // type Props = {
 //   params: {
@@ -33,13 +33,25 @@ import { track } from "@vercel/analytics";
 // };
 
 const DetailsPage = ({ params }: { params: Promise<{ id: Id<"cars"> }> }) => {
-  // const viewed = 1;
+  const viewed = 1;
   const { id } = React.use(params);
   const car = useQuery(api.cars.getCarById, { id });
+  const insertViews = useMutation(api.views.createViews);
+
   if (!id) return;
   track("pageDetails", {
     views: 1,
   });
+  useEffect(() => {
+    const createView = async () => {
+      if (car) {
+        await insertViews({ views: viewed, carId: car._id });
+      }
+    };
+
+    createView();
+  }, [car]);
+
   // useMutation(api.cars.updateCar);
   return (
     <div className="flex flex-col gap-6 w-full mx-auto py-10 overflow-y-scroll h-full">
