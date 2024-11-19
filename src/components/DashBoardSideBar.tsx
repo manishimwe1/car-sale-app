@@ -13,17 +13,6 @@ const DashBoardSideBar = () => {
     <section className=" md:w-full h-full border border-green-400 border-r-2 bottom-0 inset-0 border-white/10 px-2 flex justify-center items-center ">
       <nav className="flex md:flex-col w-full md:h-full md:gap-4 gap-8 py-10 items-center  md:items-start md:justify-start justify-between px-8 md:px-3 ">
         <Link
-          href={"/"}
-          className="flex text-center md:flex-col md:justify-start w-full  justify-between"
-        >
-          <ul className=" py-2 w-full  rounded-md shadow-sm shadow-sky group">
-            <li className="text-center flex items-center px-4 justify-center md:justify-start gap-1 group-hover:underline  w-full capitalize text-base font-normal text-nowrap">
-              <HomeIcon className="md:h-4 md:w-4 w-5 h-5 text-slate-400 group-hover:text-sky" />{" "}
-              <p className="text-sm font-normal hidden md:flex"> Home</p>
-            </li>
-          </ul>
-        </Link>
-        <Link
           href={"/dashboard"}
           className="flex text-center md:flex-col md:justify-start w-full  justify-between"
         >
