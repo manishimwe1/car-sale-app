@@ -5,8 +5,6 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@/components/ui/carousel";
 
 import Link from "next/link";
@@ -17,8 +15,8 @@ import Autoplay from "embla-carousel-autoplay";
 
 const Hero = () => {
   return (
-    <section className="w-full min-h-80 md:min-h-screen relative shadow-lg shadow-black/20 rounded-[30px] overflow-hidden">
-      <div className="w-full h-fit md:min-h-screen absolute">
+    <section className="w-full px-2 mx-auto min-h-full md:min-h-screen relative shadow-lg shadow-black/20 md:rounded-[30px] overflow-hidden">
+      <div className="w-full h-fit md:min-h-screen absolute overflow-hidden md:rounded-[30px]">
         <Carousel
           plugins={[
             //@ts-ignore
@@ -29,15 +27,15 @@ const Hero = () => {
         >
           <CarouselContent>
             <CarouselItem>
-              <div className="md:bg-cover bg-no-repeat bg-contain md:bg-center w-full bg-hero-bg min-h-screen flex flex-col rounded-b-[30px] md:rounded-[30px]" />
+              <div className="md:bg-cover bg-no-repeat bg-contain md:bg-center w-full bg-hero-bg min-h-full flex flex-col md:rounded-[30px]" />
             </CarouselItem>
             <CarouselItem>
               {" "}
-              <div className="md:bg-cover bg-no-repeat bg-contain md:bg-center w-full bg-hero-bg min-h-screen flex flex-col rounded-b-[30px] md:rounded-[30px]" />
+              <div className="md:bg-cover bg-no-repeat bg-contain md:bg-center w-full bg-hero-bg min-h-screen flex flex-col  md:rounded-[30px]" />
             </CarouselItem>
             <CarouselItem>
               {" "}
-              <div className="md:bg-cover bg-no-repeat bg-contain md:bg-center w-full bg-hero-bg min-h-screen flex flex-col rounded-b-[30px] md:rounded-[30px]" />
+              <div className="md:bg-cover bg-no-repeat bg-contain md:bg-center w-full bg-hero-bg min-h-screen flex flex-col  md:rounded-[30px]" />
             </CarouselItem>
           </CarouselContent>
         </Carousel>
