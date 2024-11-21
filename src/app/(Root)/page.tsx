@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <section className="h-full w-full space-y-10">
       <Hero />
-      <div className="container mx-auto space-y-10 px-4 " id="new">
+      <div className="container mx-auto space-y-10 " id="new">
         <ShowCase />
         <ShowCaseOverMoney />
         <Services />

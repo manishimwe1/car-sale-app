@@ -15,7 +15,7 @@ import Autoplay from "embla-carousel-autoplay";
 
 const Hero = () => {
   return (
-    <section className="w-full px-2 mx-auto min-h-80 md:min-h-screen relative shadow-lg shadow-black/20 md:rounded-[30px] overflow-hidden">
+    <section className="w-full px-2 mx-auto min-h-[290px] md:min-h-screen relative shadow-lg shadow-black/20 md:rounded-[30px] overflow-hidden">
       <div className="w-full h-fit md:min-h-screen absolute overflow-hidden md:rounded-[30px]">
         <Carousel
           plugins={[
