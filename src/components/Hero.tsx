@@ -15,13 +15,13 @@ import Autoplay from "embla-carousel-autoplay";
 
 const Hero = () => {
   return (
-    <section className="w-full px-2 mx-auto min-h-[290px] md:min-h-screen relative shadow-lg shadow-black/20 md:rounded-[30px] overflow-hidden">
+    <section className="w-full px-2 mx-auto min-h-[253px] md:min-h-screen relative shadow-lg shadow-black/20 md:rounded-[30px] overflow-hidden">
       <div className="w-full h-fit md:min-h-screen absolute overflow-hidden md:rounded-[30px]">
         <Carousel
           plugins={[
             //@ts-ignore
             Autoplay({
-              delay: 3000,
+              delay: 4000,
             }),
           ]}
         >
@@ -31,11 +31,11 @@ const Hero = () => {
             </CarouselItem>
             <CarouselItem>
               {" "}
-              <div className="md:bg-cover bg-no-repeat bg-contain md:bg-center w-full bg-hero-bg min-h-screen flex flex-col  md:rounded-[30px]" />
+              <div className="md:bg-cover bg-no-repeat bg-contain md:bg-center w-full bg-carousel min-h-screen flex flex-col  md:rounded-[30px]" />
             </CarouselItem>
             <CarouselItem>
               {" "}
-              <div className="md:bg-cover bg-no-repeat bg-contain md:bg-center w-full bg-hero-bg min-h-screen flex flex-col  md:rounded-[30px]" />
+              <div className="md:bg-cover bg-no-repeat bg-contain md:bg-center w-full bg-carousel2 min-h-screen flex flex-col  md:rounded-[30px]" />
             </CarouselItem>
           </CarouselContent>
         </Carousel>
