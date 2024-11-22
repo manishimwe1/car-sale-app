@@ -129,16 +129,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             }
           );
 
-          // if (!response.ok) {
-          //   throw new Error("Failed to fetch user");
-          // }
-
           const existingUser = await response.json();
           console.log(existingUser, "existing user");
 
           if (existingUser.error === "User not found") {
-            console.log({ email: email, firstname, image: image });
-
             const createResponse = await fetch(
               "https://famous-chihuahua-933.convex.site/createUser",
               {

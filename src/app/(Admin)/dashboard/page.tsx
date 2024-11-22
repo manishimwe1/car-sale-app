@@ -12,6 +12,10 @@ const Dashboardpage = async () => {
   if (!session?.user) {
     redirect("/login");
   }
+
+  if (session.user.role !== "admin") {
+    redirect("/");
+  }
   return (
     <section className="py-10 h-full w-full flex flex-col space-y-10">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6  w-full h-full">

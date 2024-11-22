@@ -1,7 +1,7 @@
 "use client";
 
 import { CalendarIcon } from "lucide-react";
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -13,23 +13,32 @@ import {
 import { cn } from "@/lib/utils";
 import { Label } from "./ui/label";
 import { useRouter } from "next/navigation";
+import Form from "next/form";
+import { useSession } from "next-auth/react";
+import Link from "next/link";
+import { Skeleton } from "./ui/skeleton";
+import { useReserveStore } from "@/lib/store/zustand";
 
 const ReserveForm = () => {
+  const { data: session, status } = useSession();
+
   const [drop, setDrop] = useState<string>("");
   const [Pick, setPick] = useState<string>("masaka dubai port");
-  const [date, setDate] = useState<string>();
+  const [date, setDate] = useState<string>("");
   const [time, setTime] = useState<string>("");
   const [open, setopen] = useState(false);
   const router = useRouter();
+  const sendData = useReserveStore((state) => state.sendData);
 
-  const onSubmit = (e: FormEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+  const onSubmit = () => {
     const data = { drop, Pick, date, time };
-    router.push(`/reserve?data=${data}`);
+    if (!drop || !Pick || !date || !time) return;
+    sendData(data);
+    router.push(`/reserve`);
   };
 
   return (
-    <form className="space-y-4 w-full">
+    <Form action={onSubmit} className="space-y-4 w-full">
       <div>
         <input
           type="text"
@@ -67,7 +76,7 @@ const ReserveForm = () => {
                 //@ts-ignore
                 selected={date}
                 onSelect={(v) => {
-                  setDate(v?.toLocaleDateString());
+                  setDate(v?.toLocaleDateString() ?? "");
                   setopen(false);
                 }}
               />
@@ -88,13 +97,24 @@ const ReserveForm = () => {
           className="border border-gray-300 p-1 w-full rounded"
         />
       </div>
-      <button
-        onSubmit={(e) => onSubmit(e)}
-        className="w-full bg-black hover:bg-black/60 text-white py-2 rounded-2xl"
-      >
-        Reserve Now
-      </button>
-    </form>
+      {status === "loading" && <Skeleton className="w-full py-2 rounded-2xl" />}
+      {session?.user ? (
+        <Button
+          type="submit"
+          className="w-full bg-black hover:bg-black/60 text-white py-2 rounded-2xl"
+        >
+          Reserve Now
+        </Button>
+      ) : (
+        <Button
+          asChild
+          type="button"
+          className="w-full bg-black hover:bg-black/60 text-white py-2 rounded-2xl"
+        >
+          <Link href={"/login?link=reserve"}>Sign in to Reserve Now</Link>
+        </Button>
+      )}
+    </Form>
   );
 };
 

@@ -100,8 +100,6 @@ export const getSimilarCar = query({
       })
     );
 
-    console.log(images, "here");
-
     return images;
   },
 });
@@ -125,8 +123,6 @@ export const getCarLessThanMoney = query({
       })
     );
 
-    console.log(images, "here");
-
     return images;
   },
 });
@@ -136,8 +132,6 @@ export const getCarById = query({
     id: v.id("cars"),
   },
   handler: async (ctx, args) => {
-    console.log("args", args.id);
-
     const newCarId = await ctx.db.get(args.id);
 
     if (!newCarId) return console.log("semothing went wrong");
