@@ -44,10 +44,10 @@ const Hero = () => {
           </CarouselContent>
         </Carousel>
       </div>
-      <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/60 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-transparent" />
 
       {/* Hero Content */}
-      <div className="relative z-10 flex flex-col items-center text-center mt-20 md:mt-32">
+      <div className="relative z-10 flex flex-col items-center text-center mt-10 md:mt-32">
         <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-white">
           BetterWhips
         </h1>
