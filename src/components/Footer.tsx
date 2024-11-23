@@ -9,9 +9,9 @@ const Footer = () => {
   const cars = useQuery(api.cars.getCar);
 
   return (
-    <section className="w-full">
-      <div className=" bg-sky w-full flex ">
-        <div className="container mx-auto py-10 px-6 w-full">
+    <section className="w-full h-full flex flex-col ">
+      <div className=" bg-sky w-full flex h-fit">
+        <div className="container mx-auto py-10 px-6 w-full min-h-fit">
           <div className=" grid grid-cols-2 container md:grid-cols-2 lg:grid-cols-4 gap-10 w-full">
             <div className="flex flex-col gap-2 w-full">
               <Headers label="Popular Makes" />
@@ -42,7 +42,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="w-full py-4 px-2 flex flex-col   items-center justify-center ">
+      <div className="w-full py-4 px-2 lg:flex flex-col   items-center justify-center h-full hidden ">
         <p className="text-balance text-sm text-slate-400 font-semibold">
           Copyright © BetterWhips Group Ltd - All rights reserved.
         </p>

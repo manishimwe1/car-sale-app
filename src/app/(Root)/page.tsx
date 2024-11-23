@@ -18,7 +18,7 @@ export default function Home() {
       </div>
       <WhyChooseUs />
       <CustomersReviews />
-      <div>
+      <div className="flex flex-col h-full w-full">
         <Banner />
         <Footer />
       </div>

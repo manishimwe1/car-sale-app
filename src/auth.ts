@@ -1,4 +1,3 @@
-// auth.ts
 import Credentials from "@auth/core/providers/credentials";
 import { compare } from "bcryptjs";
 import Google from "next-auth/providers/google";
@@ -88,22 +87,40 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     error: "/error",
   },
   callbacks: {
-    async jwt({ token, user, trigger, session }) {
-      if (trigger === "signIn" && user) {
+    async jwt({ token, user }) {
+      // On initial sign-in, attach user data to the token
+      if (user) {
         token.sub = user.id;
-        token.role = "user";
+        //@ts-ignore
+        token.role = user.role;
         token.email = user.email;
-      }
+      } else {
+        // Fetch the latest role from the database on subsequent requests
+        try {
+          const response = await fetch(
+            `https://famous-chihuahua-933.convex.site/getMessagesByAuthor?email=${token.email}`,
+            {
+              cache: "no-store",
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          );
 
-      if (trigger === "update" && session) {
-        // Handle session updates if needed
-        token = { ...token, ...session };
+          if (response.ok) {
+            const updatedUser = await response.json();
+            token.role = updatedUser?.role || "user"; // Default to 'user' if no role found
+          }
+        } catch (error) {
+          console.error("Error fetching user role:", error);
+        }
       }
 
       return token;
     },
 
     async session({ session, token }) {
+      // Pass token data to the session object
       if (token && session.user) {
         session.user.id = token.sub as string;
         session.user.role = token.role as string;

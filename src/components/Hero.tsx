@@ -15,7 +15,7 @@ import Autoplay from "embla-carousel-autoplay";
 
 const Hero = () => {
   return (
-    <section className="w-full px-2 mx-auto min-h-[253px] md:min-h-screen relative shadow-lg shadow-black/20 md:rounded-[30px] overflow-hidden">
+    <section className="w-full px-2 mx-auto min-h-[253px] md:min-h-screen relative shadow-lg shadow-black/20 md:rounded-[30px] rounded-b-md  overflow-hidden">
       <div className="w-full h-fit md:min-h-screen absolute overflow-hidden md:rounded-[30px]">
         <Carousel
           plugins={[
@@ -27,33 +27,33 @@ const Hero = () => {
         >
           <CarouselContent>
             <CarouselItem>
-              <div className="md:bg-cover bg-no-repeat bg-contain md:bg-center w-full bg-hero-bg min-h-full flex flex-col md:rounded-[30px]" />
+              <div className="md:bg-cover bg-no-repeat bg-contain md:bg-center w-full bg-hero-bg min-h-full flex flex-col md:rounded-[30px] rounded-b-md " />
             </CarouselItem>
             <CarouselItem>
               {" "}
-              <div className="md:bg-cover bg-no-repeat bg-contain md:bg-center w-full bg-carousel min-h-screen flex flex-col  md:rounded-[30px]" />
+              <div className="md:bg-cover bg-no-repeat bg-contain md:bg-center w-full bg-carousel min-h-screen flex flex-col  md:rounded-[30px] rounded-b-md " />
             </CarouselItem>
             <CarouselItem>
               {" "}
-              <div className="md:bg-cover bg-no-repeat bg-contain md:bg-center w-full bg-carousel2 min-h-screen flex flex-col  md:rounded-[30px]" />
+              <div className="md:bg-cover bg-no-repeat bg-contain md:bg-center w-full bg-carousel2 min-h-screen flex flex-col  md:rounded-[30px] rounded-b-md " />
             </CarouselItem>
           </CarouselContent>
         </Carousel>
       </div>
-      <div className="bg-gradient-to-b from-black/40 via-black/40 to-transparent absolute  mx-auto w-full h-fit md:rounded-[30px] ">
+      <div className="bg-gradient-to-b from-black/40 via-black/40 to-transparent absolute  mx-auto w-full h-fit md:rounded-[30px] rounded-b-md  ">
         <div className=" mt-14 md:mt-16 flex items-center flex-col">
-          <h2 className=" text-balance text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter text-white sm:text-6xl mb-6">
+          <h2 className=" text-balance text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter text-white sm:text-6xl md:mb-6">
             BetterWhips
           </h2>
           <div className="px-4 py-2 flex flex-col items-center  mb-4">
-            <p className="text-[16px] text-pretty font-medium text-green-50">
+            <p className="md:text-[16px] text-base text-pretty font-medium text-green-50">
               Where Quality Drives Forward
             </p>
             <motion.p
               // animate={{ x: 100 }}
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
-              className="text-2xl capitalize text-pretty font-medium text-white"
+              className="text-2xl hidden md:inline-block capitalize text-pretty font-medium text-white"
             >
               We sell professional car{" "}
             </motion.p>
