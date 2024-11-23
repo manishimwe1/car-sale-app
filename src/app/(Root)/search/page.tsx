@@ -6,11 +6,21 @@ import Loader from "@/components/Loader";
 import SectionHeaderBox from "@/components/SectionHeaderBox";
 import { useQuery } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import Footer from "@/components/Footer";
 import { useSearchParams } from "next/navigation";
 
 const Searchpage = () => {
+  return (
+    <Suspense fallback={<Loader />}>
+      <SearchComponent />
+    </Suspense>
+  );
+};
+
+export default Searchpage;
+
+function SearchComponent() {
   const [value, setValue] = useState<string | undefined>();
   const searchParams = useSearchParams();
 
@@ -31,7 +41,7 @@ const Searchpage = () => {
         }
       : { km: Number(KM) }
   );
-
+  // Use searchParams as needed
   return (
     <section className="w-full lg:px-0 space-y-10">
       <div className="w-full h-full container mx-auto py-10 flex flex-col items-center justify-center gap-4">
@@ -61,6 +71,4 @@ const Searchpage = () => {
       <Footer />
     </section>
   );
-};
-
-export default Searchpage;
+}
