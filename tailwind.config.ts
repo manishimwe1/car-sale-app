@@ -45,6 +45,7 @@ module.exports = {
         "hero-bg": "url('/car2.webp')",
         carousel: "url('/carSun.webp')",
         carousel2: "url('/white-car.webp')",
+        carousel3: "url('/blueCarBg.webp')",
       },
       borderRadius: {
         lg: "var(--radius)",

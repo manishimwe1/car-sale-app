@@ -25,21 +25,12 @@ function SearchComponent() {
   const searchParams = useSearchParams();
 
   const type = searchParams.get("type");
-  const KM = searchParams.get("km");
 
-  console.log(type, KM);
+  console.log(type);
 
   const cars = useQuery(
-    type
-      ? api.cars.getCarByType
-      : KM
-        ? api.cars.getCarBasedOnKM
-        : api.cars.getCar,
-    type
-      ? {
-          type: type,
-        }
-      : { km: Number(KM) }
+    type === "all cars" ? api.cars.getCar : api.cars.getCarByType,
+    type === "all cars" ? {} : { type: type ?? "" }
   );
   // Use searchParams as needed
   return (

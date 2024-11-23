@@ -15,7 +15,7 @@ import Autoplay from "embla-carousel-autoplay";
 
 const Hero = () => {
   return (
-    <section className="w-full px-2 mx-auto min-h-[253px] md:min-h-screen relative shadow-lg shadow-black/20 md:rounded-[30px] rounded-b-md  overflow-hidden">
+    <section className="w-full px-2 mx-auto min-h-[253px] md:min-h-screen relative shadow-lg shadow-black/20 md:rounded-[30px] overflow-hidden">
       <div className="w-full h-fit md:min-h-screen absolute overflow-hidden md:rounded-[30px]">
         <Carousel
           plugins={[
@@ -27,58 +27,71 @@ const Hero = () => {
         >
           <CarouselContent>
             <CarouselItem>
-              <div className="md:bg-cover bg-no-repeat bg-contain md:bg-center w-full bg-hero-bg min-h-full flex flex-col md:rounded-[30px] rounded-b-md " />
+              <div className="md:bg-cover bg-no-repeat bg-contain md:bg-center w-full bg-hero-bg min-h-full flex flex-col md:rounded-[30px] saturate-150" />
             </CarouselItem>
             <CarouselItem>
               {" "}
-              <div className="md:bg-cover bg-no-repeat bg-contain md:bg-center w-full bg-carousel min-h-screen flex flex-col  md:rounded-[30px] rounded-b-md " />
+              <div className="md:bg-cover bg-no-repeat bg-contain md:bg-center w-full bg-carousel min-h-screen flex flex-col  md:rounded-[30px] saturate-150" />
             </CarouselItem>
             <CarouselItem>
               {" "}
-              <div className="md:bg-cover bg-no-repeat bg-contain md:bg-center w-full bg-carousel2 min-h-screen flex flex-col  md:rounded-[30px] rounded-b-md " />
+              <div className="md:bg-cover bg-no-repeat bg-contain md:bg-center w-full bg-carousel3 min-h-screen flex flex-col  md:rounded-[30px] saturate-150" />
+            </CarouselItem>
+            <CarouselItem>
+              {" "}
+              <div className="md:bg-cover bg-no-repeat bg-contain md:bg-center w-full bg-carousel2 min-h-screen flex flex-col  md:rounded-[30px] saturate-150" />
             </CarouselItem>
           </CarouselContent>
         </Carousel>
       </div>
-      <div className="bg-gradient-to-b from-black/40 via-black/40 to-transparent absolute  mx-auto w-full h-fit md:rounded-[30px] rounded-b-md  ">
-        <div className=" mt-14 md:mt-16 flex items-center flex-col">
-          <h2 className=" text-balance text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter text-white sm:text-6xl md:mb-6">
-            BetterWhips
-          </h2>
-          <div className="px-4 py-2 flex flex-col items-center  mb-4">
-            <p className="md:text-[16px] text-base text-pretty font-medium text-green-50">
-              Where Quality Drives Forward
-            </p>
-            <motion.p
-              // animate={{ x: 100 }}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              className="text-2xl hidden md:inline-block capitalize text-pretty font-medium text-white"
-            >
-              We sell professional car{" "}
-            </motion.p>
-          </div>
+      <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/60 to-transparent" />
 
-          <Button asChild>
-            <Link href={"#new"}>Open Fleet</Link>
+      {/* Hero Content */}
+      <div className="relative z-10 flex flex-col items-center text-center mt-20 md:mt-32">
+        <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-white">
+          BetterWhips
+        </h1>
+        <p className="mt-4 text-lg md:text-2xl text-white/80">
+          Where Quality Drives Forward
+        </p>
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.6 }}
+          className="mt-2 hidden md:block text-xl text-white/70"
+        >
+          Experience professional car and services with our high-end vehicles.
+        </motion.p>
+
+        {/* Call-to-Actions */}
+        <div className="mt-8 flex gap-4">
+          <Button asChild className="px-6 py-3 text-lg">
+            <Link href="#new">Browse Fleet</Link>
+          </Button>
+          <Button
+            asChild
+            variant="outline"
+            className="px-6 py-3 text-lg border-white/50 bg-gradient-to-tr from-blue-500 to-blue-300 text-white font-bold hover:border-sky transition-all duration-200"
+          >
+            <Link href="#services">Explore Services</Link>
           </Button>
         </div>
       </div>
 
-      <div className="bg-white/90 hidden md:block py-6 p-4 rounded-2xl shadow-black shadow-lg md:w-80 w-full  h-fit absolute bottom-0 md:bottom-16 right-0 sm:right-10">
-        <Tabs defaultValue="account" className="w-full border-black ">
-          <TabsList className="!w-full">
+      {/* Sidebar Tabs */}
+      <div className="absolute hidden lg:flex bottom-0 md:bottom-16 right-0 sm:right-10 w-full md:w-80 p-6 bg-white/90 rounded-tl-lg shadow-lg">
+        <Tabs defaultValue="account" className="!w-full">
+          <TabsList className="w-full">
             <TabsTrigger
               value="account"
-              className="!py-2  !bg-gradient-to-r from-blue-400 via-blue-500 to-blue-300 !w-full !text-white"
+              className="!w-full py-2 bg-gradient-to-r from-blue-500 to-blue-300 text-white font-bold"
             >
               Drive a Dream
             </TabsTrigger>
           </TabsList>
-          <TabsContent value="account" className="w-full">
+          <TabsContent value="account" className="!w-full ">
             <ReserveForm />
           </TabsContent>
-          <TabsContent value="password">Change your password here.</TabsContent>
         </Tabs>
       </div>
     </section>

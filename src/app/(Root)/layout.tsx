@@ -11,7 +11,7 @@ export default function RootLayout({
     <SessionProvider>
       <main className="w-full h-screen overflow-hidden pb-6">
         <Header />
-        <div className="overflow-y-scroll h-full w-full pb-10 overflow-x-hidden scroll-smooth ">
+        <div className="overflow-y-scroll h-full w-full overflow-x-hidden scroll-smooth pb-2 ">
           {children}
         </div>
         <div className=" w-full h-full ">

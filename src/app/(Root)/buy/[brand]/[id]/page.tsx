@@ -3,7 +3,7 @@
 import AboutUs from "@/components/AboutUs";
 import Banner from "@/components/Banner";
 import CarOverView from "@/components/CarOverView";
-import { CarDetails } from "@/components/CarShowCard";
+
 import ShowSimilarCar from "@/components/ShowSimilarCar";
 import { Button } from "@/components/ui/button";
 import {
@@ -27,6 +27,7 @@ import React, { useEffect, useState } from "react";
 import { track } from "@vercel/analytics";
 import ImageInFull from "@/components/ImageInFull";
 import { carType } from "../../../../../../types";
+import { CarDetails } from "@/components/CarDetails";
 // type Props = {
 //   params: {
 //     brand: string;
