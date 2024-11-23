@@ -1,5 +1,11 @@
 "use client";
-import { ArrowUpAZ, Heart, LayoutDashboard, PackagePlus } from "lucide-react";
+import {
+  ArrowUpAZ,
+  Heart,
+  LayoutDashboard,
+  PackagePlus,
+  Sparkles,
+} from "lucide-react";
 import Link from "next/link";
 
 const DashBoardSideBar = () => {
@@ -36,6 +42,17 @@ const DashBoardSideBar = () => {
             <li className="text-center flex items-center px-4 justify-center md:justify-start gap-1 group-hover:underline  w-full capitalize text-base font-normal text-nowrap">
               <PackagePlus className="md:h-4 md:w-4 w-5 h-5 text-slate-400 group-hover:text-sky" />{" "}
               <p className="text-sm font-normal hidden md:flex"> Create new</p>
+            </li>
+          </ul>
+        </Link>
+        <Link
+          href={"/dashboard/sales"}
+          className="md:flex text-center md:flex-col md:justify-start w-full  justify-between hidden "
+        >
+          <ul className=" py-2 w-full  rounded-md shadow-sm shadow-sky group">
+            <li className="text-center flex items-center px-4 justify-center md:justify-start gap-1 group-hover:underline  w-full capitalize text-base font-normal text-nowrap">
+              <Sparkles className="md:h-4 md:w-4 w-5 h-5 text-slate-400 group-hover:text-sky" />{" "}
+              <p className="text-sm font-normal hidden md:flex"> Sales</p>
             </li>
           </ul>
         </Link>

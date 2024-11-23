@@ -71,7 +71,7 @@ const Hero = () => {
           <Button
             asChild
             variant="outline"
-            className="px-6 py-3 text-lg border-white/50 bg-gradient-to-tr from-blue-500 to-blue-300 text-white font-bold hover:border-sky transition-all duration-200"
+            className="px-6 py-3 text-lg hidden md:flex border-white/50 bg-gradient-to-tr from-blue-500 to-blue-300 text-white font-bold hover:border-sky transition-all duration-200"
           >
             <Link href="#services">Explore Services</Link>
           </Button>

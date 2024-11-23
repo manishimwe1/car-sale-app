@@ -24,4 +24,9 @@ export default defineSchema({
     views: v.number(),
     carId: v.id("cars"),
   }),
+  banner: defineTable({
+    title: v.string(),
+    subTitle: v.string(),
+    image: v.optional(v.id("_storage")),
+  }),
 });

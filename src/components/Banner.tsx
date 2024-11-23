@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "./ui/button";
 import Image from "next/image";
+import Link from "next/link";
 
 const Banner = () => {
   return (
@@ -23,7 +24,9 @@ const Banner = () => {
               below!
             </p>
             <div className="flex items-center justify-center">
-              <Button className="px-4 mt-2">Get Discount</Button>
+              <Button className="px-4 mt-2" asChild>
+                <Link href={"/reserve"}>Get Discount</Link>
+              </Button>
             </div>
           </div>
         </div>
