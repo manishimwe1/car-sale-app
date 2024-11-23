@@ -11,7 +11,7 @@ export default defineSchema({
     typeOfCar: v.string(),
     numberOfViews: v.number(),
     KM_Done: v.number(),
-  }),
+  }).index("by_type", ["typeOfCar"]),
   user: defineTable({
     firstname: v.optional(v.string()),
     lastname: v.optional(v.string()),

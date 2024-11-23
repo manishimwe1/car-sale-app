@@ -73,7 +73,7 @@ const CarShowCard = ({ car }: { car: carType }) => {
         <CarouselPrevious className="ml-[50px]" />
         <CarouselNext className="mr-[50px]" />
       </Carousel>
-      <Link href={`/buy/${car.brand}/${car._id}`}>
+      <div>
         <div className=" py-4 px-6 w-full hover:shadow-md rounded-xl shadow-sky  flex justify-between items-center">
           <div className="flex flex-col ">
             <p className="text-[14px] text-pretty font-medium text-slate-800">
@@ -90,7 +90,7 @@ const CarShowCard = ({ car }: { car: carType }) => {
             <Heart className="text-secondary-foreground h-5 w-5" />
           </div>
         </div>
-      </Link>
+      </div>
     </div>
   );
 };
@@ -100,44 +100,54 @@ export default CarShowCard;
 export function CarDetails({ car }: { car: Doc<"cars"> }) {
   return (
     <div className="flex items-center mt-1 gap-4 py-2">
-      <div className="flex gap-1 items-center hover:text-blue-500">
-        <Car className="text-slate-800 h-5 w-4" />
-        <p className="text-[14px] text-pretty font-medium capitalize text-slate-800">
-          {car.brand}
-        </p>
-      </div>
+      <Link href={`/search/${car.brand}`}>
+        <div className="flex gap-1 items-center hover:text-blue-500">
+          <Car className="text-slate-800 h-5 w-4" />
+          <p className="text-[14px] text-pretty font-medium capitalize text-slate-800">
+            {car.brand}
+          </p>
+        </div>
+      </Link>
 
       <hr className="h-3 w-0 border border-slate-500" />
       {car.typeOfCar === "electric" && (
-        <div className="flex items-center gap-1">
-          <Cable className="text-slate-500 h-5 w-4" />
-          <p className="text-[14px] text-pretty font-medium text-slate-800">
-            {car.typeOfCar}
-          </p>
-        </div>
+        <Link href={`/search?type=electric`}>
+          <div className="flex items-center gap-1">
+            <Cable className="text-slate-500 h-5 w-4" />
+            <p className="text-[14px] text-pretty font-medium text-slate-800">
+              {car.typeOfCar}
+            </p>
+          </div>
+        </Link>
       )}
       {car.typeOfCar === "diesel" && (
-        <div className="flex items-center gap-1">
-          <Fuel className="text-slate-500 h-5 w-4" />
-          <p className="text-[14px] text-pretty font-medium text-slate-800">
-            {car.typeOfCar}
-          </p>
-        </div>
+        <Link href={`/search?type=diesel`}>
+          <div className="flex items-center gap-1">
+            <Fuel className="text-slate-500 h-5 w-4" />
+            <p className="text-[14px] text-pretty font-medium text-slate-800">
+              {car.typeOfCar}
+            </p>
+          </div>
+        </Link>
       )}
       {car.typeOfCar === "hybrid" && (
+        <Link href={`/search?type=hybrid`}>
+          <div className="flex items-center gap-1">
+            <Vault className="text-slate-500 h-5 w-4" />
+            <p className="text-[14px] text-pretty font-medium text-slate-800">
+              {car.typeOfCar}
+            </p>
+          </div>
+        </Link>
+      )}
+      <Link href={`/search?km=${car.KM_Done}`}>
         <div className="flex items-center gap-1">
-          <Vault className="text-slate-500 h-5 w-4" />
+          <Clock12 className="text-slate-500 h-5 w-4" />
           <p className="text-[14px] text-pretty font-medium text-slate-800">
-            {car.typeOfCar}
+            {car.KM_Done}KM
           </p>
         </div>
-      )}
-      <div className="flex items-center gap-1">
-        <Clock12 className="text-slate-500 h-5 w-4" />
-        <p className="text-[14px] text-pretty font-medium text-slate-800">
-          {car.KM_Done}KM
-        </p>
-      </div>
+      </Link>
     </div>
   );
 }

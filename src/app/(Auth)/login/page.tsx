@@ -16,7 +16,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { redirect, useRouter, useSearchParams } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -30,9 +30,6 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 export default function LoginPage() {
-  const searchParams = useSearchParams();
-  const link = searchParams.get("link");
-
   const { data: session, status } = useSession();
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -40,9 +37,8 @@ export default function LoginPage() {
 
   // Redirect if already authenticated
   if (status !== "loading" && session) {
-    redirect(link ? `/${link}` : "/dashboard");
+    redirect("/dashboard");
   }
-  console.log("link", link);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -62,7 +58,7 @@ export default function LoginPage() {
       if (response.success) {
         // Success case
         form.reset();
-        router.push(link ? `/${link}` : "/dashboard");
+        router.push("/dashboard");
         return;
       }
 

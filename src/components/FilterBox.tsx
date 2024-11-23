@@ -12,6 +12,7 @@ import { useQuery } from "convex/react";
 import { ChevronDown } from "lucide-react";
 import { Dispatch } from "react";
 import { api } from "../../convex/_generated/api";
+import { useRouter } from "next/navigation";
 
 const FilterBox = ({
   category,
@@ -22,6 +23,8 @@ const FilterBox = ({
   value: string | undefined;
   setValue: Dispatch<React.SetStateAction<string | undefined>>;
 }) => {
+  const router = useRouter();
+
   const cars = useQuery(api.cars.getCar);
   return (
     <div className="w-full h-full grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -37,6 +40,7 @@ const FilterBox = ({
                 <DropdownMenuItem
                   onClick={(e) => {
                     setValue(e.currentTarget.innerText);
+                    router.push(`/search/${category}`);
                   }}
                   key={car._id}
                   className="flex items-center justify-between !w-full"
@@ -70,7 +74,7 @@ const FilterBox = ({
                   key={car._id}
                   className="flex items-center justify-between !w-full"
                 >
-                  {car.brand}
+                  {car.typeOfCar}
                 </DropdownMenuItem>
               ))
             ) : (

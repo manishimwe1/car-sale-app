@@ -38,6 +38,7 @@ const DetailsPage = ({ params }: { params: Promise<{ id: Id<"cars"> }> }) => {
   const [OpenFull, setOpenFull] = useState(false);
   const viewed = 1;
   const { id } = React.use(params);
+
   const car: carType = useQuery(api.cars.getCarById, { id });
   const insertViews = useMutation(api.views.createViews);
 
@@ -55,6 +56,7 @@ const DetailsPage = ({ params }: { params: Promise<{ id: Id<"cars"> }> }) => {
     createView();
   }, [car]);
 
+  const viewsFound = useQuery(api.views.getViews, { carId: car?._id });
   // useMutation(api.cars.updateCar);
   return (
     <>
@@ -209,9 +211,22 @@ const DetailsPage = ({ params }: { params: Promise<{ id: Id<"cars"> }> }) => {
                 Whatsapp
               </Button>
             </div>
-            <div className="w-full p-2 flex items-center justify-center gap-2">
-              <Eye /> <p>Viewed 2 times today</p>
-            </div>
+            {viewsFound ? (
+              <div className="w-full p-2 flex items-center justify-center gap-2">
+                <Eye className="text-blue-500 animate-pulse h-5 w-5" />{" "}
+                <p>
+                  Viewed{" "}
+                  <span className="text-blue-500 animate-pulse">
+                    {" "}
+                    {viewsFound.views}{" "}
+                  </span>{" "}
+                  times{" "}
+                </p>
+              </div>
+            ) : (
+              <Skeleton className="w-full py-2 " />
+            )}
+
             <div className="w-full p-2 mt-7 flex items-center justify-center gap-2">
               <Image
                 src={"/verified.svg"}
@@ -220,7 +235,7 @@ const DetailsPage = ({ params }: { params: Promise<{ id: Id<"cars"> }> }) => {
                 height={40}
                 className=""
               />{" "}
-              <p className=" text-pretty w-fit">
+              <p className=" text-pretty w-fit text-sm text-muted-foreground">
                 All our cars have been inspected and reconditioned meticulously
                 by our experts
               </p>

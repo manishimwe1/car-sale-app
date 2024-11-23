@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { SessionProvider } from "next-auth/react";
 
@@ -13,7 +14,9 @@ export default function RootLayout({
         <div className="overflow-y-scroll h-full w-full pb-10 overflow-x-hidden scroll-smooth ">
           {children}
         </div>
-        <div className=" w-full h-full "></div>
+        <div className=" w-full h-full ">
+          <Footer />
+        </div>
       </main>
     </SessionProvider>
   );

@@ -198,6 +198,62 @@ export const getCarByBrand = query({
     return images;
   },
 });
+export const getCarByType = query({
+  args: {
+    type: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const car = await ctx.db
+      .query("cars")
+      .withIndex("by_type", (q) => q.eq("typeOfCar", args.type))
+      .collect();
+
+    if (!car) return console.log("semothing went wrong");
+    const images = await Promise.all(
+      car.map(async (car) => {
+        const logoUrls = await ctx.storage.getUrl(car.logoId);
+        const urls = await Promise.all(
+          car.imageIds.map(async (storageId) => {
+            return await ctx.storage.getUrl(storageId);
+          })
+        );
+        console.log(car, { brand: args.type });
+
+        return { ...car, urls, logoUrls };
+      })
+    );
+
+    // console.log(images, 'here');
+
+    return images;
+  },
+});
+
+export const getCarBasedOnKM = query({
+  args: {
+    km: v.number(),
+  },
+  handler: async (ctx, args) => {
+    const cars = await ctx.db
+      .query("cars")
+      .filter((q) => q.lte(q.field("KM_Done"), args.km))
+      .collect();
+
+    const images = await Promise.all(
+      cars.map(async (car) => {
+        const logoUrls = await ctx.storage.getUrl(car.logoId);
+        const urls = await Promise.all(
+          car.imageIds.map(async (storageId) => {
+            return await ctx.storage.getUrl(storageId);
+          })
+        );
+        return { ...car, urls, logoUrls };
+      })
+    );
+
+    return images;
+  },
+});
 
 export const generateUploadUrl = mutation(async (ctx) => {
   return await ctx.storage.generateUploadUrl();

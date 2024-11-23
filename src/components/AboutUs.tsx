@@ -14,7 +14,9 @@ const AboutUs = ({
     <div className="flex flex-col gap-2  items-center">
       <Image src={data.imageUrl} alt="moneyback" width={40} height={40} />
       <h4 className="font-semibold">{data.title}</h4>
-      <p className="text-pretty text-stone-700 text-center">{data.subTitle}</p>
+      <p className=" text-muted-foreground text-sm text-balance text-center">
+        {data.subTitle}
+      </p>
     </div>
   );
 };

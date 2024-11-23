@@ -16,6 +16,22 @@ export const getViewsForCar = internalQuery({
     return Views;
   },
 });
+
+export const getViews = query({
+  args: {
+    carId: v.id("cars"),
+  },
+  handler: async (ctx, args) => {
+    const Views = await ctx.db
+      .query("views")
+      .filter((q) => q.lte(q.field("carId"), args.carId))
+      .order("asc")
+      .first();
+
+    return Views;
+  },
+});
+
 export const createViews = mutation({
   args: {
     views: v.number(),
